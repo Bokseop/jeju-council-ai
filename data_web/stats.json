@@ -1,7 +1,17 @@
 {
-  "total_speeches": 53697,
-  "total_meetings": 164,
+  "years": [
+    "2026",
+    "2025",
+    "2024"
+  ],
+  "year_counts": {
+    "2026": 73232,
+    "2025": 102340,
+    "2024": 119208
+  },
+  "total_speeches": 294780,
+  "total_meetings": 525,
   "latest_date": "2026-10-23",
-  "earliest_date": "2024-10-07",
-  "version": "1.0.0"
+  "earliest_date": "2024-02-19",
+  "version": "4.0.0"
 }

@@ -1,986 +1,3677 @@
 [
   {
-    "name": "제13대 제455회 본회의 제2차",
-    "date": "2026-10-23",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13A0110455022.html&daesu=13",
-    "count": 38
-  },
-  {
+    "id": 0,
     "name": "제13대 제455회 문화관광체육위원회 제2차",
     "date": "2026-10-23",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C9020455022.html&daesu=13",
     "count": 4
   },
   {
-    "name": "제455회[임시회] [ 임시 ] 제2차",
+    "id": 1,
+    "name": "제13대 제455회 본회의 제2차",
     "date": "2026-10-23",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C9020455022.html&daesu=13",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13A0110455022.html&daesu=13",
     "count": 38
   },
   {
+    "id": 2,
+    "name": "제455회[임시회] [ 임시 ] 제2차",
+    "date": "2026-10-23",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C9020455022.html&daesu=13",
+    "count": 76
+  },
+  {
+    "id": 3,
     "name": "제13대 제455회 환경도시위원회 제1차",
     "date": "2026-10-21",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C8080455011.html&daesu=13",
     "count": 525
   },
   {
+    "id": 4,
     "name": "제455회[임시회] [ 임시 ] 제1차",
     "date": "2026-10-21",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C8080455011.html&daesu=13",
     "count": 525
   },
   {
+    "id": 5,
     "name": "제13대 제455회 행정자치위원회 제1차",
     "date": "2026-10-20",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C2050455012.html&daesu=13",
     "count": 2
   },
   {
+    "id": 6,
     "name": "제455회[임시회] [ 임시 ] 제1차",
     "date": "2026-10-20",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C2050455012.html&daesu=13",
     "count": 2
   },
   {
-    "name": "제13대 제2026회 2026년도 행정사무감사행정자치위원회",
-    "date": "2026-10-19",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J2052026001.html&daesu=13",
-    "count": 8
-  },
-  {
-    "name": "제13대 제2026회 2026년도 행정사무감사환경도시위원회",
-    "date": "2026-10-19",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J8082026003.html&daesu=13",
-    "count": 2
-  },
-  {
-    "name": "제13대 제2026회 2026년도 행정사무감사문화관광체육위원회",
-    "date": "2026-10-19",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9022026001.html&daesu=13",
-    "count": 2
-  },
-  {
-    "name": "제13대 제2026회 2026년도 행정사무감사미래경제산업위원회",
-    "date": "2026-10-19",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9072026002.html&daesu=13",
-    "count": 2
-  },
-  {
-    "name": "제13대 제2026회 2026년도 행정사무감사교육위원회",
-    "date": "2026-10-19",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9082026001.html&daesu=13",
-    "count": 4
-  },
-  {
-    "name": "2026년도 행정사무감사 [ 임시 ] : 행정자치위원회 소관",
-    "date": "2026-10-19",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J2052026001.html&daesu=13",
-    "count": 8
-  },
-  {
-    "name": "2026년도 행정사무감사 [ 임시 ] : 환경도시위원회 소관",
-    "date": "2026-10-19",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J8082026003.html&daesu=13",
-    "count": 2
-  },
-  {
+    "id": 7,
     "name": "2026년도 행정사무감사 [ 임시 ] : 문화관광체육위원회 소관",
     "date": "2026-10-19",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9022026001.html&daesu=13",
     "count": 2
   },
   {
-    "name": "2026년도 행정사무감사 [ 임시 ] : 제주특별자치도교육청 소관",
-    "date": "2026-10-19",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9082026001.html&daesu=13",
-    "count": 4
-  },
-  {
+    "id": 8,
     "name": "2026년도 행정사무감사 [ 임시 ] : 미래경제산업위원회 소관",
     "date": "2026-10-19",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9072026002.html&daesu=13",
     "count": 2
   },
   {
+    "id": 9,
+    "name": "2026년도 행정사무감사 [ 임시 ] : 제주특별자치도교육청 소관",
+    "date": "2026-10-19",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9082026001.html&daesu=13",
+    "count": 4
+  },
+  {
+    "id": 10,
+    "name": "2026년도 행정사무감사 [ 임시 ] : 행정자치위원회 소관",
+    "date": "2026-10-19",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J2052026001.html&daesu=13",
+    "count": 8
+  },
+  {
+    "id": 11,
+    "name": "2026년도 행정사무감사 [ 임시 ] : 환경도시위원회 소관",
+    "date": "2026-10-19",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J8082026003.html&daesu=13",
+    "count": 2
+  },
+  {
+    "id": 12,
+    "name": "제13대 제2026회 2026년도 행정사무감사교육위원회",
+    "date": "2026-10-19",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9082026001.html&daesu=13",
+    "count": 4
+  },
+  {
+    "id": 13,
     "name": "제13대 제2026회 2026년도 행정사무감사농수축위원회",
     "date": "2026-10-19",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9092026004.html&daesu=13",
     "count": 2
   },
   {
-    "name": "제13대 제2026회 2026년도 행정사무감사환경도시위원회",
-    "date": "2026-10-16",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J8082026005.html&daesu=13",
-    "count": 351
+    "id": 14,
+    "name": "제13대 제2026회 2026년도 행정사무감사문화관광체육위원회",
+    "date": "2026-10-19",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9022026001.html&daesu=13",
+    "count": 2
   },
   {
+    "id": 15,
+    "name": "제13대 제2026회 2026년도 행정사무감사미래경제산업위원회",
+    "date": "2026-10-19",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9072026002.html&daesu=13",
+    "count": 2
+  },
+  {
+    "id": 16,
+    "name": "제13대 제2026회 2026년도 행정사무감사행정자치위원회",
+    "date": "2026-10-19",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J2052026001.html&daesu=13",
+    "count": 8
+  },
+  {
+    "id": 17,
+    "name": "제13대 제2026회 2026년도 행정사무감사환경도시위원회",
+    "date": "2026-10-19",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J8082026003.html&daesu=13",
+    "count": 2
+  },
+  {
+    "id": 18,
     "name": "2026년도 행정사무감사 [ 임시 ] : 제주특별자치도개발공사",
     "date": "2026-10-16",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J8082026005.html&daesu=13",
     "count": 351
   },
   {
+    "id": 19,
+    "name": "제13대 제2026회 2026년도 행정사무감사환경도시위원회",
+    "date": "2026-10-16",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J8082026005.html&daesu=13",
+    "count": 351
+  },
+  {
+    "id": 20,
+    "name": "2026년도 행정사무감사 [ 임시 ] : 서귀포시",
+    "date": "2026-10-15",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9092026003.html&daesu=13",
+    "count": 1241
+  },
+  {
+    "id": 21,
     "name": "제13대 제2026회 2026년도 행정사무감사농수축위원회",
     "date": "2026-10-15",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9092026003.html&daesu=13",
     "count": 597
   },
   {
-    "name": "2026년도 행정사무감사 [ 임시 ] : 서귀포시",
-    "date": "2026-10-15",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9092026003.html&daesu=13",
-    "count": 597
-  },
-  {
-    "name": "제13대 제2026회 2026년도 행정사무감사문화관광체육위원회",
-    "date": "2026-10-14",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9022026005.html&daesu=13",
-    "count": 707
-  },
-  {
+    "id": 22,
     "name": "2026년도 행정사무감사 [ 임시 ] : 관광교류국, 제주관광공사, 제주국제컨벤션센터, 제주특별자치도관광협회",
     "date": "2026-10-14",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9022026005.html&daesu=13",
     "count": 707
   },
   {
-    "name": "제13대 제2026회 2026년도 행정사무감사행정자치위원회",
-    "date": "2026-10-13",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J2052026004.html&daesu=13",
-    "count": 786
+    "id": 23,
+    "name": "제13대 제2026회 2026년도 행정사무감사문화관광체육위원회",
+    "date": "2026-10-14",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9022026005.html&daesu=13",
+    "count": 707
   },
   {
-    "name": "제13대 제2026회 2026년도 행정사무감사환경도시위원회",
-    "date": "2026-10-13",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J8082026001.html&daesu=13",
-    "count": 841
-  },
-  {
+    "id": 24,
     "name": "2026년도 행정사무감사 [ 임시 ] : 기획조정실, 대변인, 소통·제2공항담당관, 제주연구원",
     "date": "2026-10-13",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J2052026004.html&daesu=13",
     "count": 786
   },
   {
+    "id": 25,
     "name": "2026년도 행정사무감사 [ 임시 ] : 서귀포시",
     "date": "2026-10-13",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J8082026001.html&daesu=13",
     "count": 841
   },
   {
+    "id": 26,
+    "name": "2026년도 행정사무감사 [ 임시 ] : 제주시",
+    "date": "2026-10-13",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9072026004.html&daesu=13",
+    "count": 697
+  },
+  {
+    "id": 27,
     "name": "제13대 제2026회 2026년도 행정사무감사행정자치위원회",
-    "date": "2026-10-12",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J2052026005.html&daesu=13",
-    "count": 718
+    "date": "2026-10-13",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J2052026004.html&daesu=13",
+    "count": 786
   },
   {
+    "id": 28,
     "name": "제13대 제2026회 2026년도 행정사무감사환경도시위원회",
-    "date": "2026-10-12",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J8082026004.html&daesu=13",
-    "count": 986
+    "date": "2026-10-13",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J8082026001.html&daesu=13",
+    "count": 841
   },
   {
-    "name": "제13대 제2026회 2026년도 행정사무감사교육위원회",
-    "date": "2026-10-12",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9082026005.html&daesu=13",
-    "count": 341
-  },
-  {
-    "name": "제13대 제2026회 2026년도 행정사무감사농수축위원회",
-    "date": "2026-10-12",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9092026001.html&daesu=13",
-    "count": 572
-  },
-  {
+    "id": 29,
     "name": "2026년도 행정사무감사 [ 임시 ] : 감사위원회, 기본사회추진단, 청렴감찰관, 강정공동체사업추진단, 중앙협력본부",
     "date": "2026-10-12",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J2052026005.html&daesu=13",
-    "count": 718
+    "count": 1468
   },
   {
-    "name": "2026년도 행정사무감사 [ 임시 ] : 소통·제2공항담당관, 환경산림자원국, 보건환경연구원, 제주환경자원순환센터",
-    "date": "2026-10-12",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J8082026004.html&daesu=13",
-    "count": 986
-  },
-  {
-    "name": "2026년도 행정사무감사 [ 임시 ] : 해양수산국, 해양수산연구원",
-    "date": "2026-10-12",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9092026001.html&daesu=13",
-    "count": 572
-  },
-  {
+    "id": 30,
     "name": "2026년도 행정사무감사 [ 임시 ] : 서귀포학생문화원, 제주유아교육진흥원 소관",
     "date": "2026-10-12",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9082026005.html&daesu=13",
     "count": 341
   },
   {
-    "name": "제13대 제2026회 2026년도 행정사무감사의회운영위원회",
-    "date": "2026-10-08",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J1012026001.html&daesu=13",
-    "count": 321
+    "id": 31,
+    "name": "2026년도 행정사무감사 [ 임시 ] : 소통·제2공항담당관, 환경산림자원국, 보건환경연구원, 제주환경자원순환센터",
+    "date": "2026-10-12",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J8082026004.html&daesu=13",
+    "count": 986
   },
   {
+    "id": 32,
+    "name": "2026년도 행정사무감사 [ 임시 ] : 해양수산국, 해양수산연구원",
+    "date": "2026-10-12",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9092026001.html&daesu=13",
+    "count": 572
+  },
+  {
+    "id": 33,
+    "name": "제13대 제2026회 2026년도 행정사무감사교육위원회",
+    "date": "2026-10-12",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9082026005.html&daesu=13",
+    "count": 341
+  },
+  {
+    "id": 34,
+    "name": "제13대 제2026회 2026년도 행정사무감사농수축위원회",
+    "date": "2026-10-12",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9092026001.html&daesu=13",
+    "count": 572
+  },
+  {
+    "id": 35,
+    "name": "제13대 제2026회 2026년도 행정사무감사행정자치위원회",
+    "date": "2026-10-12",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J2052026005.html&daesu=13",
+    "count": 718
+  },
+  {
+    "id": 36,
+    "name": "제13대 제2026회 2026년도 행정사무감사환경도시위원회",
+    "date": "2026-10-12",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J8082026004.html&daesu=13",
+    "count": 986
+  },
+  {
+    "id": 37,
     "name": "2026년도 행정사무감사 [ 임시 ] : 의회사무처",
     "date": "2026-10-08",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J1012026001.html&daesu=13",
     "count": 321
   },
   {
-    "name": "제13대 제2026회 2026년도 행정사무감사행정자치위원회",
-    "date": "2026-10-07",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J2052026003.html&daesu=13",
-    "count": 518
+    "id": 38,
+    "name": "제13대 제2026회 2026년도 행정사무감사의회운영위원회",
+    "date": "2026-10-08",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J1012026001.html&daesu=13",
+    "count": 321
   },
   {
-    "name": "제13대 제2026회 2026년도 행정사무감사환경도시위원회",
-    "date": "2026-10-07",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J8082026002.html&daesu=13",
-    "count": 810
-  },
-  {
-    "name": "제13대 제2026회 2026년도 행정사무감사문화관광체육위원회",
-    "date": "2026-10-07",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9022026003.html&daesu=13",
-    "count": 610
-  },
-  {
-    "name": "제13대 제2026회 2026년도 행정사무감사미래경제산업위원회",
-    "date": "2026-10-07",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9072026003.html&daesu=13",
-    "count": 750
-  },
-  {
-    "name": "제13대 제2026회 2026년도 행정사무감사교육위원회",
-    "date": "2026-10-07",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9082026004.html&daesu=13",
-    "count": 598
-  },
-  {
-    "name": "2026년도 행정사무감사 [ 임시 ] : 제주시",
-    "date": "2026-10-07",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J2052026003.html&daesu=13",
-    "count": 518
-  },
-  {
+    "id": 39,
     "name": "2026년도 행정사무감사 [ 임시 ] : 도시건설국, 교통항공국, 상하수도본부",
     "date": "2026-10-07",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J8082026002.html&daesu=13",
     "count": 810
   },
   {
+    "id": 40,
     "name": "2026년도 행정사무감사 [ 임시 ] : 서귀포시, 서귀포시체육회, 서귀포시장애인체육회",
     "date": "2026-10-07",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9022026003.html&daesu=13",
     "count": 610
   },
   {
-    "name": "2026년도 행정사무감사 [ 임시 ] : 탐라교육원, 제주융합과학연구원 소관",
-    "date": "2026-10-07",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9082026003.html&daesu=13",
-    "count": 351
-  },
-  {
+    "id": 41,
     "name": "2026년도 행정사무감사 [ 임시 ] : 제주국제교육원, 제주박물관 소관",
     "date": "2026-10-07",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9082026004.html&daesu=13",
     "count": 247
   },
   {
+    "id": 42,
+    "name": "2026년도 행정사무감사 [ 임시 ] : 제주시",
+    "date": "2026-10-07",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J2052026003.html&daesu=13",
+    "count": 518
+  },
+  {
+    "id": 43,
     "name": "2026년도 행정사무감사 [ 임시 ] : 지방노동위원회, 경제활력국, 노동안전감독관, 고용센터, 제주특별자치도경제통상진흥원, 제주신용보증재단",
     "date": "2026-10-07",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9072026003.html&daesu=13",
     "count": 750
   },
   {
+    "id": 44,
+    "name": "2026년도 행정사무감사 [ 임시 ] : 탐라교육원, 제주융합과학연구원 소관",
+    "date": "2026-10-07",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9082026003.html&daesu=13",
+    "count": 351
+  },
+  {
+    "id": 45,
+    "name": "제13대 제2026회 2026년도 행정사무감사교육위원회",
+    "date": "2026-10-07",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9082026004.html&daesu=13",
+    "count": 598
+  },
+  {
+    "id": 46,
     "name": "제13대 제2026회 2026년도 행정사무감사농수축위원회",
     "date": "2026-10-07",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9092026002.html&daesu=13",
     "count": 859
   },
   {
-    "name": "제13대 제2026회 2026년도 행정사무감사행정자치위원회",
-    "date": "2026-10-06",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J2052026002.html&daesu=13",
-    "count": 614
+    "id": 47,
+    "name": "제13대 제2026회 2026년도 행정사무감사문화관광체육위원회",
+    "date": "2026-10-07",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9022026003.html&daesu=13",
+    "count": 610
   },
   {
-    "name": "제13대 제2026회 2026년도 행정사무감사문화관광체육위원회",
-    "date": "2026-10-06",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9022026002.html&daesu=13",
+    "id": 48,
+    "name": "제13대 제2026회 2026년도 행정사무감사미래경제산업위원회",
+    "date": "2026-10-07",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9072026003.html&daesu=13",
+    "count": 750
+  },
+  {
+    "id": 49,
+    "name": "제13대 제2026회 2026년도 행정사무감사행정자치위원회",
+    "date": "2026-10-07",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J2052026003.html&daesu=13",
+    "count": 518
+  },
+  {
+    "id": 50,
+    "name": "제13대 제2026회 2026년도 행정사무감사환경도시위원회",
+    "date": "2026-10-07",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J8082026002.html&daesu=13",
     "count": 810
   },
   {
-    "name": "제13대 제2026회 2026년도 행정사무감사교육위원회",
-    "date": "2026-10-06",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9082026002.html&daesu=13",
-    "count": 864
-  },
-  {
-    "name": "2026년도 행정사무감사 [ 임시 ] : 서귀포시",
-    "date": "2026-10-06",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J2052026002.html&daesu=13",
-    "count": 614
-  },
-  {
+    "id": 51,
     "name": "2026년도 행정사무감사 [ 임시 ] : 문화체육교육국, 전국체전기획단, 세계유산본부, 문화예술진흥원, 민속자연사박물관, 한라도서관, 제주도립미술관, 돌문화공원관리소, 제주문화예술재단, 제주콘텐츠진흥원, 제주평생교육장학진흥원, 제주학연구센터, 제주특별자치도체육회, 제주특별자치도장애인체육회",
     "date": "2026-10-06",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9022026002.html&daesu=13",
     "count": 810
   },
   {
+    "id": 52,
+    "name": "2026년도 행정사무감사 [ 임시 ] : 서귀포시",
+    "date": "2026-10-06",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J2052026002.html&daesu=13",
+    "count": 614
+  },
+  {
+    "id": 53,
     "name": "2026년도 행정사무감사 [ 임시 ] : 제주특별자치도교육청 소관",
     "date": "2026-10-06",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9082026002.html&daesu=13",
     "count": 864
   },
   {
-    "name": "제13대 제455회 본회의 제1차",
-    "date": "2026-10-02",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13A0110455012.html&daesu=13",
-    "count": 17
+    "id": 54,
+    "name": "제13대 제2026회 2026년도 행정사무감사교육위원회",
+    "date": "2026-10-06",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9082026002.html&daesu=13",
+    "count": 864
   },
   {
-    "name": "제13대 제455회 본회의 개회식",
-    "date": "2026-10-02",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13A0110455002.html&daesu=13",
-    "count": 3
+    "id": 55,
+    "name": "제13대 제2026회 2026년도 행정사무감사문화관광체육위원회",
+    "date": "2026-10-06",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J9022026002.html&daesu=13",
+    "count": 810
   },
   {
-    "name": "제13대 제455회 의회운영위원회 제1차",
-    "date": "2026-10-02",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C1010455011.html&daesu=13",
-    "count": 2
+    "id": 56,
+    "name": "제13대 제2026회 2026년도 행정사무감사행정자치위원회",
+    "date": "2026-10-06",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13J2052026002.html&daesu=13",
+    "count": 614
   },
   {
-    "name": "제13대 제455회 미래경제산업위원회 제1차",
-    "date": "2026-10-02",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C9070455012.html&daesu=13",
-    "count": 2
-  },
-  {
+    "id": 57,
     "name": "제13대 제455회 교육위원회 제1차",
     "date": "2026-10-02",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C9080455012.html&daesu=13",
     "count": 2
   },
   {
+    "id": 58,
     "name": "제13대 제455회 규제개혁특별위원회 제1차",
     "date": "2026-10-02",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13G8880455012.html&daesu=13",
     "count": 12
   },
   {
+    "id": 59,
+    "name": "제13대 제455회 미래경제산업위원회 제1차",
+    "date": "2026-10-02",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C9070455012.html&daesu=13",
+    "count": 2
+  },
+  {
+    "id": 60,
+    "name": "제13대 제455회 본회의 개회식",
+    "date": "2026-10-02",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13A0110455002.html&daesu=13",
+    "count": 3
+  },
+  {
+    "id": 61,
+    "name": "제13대 제455회 본회의 제1차",
+    "date": "2026-10-02",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13A0110455012.html&daesu=13",
+    "count": 17
+  },
+  {
+    "id": 62,
+    "name": "제13대 제455회 의회운영위원회 제1차",
+    "date": "2026-10-02",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C1010455011.html&daesu=13",
+    "count": 2
+  },
+  {
+    "id": 63,
     "name": "제455회[임시회] [ 임시 ] 개회식",
     "date": "2026-10-02",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13A0110455002.html&daesu=13",
     "count": 3
   },
   {
+    "id": 64,
     "name": "제455회[임시회] [ 임시 ] 제1차",
     "date": "2026-10-02",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13G8880455012.html&daesu=13",
     "count": 17
   },
   {
+    "id": 65,
     "name": "제454회[제1차 정례회] [ 임시 ] 제1차[폐회중]",
     "date": "2026-10-01",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13G1050454011.html&daesu=13",
     "count": 12
   },
   {
+    "id": 66,
     "name": "제454회[제1차 정례회] [ 임시 ] 제2차[폐회중]",
     "date": "2026-09-23",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13G9740454022.html&daesu=13",
     "count": 901
   },
   {
+    "id": 67,
     "name": "제454회[제1차 정례회] [ 임시 ] 제7차",
     "date": "2026-09-22",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13A0110454071.html&daesu=13",
     "count": 32
   },
   {
+    "id": 68,
     "name": "제454회[제1차 정례회] [ 임시 ] 제2차",
     "date": "2026-09-21",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C9080454021.html&daesu=13",
     "count": 4
   },
   {
+    "id": 69,
     "name": "제454회[제1차 정례회] [ 임시 ] 제3차",
     "date": "2026-09-21",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13E0110454031.html&daesu=13",
     "count": 573
   },
   {
+    "id": 70,
     "name": "제454회[제1차 정례회] [ 임시 ] 제2차",
     "date": "2026-09-17",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13E0110454021.html&daesu=13",
     "count": 715
   },
   {
+    "id": 71,
     "name": "제454회[제1차 정례회] [ 임시 ] 제1차",
     "date": "2026-09-16",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13E0110454011.html&daesu=13",
     "count": 1007
   },
   {
-    "name": "제454회[제1차 정례회] [ 임시 ] 제3차",
-    "date": "2026-09-15",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C8080454032.html&daesu=13",
-    "count": 543
-  },
-  {
+    "id": 72,
     "name": "제454회[제1차 정례회] [ 임시 ] 제1차",
     "date": "2026-09-15",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C9020454011.html&daesu=13",
     "count": 537
   },
   {
-    "name": "제454회[제1차 정례회] [ 임시 ] 제2차",
-    "date": "2026-09-14",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C2050454022.html&daesu=13",
-    "count": 599
+    "id": 73,
+    "name": "제454회[제1차 정례회] [ 임시 ] 제3차",
+    "date": "2026-09-15",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C8080454032.html&daesu=13",
+    "count": 543
   },
   {
+    "id": 74,
     "name": "제454회[제1차 정례회] [ 임시 ] 제1차",
     "date": "2026-09-14",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C9080454012.html&daesu=13",
-    "count": 818
+    "count": 1687
   },
   {
+    "id": 75,
+    "name": "제454회[제1차 정례회] [ 임시 ] 제2차",
+    "date": "2026-09-14",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C2050454022.html&daesu=13",
+    "count": 1223
+  },
+  {
+    "id": 76,
     "name": "제454회[제1차 정례회] [ 임시 ] 제1차",
     "date": "2026-09-11",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C9090454012.html&daesu=13",
-    "count": 710
+    "count": 1482
   },
   {
+    "id": 77,
     "name": "제454회[제1차 정례회] [ 임시 ] 제2차",
     "date": "2026-09-11",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C8080454021.html&daesu=13",
     "count": 522
   },
   {
+    "id": 78,
     "name": "제454회[제1차 정례회] [ 임시 ] 제1차",
     "date": "2026-09-10",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C2050454012.html&daesu=13",
     "count": 504
   },
   {
-    "name": "제454회[제1차 정례회] [ 임시 ] 제6차",
-    "date": "2026-09-09",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13A0110454061.html&daesu=13",
-    "count": 297
-  },
-  {
+    "id": 79,
     "name": "제454회[제1차 정례회] [ 임시 ] 제1차",
     "date": "2026-09-09",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13G9740454011.html&daesu=13",
     "count": 15
   },
   {
+    "id": 80,
+    "name": "제454회[제1차 정례회] [ 임시 ] 제6차",
+    "date": "2026-09-09",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13A0110454061.html&daesu=13",
+    "count": 297
+  },
+  {
+    "id": 81,
     "name": "제454회[제1차 정례회] [ 임시 ] 제5차",
     "date": "2026-09-08",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13A0110454052.html&daesu=13",
     "count": 249
   },
   {
+    "id": 82,
     "name": "제454회[제1차 정례회] [ 임시 ] 제4차",
     "date": "2026-09-07",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13A0110454042.html&daesu=13",
     "count": 378
   },
   {
+    "id": 83,
     "name": "제454회[제1차 정례회] [ 임시 ] 제3차",
     "date": "2026-09-04",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13A0110454031.html&daesu=13",
     "count": 576
   },
   {
+    "id": 84,
     "name": "제454회[제1차 정례회] [ 임시 ] 제2차",
     "date": "2026-09-03",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13A0110454021.html&daesu=13",
     "count": 436
   },
   {
+    "id": 85,
     "name": "제454회[제1차 정례회] [ 임시 ] 개회식",
     "date": "2026-09-02",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13A0110454002.html&daesu=13",
     "count": 3
   },
   {
+    "id": 86,
     "name": "제454회[제1차 정례회] [ 임시 ] 제1차",
     "date": "2026-09-02",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C8080454012.html&daesu=13",
-    "count": 18
+    "count": 327
   },
   {
+    "id": 87,
     "name": "제453회[임시회] 제3차[폐회중]",
     "date": "2026-09-01",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C9090453031.html&daesu=13",
-    "count": 4
+    "count": 8
   },
   {
-    "name": "제453회[임시회] 제3차[폐회중]",
-    "date": "2026-08-31",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C9060453032.html&daesu=13",
-    "count": 4
-  },
-  {
+    "id": 88,
     "name": "제453회[임시회] 제2차[폐회중]",
     "date": "2026-08-31",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C9070453021.html&daesu=13",
     "count": 4
   },
   {
+    "id": 89,
+    "name": "제453회[임시회] 제3차[폐회중]",
+    "date": "2026-08-31",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C9060453032.html&daesu=13",
+    "count": 8
+  },
+  {
+    "id": 90,
     "name": "제453회[임시회] 제3차[폐회중]",
     "date": "2026-08-28",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C9080453032.html&daesu=13",
     "count": 4
   },
   {
+    "id": 91,
     "name": "제453회[임시회] 제3차[폐회중]",
     "date": "2026-08-27",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C8080453032.html&daesu=13",
     "count": 4
   },
   {
+    "id": 92,
     "name": "제453회[임시회] 제2차[폐회중]",
     "date": "2026-08-26",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13G9720453022.html&daesu=13",
     "count": 862
   },
   {
+    "id": 93,
     "name": "제453회[임시회] 제2차[폐회중]",
     "date": "2026-08-24",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C9080453021.html&daesu=13",
     "count": 212
   },
   {
+    "id": 94,
     "name": "제453회[임시회] 제2차[폐회중]",
     "date": "2026-08-21",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13G9740453022.html&daesu=13",
     "count": 516
   },
   {
+    "id": 95,
     "name": "제453회[임시회] 제1차[폐회중]",
     "date": "2026-08-14",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13G9720453012.html&daesu=13",
     "count": 12
   },
   {
+    "id": 96,
     "name": "제453회[임시회] 제1차[폐회중]",
     "date": "2026-08-10",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13G9740453011.html&daesu=13",
     "count": 14
   },
   {
+    "id": 97,
     "name": "제453회[임시회] 제2차",
     "date": "2026-07-30",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C1010453021.html&daesu=13",
-    "count": 44
+    "count": 88
   },
   {
+    "id": 98,
     "name": "제453회[임시회] 제4차",
     "date": "2026-07-30",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13E0110453041.html&daesu=13",
     "count": 6
   },
   {
+    "id": 99,
     "name": "제453회[임시회] 제3차",
     "date": "2026-07-29",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13E0110453032.html&daesu=13",
     "count": 4
   },
   {
+    "id": 100,
     "name": "제453회[임시회] 제2차",
     "date": "2026-07-28",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13E0110453022.html&daesu=13",
     "count": 515
   },
   {
+    "id": 101,
     "name": "제453회[임시회] 제1차",
     "date": "2026-07-27",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13E0110453011.html&daesu=13",
     "count": 931
   },
   {
-    "name": "제453회[임시회] 제2차",
-    "date": "2026-07-24",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C9090453021.html&daesu=13",
-    "count": 6
-  },
-  {
+    "id": 102,
     "name": "제453회[임시회] 제1차",
     "date": "2026-07-24",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C9080453012.html&daesu=13",
-    "count": 659
+    "count": 1351
   },
   {
+    "id": 103,
+    "name": "제453회[임시회] 제2차",
+    "date": "2026-07-24",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C9090453021.html&daesu=13",
+    "count": 751
+  },
+  {
+    "id": 104,
     "name": "제453회[임시회] 제1차",
     "date": "2026-07-23",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C8080453011.html&daesu=13",
-    "count": 473
+    "count": 982
   },
   {
+    "id": 105,
     "name": "제453회[임시회] 제1차",
     "date": "2026-07-22",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C9090453011.html&daesu=13",
-    "count": 695
+    "count": 2118
   },
   {
+    "id": 106,
     "name": "제453회[임시회] 개회식",
     "date": "2026-07-21",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13A0110453001.html&daesu=13",
     "count": 3
   },
   {
+    "id": 107,
     "name": "제453회[임시회] 제1차",
     "date": "2026-07-21",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C1010453012.html&daesu=13",
-    "count": 17
+    "count": 34
   },
   {
+    "id": 108,
     "name": "제452회[임시회] 제2차",
     "date": "2026-07-16",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C1010452021.html&daesu=13",
-    "count": 32
+    "count": 64
   },
   {
-    "name": "제452회[임시회] 제3차",
-    "date": "2026-07-15",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C9080452032.html&daesu=13",
-    "count": 495
-  },
-  {
+    "id": 109,
     "name": "제452회[임시회] 제2차",
     "date": "2026-07-15",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C8080452022.html&daesu=13",
-    "count": 456
+    "count": 1834
   },
   {
+    "id": 110,
+    "name": "제452회[임시회] 제3차",
+    "date": "2026-07-15",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C9080452032.html&daesu=13",
+    "count": 1395
+  },
+  {
+    "id": 111,
     "name": "제452회[임시회] 제1차",
     "date": "2026-07-14",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C8080452011.html&daesu=13",
     "count": 878
   },
   {
+    "id": 112,
     "name": "제452회[임시회] 제2차",
     "date": "2026-07-14",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C9080452021.html&daesu=13",
-    "count": 310
+    "count": 1056
   },
   {
+    "id": 113,
+    "name": "제452회[임시회] 제1차",
+    "date": "2026-07-13",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C9080452011.html&daesu=13",
+    "count": 2932
+  },
+  {
+    "id": 114,
     "name": "제452회[임시회] 제2차",
     "date": "2026-07-13",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C2050452021.html&daesu=13",
     "count": 398
   },
   {
-    "name": "제452회[임시회] 제1차",
-    "date": "2026-07-13",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C9080452011.html&daesu=13",
-    "count": 569
-  },
-  {
+    "id": 115,
     "name": "제452회[임시회] 제1차",
     "date": "2026-07-10",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C2050452011.html&daesu=13",
     "count": 516
   },
   {
+    "id": 116,
     "name": "제452회[임시회] 개회식",
     "date": "2026-07-09",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13A0110452001.html&daesu=13",
     "count": 3
   },
   {
+    "id": 117,
     "name": "제452회[임시회] 제1차",
     "date": "2026-07-09",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C1010452011.html&daesu=13",
-    "count": 14
+    "count": 28
   },
   {
+    "id": 118,
+    "name": "제451회[임시회] 제1차",
+    "date": "2026-07-06",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13G9000451011.html&daesu=13",
+    "count": 24
+  },
+  {
+    "id": 119,
     "name": "제451회[임시회] 제3차",
     "date": "2026-07-06",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13A0110451032.html&daesu=13",
     "count": 13
   },
   {
-    "name": "제451회[임시회] 제1차",
-    "date": "2026-07-06",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13G9000451011.html&daesu=13",
-    "count": 12
-  },
-  {
+    "id": 120,
     "name": "제451회[임시회] 제1차",
     "date": "2026-07-03",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13C9080451011.html&daesu=13",
-    "count": 16
+    "count": 95
   },
   {
+    "id": 121,
     "name": "제451회[임시회] 개회식",
     "date": "2026-07-02",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13A0110451002.html&daesu=13",
     "count": 12
   },
   {
+    "id": 122,
     "name": "제451회[임시회] 제2차",
     "date": "2026-07-02",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13A0110451021.html&daesu=13",
     "count": 37
   },
   {
+    "id": 123,
     "name": "제451회[임시회] 제1차",
     "date": "2026-07-01",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=13A0110451011.html&daesu=13",
     "count": 33
   },
   {
+    "id": 124,
     "name": "제450회[임시회] 개회식",
     "date": "2026-06-24",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110450001.html&daesu=12",
     "count": 1
   },
   {
+    "id": 125,
     "name": "제450회[임시회] 제1차",
     "date": "2026-06-24",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050450011.html&daesu=12",
-    "count": 13
+    "count": 37
   },
   {
+    "id": 126,
     "name": "제449회[임시회] 제2차",
     "date": "2026-06-17",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110449021.html&daesu=12",
     "count": 38
   },
   {
+    "id": 127,
     "name": "제449회[임시회] 제4차",
     "date": "2026-06-17",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G9760449042.html&daesu=12",
     "count": 4
   },
   {
+    "id": 128,
     "name": "제449회[임시회] 제1차",
     "date": "2026-06-15",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C1010449012.html&daesu=12",
     "count": 14
   },
   {
+    "id": 129,
     "name": "제449회[임시회] 제1차",
     "date": "2026-06-12",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9080449012.html&daesu=12",
-    "count": 185
+    "count": 670
   },
   {
+    "id": 130,
     "name": "제449회[임시회] 제1차",
     "date": "2026-06-11",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C8080449012.html&daesu=12",
     "count": 279
   },
   {
+    "id": 131,
     "name": "제449회[임시회] 제1차",
     "date": "2026-06-10",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9020449011.html&daesu=12",
-    "count": 231
+    "count": 473
   },
   {
+    "id": 132,
     "name": "제449회[임시회] 개회식",
     "date": "2026-06-09",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110449001.html&daesu=12",
     "count": 3
   },
   {
+    "id": 133,
     "name": "제449회[임시회] 제1차",
     "date": "2026-06-09",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110449012.html&daesu=12",
     "count": 8
   },
   {
-    "name": "제449회[임시회] 제6차",
-    "date": "2026-06-09",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G1050449061.html&daesu=12",
-    "count": 6
-  },
-  {
+    "id": 134,
     "name": "제449회[임시회] 제3차",
     "date": "2026-06-09",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G9750449032.html&daesu=12",
     "count": 5
   },
   {
+    "id": 135,
     "name": "제449회[임시회] 제4차",
     "date": "2026-06-09",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G9770449042.html&daesu=12",
     "count": 10
   },
   {
+    "id": 136,
+    "name": "제449회[임시회] 제6차",
+    "date": "2026-06-09",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G1050449061.html&daesu=12",
+    "count": 6
+  },
+  {
+    "id": 137,
     "name": "제448회[임시회] 제2차",
     "date": "2026-04-30",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110448022.html&daesu=12",
     "count": 20
   },
   {
+    "id": 138,
     "name": "제448회[임시회] 제2차",
     "date": "2026-04-29",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110448021.html&daesu=12",
     "count": 369
   },
   {
+    "id": 139,
     "name": "제448회[임시회] 제1차",
     "date": "2026-04-28",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110448011.html&daesu=12",
     "count": 363
   },
   {
+    "id": 140,
     "name": "제448회[임시회] 제1차",
     "date": "2026-04-27",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9080448012.html&daesu=12",
-    "count": 233
+    "count": 1022
   },
   {
+    "id": 141,
     "name": "제448회[임시회] 개회식",
     "date": "2026-04-24",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110448002.html&daesu=12",
     "count": 3
   },
   {
+    "id": 142,
     "name": "제448회[임시회] 제1차",
     "date": "2026-04-24",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110448012.html&daesu=12",
     "count": 14
   },
   {
+    "id": 143,
     "name": "제447회[임시회] 제2차",
     "date": "2026-03-27",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110447021.html&daesu=12",
     "count": 26
   },
   {
+    "id": 144,
     "name": "제447회[임시회] 제1차",
     "date": "2026-03-25",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050447012.html&daesu=12",
     "count": 443
   },
   {
+    "id": 145,
     "name": "제447회[임시회] 제2차",
     "date": "2026-03-25",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9090447021.html&daesu=12",
-    "count": 170
+    "count": 348
   },
   {
+    "id": 146,
     "name": "제447회[임시회] 제1차",
     "date": "2026-03-24",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9020447012.html&daesu=12",
-    "count": 315
+    "count": 670
   },
   {
+    "id": 147,
     "name": "제447회[임시회] 제1차",
     "date": "2026-03-20",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9080447012.html&daesu=12",
     "count": 260
   },
   {
+    "id": 148,
     "name": "제447회[임시회] 개회식",
     "date": "2026-03-19",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110447002.html&daesu=12",
     "count": 3
   },
   {
+    "id": 149,
     "name": "제447회[임시회] 제1차",
     "date": "2026-03-19",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9090447011.html&daesu=12",
-    "count": 19
+    "count": 167
   },
   {
+    "id": 150,
     "name": "제447회[임시회] 제5차",
     "date": "2026-03-19",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G1050447052.html&daesu=12",
     "count": 346
   },
   {
+    "id": 151,
     "name": "제446회[임시회] 제2차",
     "date": "2026-02-13",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110446022.html&daesu=12",
     "count": 21
   },
   {
+    "id": 152,
     "name": "제446회[임시회] 제3차",
     "date": "2026-02-13",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G9760446032.html&daesu=12",
     "count": 228
   },
   {
+    "id": 153,
     "name": "제446회[임시회] 제2차",
     "date": "2026-02-12",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9060446022.html&daesu=12",
     "count": 479
   },
   {
+    "id": 154,
     "name": "제446회[임시회] 제3차",
     "date": "2026-02-12",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9090446032.html&daesu=12",
-    "count": 419
+    "count": 876
   },
   {
+    "id": 155,
     "name": "제446회[임시회] 제2차",
     "date": "2026-02-11",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9020446022.html&daesu=12",
-    "count": 691
+    "count": 1453
   },
   {
+    "id": 156,
     "name": "제446회[임시회] 제3차",
     "date": "2026-02-11",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9080446031.html&daesu=12",
     "count": 477
   },
   {
-    "name": "제446회[임시회] 제2차",
-    "date": "2026-02-10",
-    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9080446022.html&daesu=12",
-    "count": 702
-  },
-  {
+    "id": 157,
     "name": "제446회[임시회] 제1차",
     "date": "2026-02-10",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C8080446012.html&daesu=12",
-    "count": 410
+    "count": 847
   },
   {
+    "id": 158,
+    "name": "제446회[임시회] 제2차",
+    "date": "2026-02-10",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9080446022.html&daesu=12",
+    "count": 2053
+  },
+  {
+    "id": 159,
     "name": "제446회[임시회] 제1차",
     "date": "2026-02-09",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9080446011.html&daesu=12",
-    "count": 886
+    "count": 2870
   },
   {
+    "id": 160,
     "name": "제446회[임시회] 제1차",
     "date": "2026-02-06",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050446011.html&daesu=12",
     "count": 689
   },
   {
+    "id": 161,
     "name": "제446회[임시회] 개회식",
     "date": "2026-02-05",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110446002.html&daesu=12",
     "count": 3
   },
   {
+    "id": 162,
     "name": "제446회[임시회] 제1차",
     "date": "2026-02-05",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C1010446011.html&daesu=12",
+    "count": 52
+  },
+  {
+    "id": 163,
+    "name": "제445회[임시회] 제2차[폐회중]",
+    "date": "2026-01-21",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C1010445022.html&daesu=12",
+    "count": 8
+  },
+  {
+    "id": 164,
+    "name": "제445회[임시회] 제2차",
+    "date": "2025-12-19",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110445022.html&daesu=12",
+    "count": 39
+  },
+  {
+    "id": 165,
+    "name": "제445회[임시회] 제2차",
+    "date": "2025-12-18",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110445022.html&daesu=12",
+    "count": 555
+  },
+  {
+    "id": 166,
+    "name": "제445회[임시회] 제1차",
+    "date": "2025-12-17",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110445012.html&daesu=12",
+    "count": 571
+  },
+  {
+    "id": 167,
+    "name": "제445회[임시회] 제1차",
+    "date": "2025-12-16",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C1010445011.html&daesu=12",
+    "count": 3507
+  },
+  {
+    "id": 168,
+    "name": "제445회[임시회] 개회식",
+    "date": "2025-12-15",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110445001.html&daesu=12",
+    "count": 3
+  },
+  {
+    "id": 169,
+    "name": "제445회[임시회] 제1차",
+    "date": "2025-12-15",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110445012.html&daesu=12",
+    "count": 17
+  },
+  {
+    "id": 170,
+    "name": "제444회[제2차 정례회] 제6차",
+    "date": "2025-12-10",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110444061.html&daesu=12",
+    "count": 40
+  },
+  {
+    "id": 171,
+    "name": "제444회[제2차 정례회] 제7차",
+    "date": "2025-12-10",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110444072.html&daesu=12",
+    "count": 16
+  },
+  {
+    "id": 172,
+    "name": "제444회[제2차 정례회] 제6차",
+    "date": "2025-12-09",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110444062.html&daesu=12",
+    "count": 8
+  },
+  {
+    "id": 173,
+    "name": "제444회[제2차 정례회] 제5차",
+    "date": "2025-12-08",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110444052.html&daesu=12",
+    "count": 3
+  },
+  {
+    "id": 174,
+    "name": "제444회[제2차 정례회] 제4차",
+    "date": "2025-12-05",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110444042.html&daesu=12",
+    "count": 931
+  },
+  {
+    "id": 175,
+    "name": "제444회[제2차 정례회] 제3차",
+    "date": "2025-12-03",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110444032.html&daesu=12",
+    "count": 788
+  },
+  {
+    "id": 176,
+    "name": "제444회[제2차 정례회] 제2차",
+    "date": "2025-12-02",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110444022.html&daesu=12",
+    "count": 1493
+  },
+  {
+    "id": 177,
+    "name": "제444회[제2차 정례회] 제1차",
+    "date": "2025-12-01",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110444012.html&daesu=12",
+    "count": 1099
+  },
+  {
+    "id": 178,
+    "name": "제444회[제2차 정례회] 제1차",
+    "date": "2025-11-27",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C1010444011.html&daesu=12",
+    "count": 257
+  },
+  {
+    "id": 179,
+    "name": "제444회[제2차 정례회] 제4차",
+    "date": "2025-11-27",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9060444042.html&daesu=12",
+    "count": 24
+  },
+  {
+    "id": 180,
+    "name": "제444회[제2차 정례회] 제5차",
+    "date": "2025-11-27",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050444052.html&daesu=12",
+    "count": 14
+  },
+  {
+    "id": 181,
+    "name": "제444회[제2차 정례회] 제6차",
+    "date": "2025-11-27",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C8080444062.html&daesu=12",
+    "count": 7
+  },
+  {
+    "id": 182,
+    "name": "제444회[제2차 정례회] 제3차",
+    "date": "2025-11-26",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9080444032.html&daesu=12",
+    "count": 187
+  },
+  {
+    "id": 183,
+    "name": "제444회[제2차 정례회] 제4차",
+    "date": "2025-11-26",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050444041.html&daesu=12",
+    "count": 789
+  },
+  {
+    "id": 184,
+    "name": "제444회[제2차 정례회] 제2차",
+    "date": "2025-11-25",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9080444022.html&daesu=12",
+    "count": 739
+  },
+  {
+    "id": 185,
+    "name": "제444회[제2차 정례회] 제3차",
+    "date": "2025-11-25",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9060444032.html&daesu=12",
+    "count": 1113
+  },
+  {
+    "id": 186,
+    "name": "제444회[제2차 정례회] 제5차",
+    "date": "2025-11-25",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C8080444052.html&daesu=12",
+    "count": 560
+  },
+  {
+    "id": 187,
+    "name": "제444회[제2차 정례회] 제1차",
+    "date": "2025-11-24",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9080444012.html&daesu=12",
+    "count": 921
+  },
+  {
+    "id": 188,
+    "name": "제444회[제2차 정례회] 제3차",
+    "date": "2025-11-24",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050444032.html&daesu=12",
+    "count": 1739
+  },
+  {
+    "id": 189,
+    "name": "제444회[제2차 정례회] 제2차",
+    "date": "2025-11-21",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050444021.html&daesu=12",
+    "count": 2746
+  },
+  {
+    "id": 190,
+    "name": "제444회[제2차 정례회] 제4차",
+    "date": "2025-11-21",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C8080444041.html&daesu=12",
+    "count": 889
+  },
+  {
+    "id": 191,
+    "name": "제444회[제2차 정례회] 제1차",
+    "date": "2025-11-20",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9020444012.html&daesu=12",
+    "count": 858
+  },
+  {
+    "id": 192,
+    "name": "제444회[제2차 정례회] 제3차",
+    "date": "2025-11-20",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C8080444031.html&daesu=12",
+    "count": 910
+  },
+  {
+    "id": 193,
+    "name": "제444회[제2차 정례회] 제1차",
+    "date": "2025-11-19",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050444011.html&daesu=12",
+    "count": 2120
+  },
+  {
+    "id": 194,
+    "name": "제444회[제2차 정례회] 제2차",
+    "date": "2025-11-19",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C8080444022.html&daesu=12",
+    "count": 780
+  },
+  {
+    "id": 195,
+    "name": "제444회[제2차 정례회] 제5차",
+    "date": "2025-11-18",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110444052.html&daesu=12",
+    "count": 376
+  },
+  {
+    "id": 196,
+    "name": "제444회[제2차 정례회] 제4차",
+    "date": "2025-11-17",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110444042.html&daesu=12",
+    "count": 306
+  },
+  {
+    "id": 197,
+    "name": "제444회[제2차 정례회] 제3차",
+    "date": "2025-11-14",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110444032.html&daesu=12",
+    "count": 235
+  },
+  {
+    "id": 198,
+    "name": "제444회[제2차 정례회] 제2차",
+    "date": "2025-11-13",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110444021.html&daesu=12",
+    "count": 394
+  },
+  {
+    "id": 199,
+    "name": "제444회[제2차 정례회] 개회식",
+    "date": "2025-11-11",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110444001.html&daesu=12",
+    "count": 3
+  },
+  {
+    "id": 200,
+    "name": "제444회[제2차 정례회] 제1차",
+    "date": "2025-11-11",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110444011.html&daesu=12",
+    "count": 490
+  },
+  {
+    "id": 201,
+    "name": "제443회[임시회] 제2차",
+    "date": "2025-10-31",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110443021.html&daesu=12",
+    "count": 36
+  },
+  {
+    "id": 202,
+    "name": "제443회[임시회] 제4차",
+    "date": "2025-10-31",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G1050443042.html&daesu=12",
+    "count": 2
+  },
+  {
+    "id": 203,
+    "name": "제443회[임시회] 제1차",
+    "date": "2025-10-30",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C8080443011.html&daesu=12",
+    "count": 572
+  },
+  {
+    "id": 204,
+    "name": "제443회[임시회] 제1차",
+    "date": "2025-10-29",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9020443012.html&daesu=12",
+    "count": 1535
+  },
+  {
+    "id": 205,
+    "name": "제443회[임시회] 제2차",
+    "date": "2025-10-29",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050443021.html&daesu=12",
+    "count": 715
+  },
+  {
+    "id": 206,
+    "name": "2025년도 행정사무감사 : 교육위원회 소관",
+    "date": "2025-10-27",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J90820250010.html&daesu=12",
+    "count": 6
+  },
+  {
+    "id": 207,
+    "name": "2025년도 행정사무감사 : 농수축경제위원회 소관",
+    "date": "2025-10-27",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9092025004.html&daesu=12",
+    "count": 2
+  },
+  {
+    "id": 208,
+    "name": "2025년도 행정사무감사 : 문화관광체육위원회 소관",
+    "date": "2025-10-27",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9022025004.html&daesu=12",
+    "count": 2
+  },
+  {
+    "id": 209,
+    "name": "2025년도 행정사무감사 : 보건복지안전위원회 소관",
+    "date": "2025-10-27",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9062025005.html&daesu=12",
+    "count": 6
+  },
+  {
+    "id": 210,
+    "name": "2025년도 행정사무감사 : 행정자치위원회 소관",
+    "date": "2025-10-27",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J2052025004.html&daesu=12",
+    "count": 4
+  },
+  {
+    "id": 211,
+    "name": "2025년도 행정사무감사 : 환경도시위원회 소관",
+    "date": "2025-10-27",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J8082025001.html&daesu=12",
+    "count": 2
+  },
+  {
+    "id": 212,
+    "name": "제443회[임시회] 제1차",
+    "date": "2025-10-27",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C1010443011.html&daesu=12",
+    "count": 73
+  },
+  {
+    "id": 213,
+    "name": "2025년도 행정사무감사 : 건설주택국, 상하수도본부",
+    "date": "2025-10-24",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J8082025006.html&daesu=12",
+    "count": 806
+  },
+  {
+    "id": 214,
+    "name": "2025년도 행정사무감사 : 서귀포시",
+    "date": "2025-10-24",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J2052025005.html&daesu=12",
+    "count": 795
+  },
+  {
+    "id": 215,
+    "name": "2025년도 행정사무감사 : 서귀포시, 서귀포시체육회, 서귀포시장애인체육회",
+    "date": "2025-10-23",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9022025003.html&daesu=12",
+    "count": 679
+  },
+  {
+    "id": 216,
+    "name": "2025년도 행정사무감사 : 제주시",
+    "date": "2025-10-23",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J8082025003.html&daesu=12",
+    "count": 948
+  },
+  {
+    "id": 217,
+    "name": "2025년도 행정사무감사 : 제주특별자치도교육청",
+    "date": "2025-10-23",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9082025002.html&daesu=12",
+    "count": 813
+  },
+  {
+    "id": 218,
+    "name": "2025년도 행정사무감사 : 혁신산업국, 제주에너지공사, 제주테크노파크",
+    "date": "2025-10-23",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9092025005.html&daesu=12",
+    "count": 1085
+  },
+  {
+    "id": 219,
+    "name": "2025년도 행정사무감사 : 농축산식품국, 해양수산국, 농업기술원, 축산생명연구원, 해양수산연구원, 동물위생시험소",
+    "date": "2025-10-22",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9092025002.html&daesu=12",
+    "count": 1142
+  },
+  {
+    "id": 220,
+    "name": "2025년도 행정사무감사 : 서귀포시",
+    "date": "2025-10-22",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9062025004.html&daesu=12",
+    "count": 1020
+  },
+  {
+    "id": 221,
+    "name": "2025년도 행정사무감사 : 제주국제교육원, 제주교육박물관",
+    "date": "2025-10-22",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9082025004.html&daesu=12",
+    "count": 454
+  },
+  {
+    "id": 222,
+    "name": "2025년도 행정사무감사 : 제주도서관, 제주학생문화원",
+    "date": "2025-10-22",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9082025006.html&daesu=12",
+    "count": 357
+  },
+  {
+    "id": 223,
+    "name": "2025년도 행정사무감사 : 제주시",
+    "date": "2025-10-22",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J2052025006.html&daesu=12",
+    "count": 734
+  },
+  {
+    "id": 224,
+    "name": "2025년도 행정사무감사 : 관광교류국, 제주관광공사, 제주국제컨벤션센터, 제주특별자치도관광협회, 세계유산본부, 문화예술진흥원, 민속자연사박물관, 한라도서관, 제주도립미술관, 돌문화공원관리소",
+    "date": "2025-10-21",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9022025006.html&daesu=12",
+    "count": 936
+  },
+  {
+    "id": 225,
+    "name": "2025년도 행정사무감사 : 서귀포시",
+    "date": "2025-10-21",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J8082025004.html&daesu=12",
+    "count": 873
+  },
+  {
+    "id": 226,
+    "name": "2025년도 행정사무감사 : 서귀포시교육지원청",
+    "date": "2025-10-21",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9082025008.html&daesu=12",
+    "count": 394
+  },
+  {
+    "id": 227,
+    "name": "2025년도 행정사무감사 : 서귀포학생문화원, 제주유아교육진흥원",
+    "date": "2025-10-21",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9082025009.html&daesu=12",
+    "count": 405
+  },
+  {
+    "id": 228,
+    "name": "2025년도 행정사무감사 : 제주시",
+    "date": "2025-10-21",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9062025003.html&daesu=12",
+    "count": 769
+  },
+  {
+    "id": 229,
+    "name": "2025년도 행정사무감사 : 감사위원회, 특별자치행정국, 기초자치단체설치준비단, 소통청렴담당관, 공공정책연수원, 제주4·3평화재단",
+    "date": "2025-10-20",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J2052025001.html&daesu=12",
+    "count": 1001
+  },
+  {
+    "id": 230,
+    "name": "2025년도 행정사무감사 : 교통항공국, 15분도시추진단",
+    "date": "2025-10-20",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J8082025005.html&daesu=12",
+    "count": 1188
+  },
+  {
+    "id": 231,
+    "name": "2025년도 행정사무감사 : 안전건강실, 소방안전본부, 자치경찰위원회, 자치경찰단, 제주의료원, 서귀포의료원, 제주한의약연구원",
+    "date": "2025-10-20",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9062025006.html&daesu=12",
+    "count": 1235
+  },
+  {
+    "id": 232,
+    "name": "2025년도 행정사무감사 : 제주시",
+    "date": "2025-10-20",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9092025003.html&daesu=12",
+    "count": 813
+  },
+  {
+    "id": 233,
+    "name": "2025년도 행정사무감사 : 제주시교육지원청",
+    "date": "2025-10-20",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9082025001.html&daesu=12",
+    "count": 421
+  },
+  {
+    "id": 234,
+    "name": "2025년도 행정사무감사 : 탐라교육원, 제주융합과학연구원",
+    "date": "2025-10-20",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J90820250011.html&daesu=12",
+    "count": 582
+  },
+  {
+    "id": 235,
+    "name": "2025년도 행정사무감사 : 의회사무처",
+    "date": "2025-10-17",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J1012025002.html&daesu=12",
+    "count": 399
+  },
+  {
+    "id": 236,
+    "name": "2025년도 행정사무감사 : 기후환경국, 보건환경연구원, 제주환경자원순환센터, 제주특별자치도개발공사",
+    "date": "2025-10-16",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J8082025002.html&daesu=12",
+    "count": 1039
+  },
+  {
+    "id": 237,
+    "name": "2025년도 행정사무감사 : 복지가족국, 성평등여성정책관, 보훈청, 설문대여성문화센터, 제주여성가족연구원, 제주특별자치도사회서비스원",
+    "date": "2025-10-16",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9062025002.html&daesu=12",
+    "count": 1109
+  },
+  {
+    "id": 238,
+    "name": "2025년도 행정사무감사 : 서귀포시",
+    "date": "2025-10-16",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9092025006.html&daesu=12",
+    "count": 633
+  },
+  {
+    "id": 239,
+    "name": "2025년도 행정사무감사 : 제주시, 제주시체육회, 제주시장애인체육회",
+    "date": "2025-10-16",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9022025005.html&daesu=12",
+    "count": 644
+  },
+  {
+    "id": 240,
+    "name": "2025년도 행정사무감사 : 제주특별자치도교육청",
+    "date": "2025-10-16",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9082025007.html&daesu=12",
+    "count": 805
+  },
+  {
+    "id": 241,
+    "name": "2025년도 행정사무감사 : 기획조정실, 대변인, 강정공동체사업추진단, 중앙협력본부, 제주연구원",
+    "date": "2025-10-15",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J2052025003.html&daesu=12",
+    "count": 796
+  },
+  {
+    "id": 242,
+    "name": "2025년도 행정사무감사 : 문화체육교육국, 전국체전기획단, 제주문화예술재단, 제주콘텐츠진흥원, 제주평생교육장학진흥원, 제주학연구센터, 제주특별자치도체육회, 제주특별자치도장애인체육회",
+    "date": "2025-10-15",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9022025001.html&daesu=12",
+    "count": 965
+  },
+  {
+    "id": 243,
+    "name": "2025년도 행정사무감사 : 제주특별자치도교육청",
+    "date": "2025-10-15",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9082025003.html&daesu=12",
+    "count": 727
+  },
+  {
+    "id": 244,
+    "name": "2025년도 행정사무감사 : 지방노동위원회, 경제활력국, 새정부경제정책추진단, 제주특별자치도경제통상진흥원, 제주신용보증재단",
+    "date": "2025-10-15",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9092025007.html&daesu=12",
+    "count": 1022
+  },
+  {
+    "id": 245,
+    "name": "제443회[임시회] 개회식",
+    "date": "2025-10-14",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110443001.html&daesu=12",
+    "count": 3
+  },
+  {
+    "id": 246,
+    "name": "제443회[임시회] 제1차",
+    "date": "2025-10-14",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110443011.html&daesu=12",
+    "count": 14
+  },
+  {
+    "id": 247,
+    "name": "제442회[임시회] 제3차[폐회중]",
+    "date": "2025-10-02",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9090442032.html&daesu=12",
+    "count": 529
+  },
+  {
+    "id": 248,
+    "name": "제442회[임시회] 제3차[폐회중]",
+    "date": "2025-10-01",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9020442032.html&daesu=12",
+    "count": 375
+  },
+  {
+    "id": 249,
+    "name": "제442회[임시회] 제2차[폐회중]",
+    "date": "2025-09-17",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9090442021.html&daesu=12",
+    "count": 4
+  },
+  {
+    "id": 250,
+    "name": "제442회[임시회] 제2차",
+    "date": "2025-09-16",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110442021.html&daesu=12",
+    "count": 32
+  },
+  {
+    "id": 251,
+    "name": "제442회[임시회] 제3차",
+    "date": "2025-09-16",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G9770442032.html&daesu=12",
+    "count": 604
+  },
+  {
+    "id": 252,
+    "name": "제442회[임시회] 제1차",
+    "date": "2025-09-15",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9080442012.html&daesu=12",
+    "count": 311
+  },
+  {
+    "id": 253,
+    "name": "제442회[임시회] 제1차",
+    "date": "2025-09-12",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C8080442012.html&daesu=12",
+    "count": 830
+  },
+  {
+    "id": 254,
+    "name": "제442회[임시회] 제2차",
+    "date": "2025-09-12",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050442022.html&daesu=12",
+    "count": 466
+  },
+  {
+    "id": 255,
+    "name": "제442회[임시회] 제1차",
+    "date": "2025-09-11",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9020442012.html&daesu=12",
+    "count": 829
+  },
+  {
+    "id": 256,
+    "name": "제442회[임시회] 제1차",
+    "date": "2025-09-10",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050442012.html&daesu=12",
+    "count": 475
+  },
+  {
+    "id": 257,
+    "name": "제442회[임시회] 개회식",
+    "date": "2025-09-09",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110442001.html&daesu=12",
+    "count": 3
+  },
+  {
+    "id": 258,
+    "name": "제442회[임시회] 제1차",
+    "date": "2025-09-09",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110442011.html&daesu=12",
+    "count": 93
+  },
+  {
+    "id": 259,
+    "name": "제441회[임시회] 제2차[폐회중]",
+    "date": "2025-09-03",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9090441022.html&daesu=12",
+    "count": 4
+  },
+  {
+    "id": 260,
+    "name": "제441회[임시회] 제3차[폐회중]",
+    "date": "2025-09-03",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9060441032.html&daesu=12",
+    "count": 11
+  },
+  {
+    "id": 261,
+    "name": "제441회[임시회] 제2차[폐회중]",
+    "date": "2025-09-01",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050441021.html&daesu=12",
+    "count": 16
+  },
+  {
+    "id": 262,
+    "name": "제441회[임시회] 제2차[폐회중]",
+    "date": "2025-08-22",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9080441022.html&daesu=12",
+    "count": 4
+  },
+  {
+    "id": 263,
+    "name": "제441회[임시회] 제2차",
+    "date": "2025-08-14",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110441022.html&daesu=12",
+    "count": 77
+  },
+  {
+    "id": 264,
+    "name": "제441회[임시회] 제3차",
+    "date": "2025-08-14",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110441033.html&daesu=12",
+    "count": 12
+  },
+  {
+    "id": 265,
+    "name": "제441회[임시회] 제2차",
+    "date": "2025-08-13",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110441021.html&daesu=12",
+    "count": 3
+  },
+  {
+    "id": 266,
+    "name": "제441회[임시회] 제1차",
+    "date": "2025-08-12",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110441011.html&daesu=12",
+    "count": 1206
+  },
+  {
+    "id": 267,
+    "name": "제441회[임시회] 제1차",
+    "date": "2025-08-08",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050441011.html&daesu=12",
+    "count": 2651
+  },
+  {
+    "id": 268,
+    "name": "제441회[임시회] 제2차",
+    "date": "2025-08-08",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9060441022.html&daesu=12",
+    "count": 9
+  },
+  {
+    "id": 269,
+    "name": "제441회[임시회] 제1차",
+    "date": "2025-08-07",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9060441012.html&daesu=12",
+    "count": 1819
+  },
+  {
+    "id": 270,
+    "name": "제441회[임시회] 제1차",
+    "date": "2025-08-06",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C1010441012.html&daesu=12",
+    "count": 254
+  },
+  {
+    "id": 271,
+    "name": "제441회[임시회] 개회식",
+    "date": "2025-08-05",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110441002.html&daesu=12",
+    "count": 3
+  },
+  {
+    "id": 272,
+    "name": "제441회[임시회] 제1차",
+    "date": "2025-08-05",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110441011.html&daesu=12",
+    "count": 79
+  },
+  {
+    "id": 273,
+    "name": "제440회[임시회] 개회식",
+    "date": "2025-07-16",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110440002.html&daesu=12",
+    "count": 3
+  },
+  {
+    "id": 274,
+    "name": "제440회[임시회] 제1차",
+    "date": "2025-07-16",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110440012.html&daesu=12",
+    "count": 30
+  },
+  {
+    "id": 275,
+    "name": "제439회[제1차 정례회] 제2차[폐회중]",
+    "date": "2025-07-08",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C1010439022.html&daesu=12",
+    "count": 13
+  },
+  {
+    "id": 276,
+    "name": "제439회[제1차 정례회] 제4차[폐회중]",
+    "date": "2025-07-07",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110439041.html&daesu=12",
+    "count": 18
+  },
+  {
+    "id": 277,
+    "name": "제439회[제1차 정례회] 제2차",
+    "date": "2025-06-27",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110439021.html&daesu=12",
+    "count": 47
+  },
+  {
+    "id": 278,
+    "name": "제439회[제1차 정례회] 제4차",
+    "date": "2025-06-27",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G9760439042.html&daesu=12",
+    "count": 13
+  },
+  {
+    "id": 279,
+    "name": "제439회[제1차 정례회] 제5차",
+    "date": "2025-06-27",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G1050439051.html&daesu=12",
+    "count": 10
+  },
+  {
+    "id": 280,
+    "name": "제439회[제1차 정례회] 제6차",
+    "date": "2025-06-27",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G9750439061.html&daesu=12",
+    "count": 4
+  },
+  {
+    "id": 281,
+    "name": "제439회[제1차 정례회] 제3차",
+    "date": "2025-06-26",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110439032.html&daesu=12",
+    "count": 626
+  },
+  {
+    "id": 282,
+    "name": "제439회[제1차 정례회] 제5차",
+    "date": "2025-06-25",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G9750439051.html&daesu=12",
     "count": 26
   },
   {
+    "id": 283,
+    "name": "제439회[제1차 정례회] 제2차",
+    "date": "2025-06-24",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110439021.html&daesu=12",
+    "count": 1488
+  },
+  {
+    "id": 284,
+    "name": "제439회[제1차 정례회] 제1차",
+    "date": "2025-06-20",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110439011.html&daesu=12",
+    "count": 987
+  },
+  {
+    "id": 285,
+    "name": "제439회[제1차 정례회] 제2차",
+    "date": "2025-06-18",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9060439022.html&daesu=12",
+    "count": 1050
+  },
+  {
+    "id": 286,
+    "name": "제439회[제1차 정례회] 제1차",
+    "date": "2025-06-17",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9060439012.html&daesu=12",
+    "count": 1739
+  },
+  {
+    "id": 287,
+    "name": "제439회[제1차 정례회] 제3차",
+    "date": "2025-06-17",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050439032.html&daesu=12",
+    "count": 603
+  },
+  {
+    "id": 288,
+    "name": "제439회[제1차 정례회] 제2차",
+    "date": "2025-06-16",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050439022.html&daesu=12",
+    "count": 1684
+  },
+  {
+    "id": 289,
+    "name": "제439회[제1차 정례회] 제1차",
+    "date": "2025-06-13",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9080439012.html&daesu=12",
+    "count": 843
+  },
+  {
+    "id": 290,
+    "name": "제439회[제1차 정례회] 제1차",
+    "date": "2025-06-12",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050439011.html&daesu=12",
+    "count": 676
+  },
+  {
+    "id": 291,
+    "name": "제439회[제1차 정례회] 제1차",
+    "date": "2025-06-11",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9020439012.html&daesu=12",
+    "count": 270
+  },
+  {
+    "id": 292,
+    "name": "제439회[제1차 정례회] 개회식",
+    "date": "2025-06-10",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110439001.html&daesu=12",
+    "count": 3
+  },
+  {
+    "id": 293,
+    "name": "제439회[제1차 정례회] 제1차",
+    "date": "2025-06-10",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110439011.html&daesu=12",
+    "count": 297
+  },
+  {
+    "id": 294,
+    "name": "제438회[임시회] 제1차[폐회중]",
+    "date": "2025-06-02",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9080438011.html&daesu=12",
+    "count": 222
+  },
+  {
+    "id": 295,
+    "name": "제438회[임시회] 개회식",
+    "date": "2025-05-23",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110438002.html&daesu=12",
+    "count": 3
+  },
+  {
+    "id": 296,
+    "name": "제438회[임시회] 제1차",
+    "date": "2025-05-23",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110438011.html&daesu=12",
+    "count": 203
+  },
+  {
+    "id": 297,
+    "name": "제437회[임시회] 제3차[폐회중]",
+    "date": "2025-04-29",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050437031.html&daesu=12",
+    "count": 517
+  },
+  {
+    "id": 298,
+    "name": "제437회[임시회] 제7차",
+    "date": "2025-04-23",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110437071.html&daesu=12",
+    "count": 33
+  },
+  {
+    "id": 299,
+    "name": "제437회[임시회] 제3차",
+    "date": "2025-04-22",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110437031.html&daesu=12",
+    "count": 7
+  },
+  {
+    "id": 300,
+    "name": "제437회[임시회] 제2차",
+    "date": "2025-04-21",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110437022.html&daesu=12",
+    "count": 969
+  },
+  {
+    "id": 301,
+    "name": "제437회[임시회] 제1차",
+    "date": "2025-04-18",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110437012.html&daesu=12",
+    "count": 1454
+  },
+  {
+    "id": 302,
+    "name": "제437회[임시회] 제1차",
+    "date": "2025-04-17",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C1010437011.html&daesu=12",
+    "count": 101
+  },
+  {
+    "id": 303,
+    "name": "제437회[임시회] 제2차",
+    "date": "2025-04-17",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C8080437022.html&daesu=12",
+    "count": 38
+  },
+  {
+    "id": 304,
+    "name": "제437회[임시회] 제3차",
+    "date": "2025-04-17",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9060437032.html&daesu=12",
+    "count": 9
+  },
+  {
+    "id": 305,
+    "name": "제437회[임시회] 제1차",
+    "date": "2025-04-16",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C8080437012.html&daesu=12",
+    "count": 992
+  },
+  {
+    "id": 306,
+    "name": "제437회[임시회] 제2차",
+    "date": "2025-04-16",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9060437022.html&daesu=12",
+    "count": 643
+  },
+  {
+    "id": 307,
+    "name": "제437회[임시회] 제1차",
+    "date": "2025-04-15",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9060437011.html&daesu=12",
+    "count": 2186
+  },
+  {
+    "id": 308,
+    "name": "제437회[임시회] 제1차",
+    "date": "2025-04-14",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050437011.html&daesu=12",
+    "count": 858
+  },
+  {
+    "id": 309,
+    "name": "제437회[임시회] 제6차",
+    "date": "2025-04-11",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110437062.html&daesu=12",
+    "count": 396
+  },
+  {
+    "id": 310,
+    "name": "제437회[임시회] 제5차",
+    "date": "2025-04-10",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110437051.html&daesu=12",
+    "count": 488
+  },
+  {
+    "id": 311,
+    "name": "제437회[임시회] 제4차",
+    "date": "2025-04-09",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110437042.html&daesu=12",
+    "count": 416
+  },
+  {
+    "id": 312,
+    "name": "제437회[임시회] 제3차",
+    "date": "2025-04-08",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110437032.html&daesu=12",
+    "count": 233
+  },
+  {
+    "id": 313,
+    "name": "제437회[임시회] 제2차",
+    "date": "2025-04-07",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110437021.html&daesu=12",
+    "count": 495
+  },
+  {
+    "id": 314,
+    "name": "제437회[임시회] 개회식",
+    "date": "2025-04-04",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110437002.html&daesu=12",
+    "count": 3
+  },
+  {
+    "id": 315,
+    "name": "제437회[임시회] 제1차",
+    "date": "2025-04-04",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110437011.html&daesu=12",
+    "count": 25
+  },
+  {
+    "id": 316,
+    "name": "제437회[임시회] 제4차",
+    "date": "2025-04-04",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G9750437042.html&daesu=12",
+    "count": 19
+  },
+  {
+    "id": 317,
+    "name": "제436회[임시회] 제2차",
+    "date": "2025-03-25",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110436022.html&daesu=12",
+    "count": 23
+  },
+  {
+    "id": 318,
+    "name": "제436회[임시회] 제3차",
+    "date": "2025-03-25",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G9760436032.html&daesu=12",
+    "count": 281
+  },
+  {
+    "id": 319,
+    "name": "제436회[임시회] 제1차",
+    "date": "2025-03-21",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9060436011.html&daesu=12",
+    "count": 677
+  },
+  {
+    "id": 320,
+    "name": "제436회[임시회] 제1차",
+    "date": "2025-03-20",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9020436011.html&daesu=12",
+    "count": 1095
+  },
+  {
+    "id": 321,
+    "name": "제436회[임시회] 개회식",
+    "date": "2025-03-18",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110436001.html&daesu=12",
+    "count": 3
+  },
+  {
+    "id": 322,
+    "name": "제436회[임시회] 제1차",
+    "date": "2025-03-18",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110436011.html&daesu=12",
+    "count": 98
+  },
+  {
+    "id": 323,
+    "name": "제435회[임시회] 제4차[폐회중]",
+    "date": "2025-03-17",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G1050435042.html&daesu=12",
+    "count": 273
+  },
+  {
+    "id": 324,
+    "name": "제435회[임시회] 제2차",
+    "date": "2025-02-27",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110435022.html&daesu=12",
+    "count": 35
+  },
+  {
+    "id": 325,
+    "name": "제435회[임시회] 제3차",
+    "date": "2025-02-27",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G1050435031.html&daesu=12",
+    "count": 8
+  },
+  {
+    "id": 326,
+    "name": "제435회[임시회] 제3차",
+    "date": "2025-02-26",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050435032.html&daesu=12",
+    "count": 1004
+  },
+  {
+    "id": 327,
+    "name": "제435회[임시회] 제4차",
+    "date": "2025-02-26",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9090435042.html&daesu=12",
+    "count": 525
+  },
+  {
+    "id": 328,
+    "name": "제435회[임시회] 제2차",
+    "date": "2025-02-25",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050435021.html&daesu=12",
+    "count": 1375
+  },
+  {
+    "id": 329,
+    "name": "제435회[임시회] 제3차",
+    "date": "2025-02-25",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9060435031.html&daesu=12",
+    "count": 456
+  },
+  {
+    "id": 330,
+    "name": "제435회[임시회] 제4차",
+    "date": "2025-02-25",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C8080435042.html&daesu=12",
+    "count": 356
+  },
+  {
+    "id": 331,
+    "name": "제435회[임시회] 제5차",
+    "date": "2025-02-25",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9080435051.html&daesu=12",
+    "count": 962
+  },
+  {
+    "id": 332,
+    "name": "제435회[임시회] 제2차",
+    "date": "2025-02-24",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9060435022.html&daesu=12",
+    "count": 802
+  },
+  {
+    "id": 333,
+    "name": "제435회[임시회] 제3차",
+    "date": "2025-02-24",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C8080435032.html&daesu=12",
+    "count": 1237
+  },
+  {
+    "id": 334,
+    "name": "제435회[임시회] 제4차",
+    "date": "2025-02-24",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9080435041.html&daesu=12",
+    "count": 532
+  },
+  {
+    "id": 335,
+    "name": "제435회[임시회] 제1차",
+    "date": "2025-02-21",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9020435011.html&daesu=12",
+    "count": 890
+  },
+  {
+    "id": 336,
+    "name": "제435회[임시회] 제3차",
+    "date": "2025-02-21",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9080435031.html&daesu=12",
+    "count": 675
+  },
+  {
+    "id": 337,
+    "name": "제435회[임시회] 제1차",
+    "date": "2025-02-20",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9060435012.html&daesu=12",
+    "count": 529
+  },
+  {
+    "id": 338,
+    "name": "제435회[임시회] 제2차",
+    "date": "2025-02-20",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C8080435022.html&daesu=12",
+    "count": 2098
+  },
+  {
+    "id": 339,
+    "name": "제435회[임시회] 제1차",
+    "date": "2025-02-19",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050435012.html&daesu=12",
+    "count": 2512
+  },
+  {
+    "id": 340,
+    "name": "제435회[임시회] 개회식",
+    "date": "2025-02-18",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110435001.html&daesu=12",
+    "count": 3
+  },
+  {
+    "id": 341,
+    "name": "제435회[임시회] 제1차",
+    "date": "2025-02-18",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110435012.html&daesu=12",
+    "count": 346
+  },
+  {
+    "id": 342,
+    "name": "제434회[임시회] 제2차[폐회중]",
+    "date": "2025-02-05",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C1010434021.html&daesu=12",
+    "count": 18
+  },
+  {
+    "id": 343,
+    "name": "제434회[임시회] 제2차",
+    "date": "2024-12-16",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110434021.html&daesu=12",
+    "count": 33
+  },
+  {
+    "id": 344,
+    "name": "제434회[임시회] 제3차",
+    "date": "2024-12-13",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110434031.html&daesu=12",
+    "count": 568
+  },
+  {
+    "id": 345,
+    "name": "제434회[임시회] 제2차",
+    "date": "2024-12-12",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110434021.html&daesu=12",
+    "count": 1150
+  },
+  {
+    "id": 346,
+    "name": "제434회[임시회] 제1차",
+    "date": "2024-12-11",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9060434011.html&daesu=12",
+    "count": 3773
+  },
+  {
+    "id": 347,
+    "name": "제434회[임시회] 개회식",
+    "date": "2024-12-10",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110434001.html&daesu=12",
+    "count": 3
+  },
+  {
+    "id": 348,
+    "name": "제434회[임시회] 제1차",
+    "date": "2024-12-10",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C1010434011.html&daesu=12",
+    "count": 158
+  },
+  {
+    "id": 349,
+    "name": "제433회[제2차 정례회] 제3차[폐회중]",
+    "date": "2024-12-09",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G9750433032.html&daesu=12",
+    "count": 105
+  },
+  {
+    "id": 350,
+    "name": "제433회[제2차 정례회] 제6차",
+    "date": "2024-12-03",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110433061.html&daesu=12",
+    "count": 10
+  },
+  {
+    "id": 351,
+    "name": "제433회[제2차 정례회] 제5차",
+    "date": "2024-12-02",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110433051.html&daesu=12",
+    "count": 3
+  },
+  {
+    "id": 352,
+    "name": "제433회[제2차 정례회] 제4차",
+    "date": "2024-11-29",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110433042.html&daesu=12",
+    "count": 1322
+  },
+  {
+    "id": 353,
+    "name": "제433회[제2차 정례회] 제3차",
+    "date": "2024-11-27",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110433031.html&daesu=12",
+    "count": 783
+  },
+  {
+    "id": 354,
+    "name": "제433회[제2차 정례회] 제2차",
+    "date": "2024-11-26",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110433021.html&daesu=12",
+    "count": 1899
+  },
+  {
+    "id": 355,
+    "name": "제433회[제2차 정례회] 제1차",
+    "date": "2024-11-25",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110433012.html&daesu=12",
+    "count": 1567
+  },
+  {
+    "id": 356,
+    "name": "제433회[제2차 정례회] 제1차",
+    "date": "2024-11-21",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C1010433012.html&daesu=12",
+    "count": 442
+  },
+  {
+    "id": 357,
+    "name": "제433회[제2차 정례회] 제4차",
+    "date": "2024-11-21",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9020433042.html&daesu=12",
+    "count": 140
+  },
+  {
+    "id": 358,
+    "name": "제433회[제2차 정례회] 제5차",
+    "date": "2024-11-21",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050433052.html&daesu=12",
+    "count": 26
+  },
+  {
+    "id": 359,
+    "name": "제433회[제2차 정례회] 제3차",
+    "date": "2024-11-20",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9080433031.html&daesu=12",
+    "count": 583
+  },
+  {
+    "id": 360,
+    "name": "제433회[제2차 정례회] 제4차",
+    "date": "2024-11-20",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050433041.html&daesu=12",
+    "count": 2095
+  },
+  {
+    "id": 361,
+    "name": "제433회[제2차 정례회] 제2차",
+    "date": "2024-11-19",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9080433022.html&daesu=12",
+    "count": 1241
+  },
+  {
+    "id": 362,
+    "name": "제433회[제2차 정례회] 제3차",
+    "date": "2024-11-19",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C8080433032.html&daesu=12",
+    "count": 1703
+  },
+  {
+    "id": 363,
+    "name": "제433회[제2차 정례회] 제4차",
+    "date": "2024-11-19",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9060433041.html&daesu=12",
+    "count": 775
+  },
+  {
+    "id": 364,
+    "name": "제433회[제2차 정례회] 제1차",
+    "date": "2024-11-18",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9080433012.html&daesu=12",
+    "count": 1115
+  },
+  {
+    "id": 365,
+    "name": "제433회[제2차 정례회] 제3차",
+    "date": "2024-11-18",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050433032.html&daesu=12",
+    "count": 3206
+  },
+  {
+    "id": 366,
+    "name": "제433회[제2차 정례회] 제2차",
+    "date": "2024-11-15",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050433022.html&daesu=12",
+    "count": 3916
+  },
+  {
+    "id": 367,
+    "name": "제433회[제2차 정례회] 제1차",
+    "date": "2024-11-14",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C8080433012.html&daesu=12",
+    "count": 418
+  },
+  {
+    "id": 368,
+    "name": "제433회[제2차 정례회] 제2차",
+    "date": "2024-11-14",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9060433022.html&daesu=12",
+    "count": 947
+  },
+  {
+    "id": 369,
+    "name": "제433회[제2차 정례회] 제1차",
+    "date": "2024-11-13",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050433011.html&daesu=12",
+    "count": 2396
+  },
+  {
+    "id": 370,
+    "name": "제433회[제2차 정례회] 개회식",
+    "date": "2024-11-12",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110433001.html&daesu=12",
+    "count": 3
+  },
+  {
+    "id": 371,
+    "name": "제433회[제2차 정례회] 제1차",
+    "date": "2024-11-12",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110433012.html&daesu=12",
+    "count": 17
+  },
+  {
+    "id": 372,
+    "name": "제432회[임시회] 제1차",
+    "date": "2024-10-24",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C1010432012.html&daesu=12",
+    "count": 32
+  },
+  {
+    "id": 373,
+    "name": "제432회[임시회] 제2차",
+    "date": "2024-10-24",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110432022.html&daesu=12",
+    "count": 24
+  },
+  {
+    "id": 374,
+    "name": "제432회[임시회] 제1차",
+    "date": "2024-10-22",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9060432011.html&daesu=12",
+    "count": 751
+  },
+  {
+    "id": 375,
+    "name": "제432회[임시회] 제2차",
+    "date": "2024-10-22",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050432021.html&daesu=12",
+    "count": 1297
+  },
+  {
+    "id": 376,
+    "name": "제432회[임시회] 제1차",
+    "date": "2024-10-21",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9020432011.html&daesu=12",
+    "count": 1002
+  },
+  {
+    "id": 377,
+    "name": "2024년도 행정사무감사 : 교육위원회 소관",
+    "date": "2024-10-18",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9082024002.html&daesu=12",
+    "count": 6
+  },
+  {
+    "id": 378,
+    "name": "2024년도 행정사무감사 : 농수축경제위원회 소관",
+    "date": "2024-10-18",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9092024001.html&daesu=12",
+    "count": 2
+  },
+  {
+    "id": 379,
+    "name": "2024년도 행정사무감사 : 문화관광체육위원회 소관",
+    "date": "2024-10-18",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9022024005.html&daesu=12",
+    "count": 2
+  },
+  {
+    "id": 380,
+    "name": "2024년도 행정사무감사 : 보건복지안전위원회 소관",
+    "date": "2024-10-18",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9062024006.html&daesu=12",
+    "count": 2
+  },
+  {
+    "id": 381,
+    "name": "2024년도 행정사무감사 : 행정자치위원회 소관",
+    "date": "2024-10-18",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J2052024002.html&daesu=12",
+    "count": 36
+  },
+  {
+    "id": 382,
+    "name": "제432회[임시회] 제1차",
+    "date": "2024-10-18",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050432011.html&daesu=12",
+    "count": 249
+  },
+  {
+    "id": 383,
+    "name": "2024년도 행정사무감사 : 제주시",
+    "date": "2024-10-17",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J2052024001.html&daesu=12",
+    "count": 887
+  },
+  {
+    "id": 384,
+    "name": "2024년도 행정사무감사 : 환경도시위원회 소관",
+    "date": "2024-10-17",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J8082024004.html&daesu=12",
+    "count": 8
+  },
+  {
+    "id": 385,
+    "name": "2024년도 행정사무감사 : 서귀포시",
+    "date": "2024-10-16",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J8082024005.html&daesu=12",
+    "count": 985
+  },
+  {
+    "id": 386,
+    "name": "2024년도 행정사무감사 : 제주시",
+    "date": "2024-10-16",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9062024002.html&daesu=12",
+    "count": 943
+  },
+  {
+    "id": 387,
+    "name": "2024년도 행정사무감사 : 제주특별자치도교육청",
+    "date": "2024-10-16",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J90820240011.html&daesu=12",
+    "count": 894
+  },
+  {
+    "id": 388,
+    "name": "2024년도 행정사무감사 : 기후환경국, 보건환경연구원, 제주특별자치도개발공사",
+    "date": "2024-10-15",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J8082024001.html&daesu=12",
+    "count": 1207
+  },
+  {
+    "id": 389,
+    "name": "2024년도 행정사무감사 : 서귀포시",
+    "date": "2024-10-15",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J2052024004.html&daesu=12",
+    "count": 929
+  },
+  {
+    "id": 390,
+    "name": "2024년도 행정사무감사 : 서귀포시교육지원청",
+    "date": "2024-10-15",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9082024007.html&daesu=12",
+    "count": 456
+  },
+  {
+    "id": 391,
+    "name": "2024년도 행정사무감사 : 제주시, 제주시체육회, 제주시장애인체육회",
+    "date": "2024-10-15",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9022024006.html&daesu=12",
+    "count": 900
+  },
+  {
+    "id": 392,
+    "name": "2024년도 행정사무감사 : 제주융합과학연구원, 제주유아교육진흥원",
+    "date": "2024-10-15",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J90820240010.html&daesu=12",
+    "count": 526
+  },
+  {
+    "id": 393,
+    "name": "2024년도 행정사무감사 : 지방노동위원회, 경제활력국, 혁신산업국, 제주에너지공사, 제주특별자치도경제통상진흥원, 제주신용보증재단, 제주테크노파크",
+    "date": "2024-10-15",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9092024005.html&daesu=12",
+    "count": 1190
+  },
+  {
+    "id": 394,
+    "name": "2024년도 행정사무감사 : 문화체육교육국, 전국체전기획단, 제주문화예술재단, 제주콘텐츠진흥원, 제주학연구센터, 제주평생교육장학진흥원, 제주특별자치도장애인체육회",
+    "date": "2024-10-14",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9022024004.html&daesu=12",
+    "count": 1293
+  },
+  {
+    "id": 395,
+    "name": "2024년도 행정사무감사 : 서귀포시",
+    "date": "2024-10-14",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9062024003.html&daesu=12",
+    "count": 1129
+  },
+  {
+    "id": 396,
+    "name": "2024년도 행정사무감사 : 제주국제교육원, 제주교육박물관",
+    "date": "2024-10-14",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9082024008.html&daesu=12",
+    "count": 491
+  },
+  {
+    "id": 397,
+    "name": "2024년도 행정사무감사 : 제주시",
+    "date": "2024-10-14",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J8082024002.html&daesu=12",
+    "count": 779
+  },
+  {
+    "id": 398,
+    "name": "2024년도 행정사무감사 : 제주시교육지원청",
+    "date": "2024-10-14",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9082024005.html&daesu=12",
+    "count": 442
+  },
+  {
+    "id": 399,
+    "name": "2024년도 행정사무감사 : 해양수산국, 해양수산연구원",
+    "date": "2024-10-14",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9092024002.html&daesu=12",
+    "count": 1056
+  },
+  {
+    "id": 400,
+    "name": "2024년도 행정사무감사 : 감사위원회, 특별자치행정국, 기초자치단체설치준비단, 소통청렴담당관, 공공정책연수원, 제주4·3평화재단",
+    "date": "2024-10-11",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J2052024006.html&daesu=12",
+    "count": 1045
+  },
+  {
+    "id": 401,
+    "name": "2024년도 행정사무감사 : 건설주택국, 상하수도본부",
+    "date": "2024-10-11",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J8082024008.html&daesu=12",
+    "count": 849
+  },
+  {
+    "id": 402,
+    "name": "2024년도 행정사무감사 : 복지가족국, 성평등여성정책관, 보훈청, 설문대여성문화센터, 제주여성가족연구원, 제주특별자치도사회서비스원",
+    "date": "2024-10-11",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9062024004.html&daesu=12",
+    "count": 1142
+  },
+  {
+    "id": 403,
+    "name": "2024년도 행정사무감사 : 서귀포시",
+    "date": "2024-10-11",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9092024003.html&daesu=12",
+    "count": 794
+  },
+  {
+    "id": 404,
+    "name": "2024년도 행정사무감사 : 세계유산본부, 문화예술진흥원, 민속자연사박물관, 한라도서관, 제주도립미술관, 돌문화공원관리소",
+    "date": "2024-10-11",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9022024003.html&daesu=12",
+    "count": 885
+  },
+  {
+    "id": 405,
+    "name": "2024년도 행정사무감사 : 제주학생문화원, 서귀포학생문화원",
+    "date": "2024-10-11",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9082024006.html&daesu=12",
+    "count": 496
+  },
+  {
+    "id": 406,
+    "name": "2024년도 행정사무감사 : 탐라교육원, 제주도서관",
+    "date": "2024-10-11",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9082024004.html&daesu=12",
+    "count": 462
+  },
+  {
+    "id": 407,
     "name": "2024년도 행정사무감사 : 의회사무처",
     "date": "2024-10-10",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J1012024002.html&daesu=12",
     "count": 448
   },
   {
+    "id": 408,
+    "name": "2024년도 행정사무감사 : 교통항공국, 15분도시추진단, 공항확충지원단",
+    "date": "2024-10-08",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J8082024003.html&daesu=12",
+    "count": 1102
+  },
+  {
+    "id": 409,
+    "name": "2024년도 행정사무감사 : 서귀포시, 서귀포시체육회, 서귀포시장애인체육회",
+    "date": "2024-10-08",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9022024001.html&daesu=12",
+    "count": 921
+  },
+  {
+    "id": 410,
+    "name": "2024년도 행정사무감사 : 안전건강실, 소방안전본부, 자치경찰위원회, 자치경찰단, 제주의료원, 서귀포의료원, 제주한의약연구원",
+    "date": "2024-10-08",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9062024001.html&daesu=12",
+    "count": 1522
+  },
+  {
+    "id": 411,
+    "name": "2024년도 행정사무감사 : 제주시",
+    "date": "2024-10-08",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9092024004.html&daesu=12",
+    "count": 726
+  },
+  {
+    "id": 412,
+    "name": "2024년도 행정사무감사 : 제주특별자치도교육청",
+    "date": "2024-10-08",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9082024009.html&daesu=12",
+    "count": 927
+  },
+  {
+    "id": 413,
+    "name": "2024년도 행정사무감사 : 관광교류국, 제주관광공사, 제주특별자치도관광협회, 제주국제컨벤션센터, 제주컨벤션뷰로, 제주특별자치도체육회",
+    "date": "2024-10-07",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9022024007.html&daesu=12",
+    "count": 1174
+  },
+  {
+    "id": 414,
     "name": "2024년도 행정사무감사 : 기획조정실, 대변인, 강정공동체사업추진단, 중앙협력본부, 제주연구원",
     "date": "2024-10-07",
     "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J2052024003.html&daesu=12",
     "count": 928
+  },
+  {
+    "id": 415,
+    "name": "2024년도 행정사무감사 : 농축산식품국, 농업기술원, 축산생명연구원, 동물위생시험소",
+    "date": "2024-10-07",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9092024007.html&daesu=12",
+    "count": 1016
+  },
+  {
+    "id": 416,
+    "name": "2024년도 행정사무감사 : 제주특별자치도교육청",
+    "date": "2024-10-07",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12J9082024001.html&daesu=12",
+    "count": 1008
+  },
+  {
+    "id": 417,
+    "name": "제432회[임시회] 개회식",
+    "date": "2024-10-04",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110432001.html&daesu=12",
+    "count": 3
+  },
+  {
+    "id": 418,
+    "name": "제432회[임시회] 제1차",
+    "date": "2024-10-04",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110432011.html&daesu=12",
+    "count": 8
+  },
+  {
+    "id": 419,
+    "name": "제431회[임시회] 제2차",
+    "date": "2024-09-13",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G1050431022.html&daesu=12",
+    "count": 343
+  },
+  {
+    "id": 420,
+    "name": "제431회[임시회] 제7차",
+    "date": "2024-09-13",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110431071.html&daesu=12",
+    "count": 23
+  },
+  {
+    "id": 421,
+    "name": "제431회[임시회] 제2차",
+    "date": "2024-09-12",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9020431021.html&daesu=12",
+    "count": 468
+  },
+  {
+    "id": 422,
+    "name": "제431회[임시회] 제1차",
+    "date": "2024-09-11",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9060431012.html&daesu=12",
+    "count": 1812
+  },
+  {
+    "id": 423,
+    "name": "제431회[임시회] 제1차",
+    "date": "2024-09-10",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050431011.html&daesu=12",
+    "count": 1030
+  },
+  {
+    "id": 424,
+    "name": "제431회[임시회] 제6차",
+    "date": "2024-09-09",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110431062.html&daesu=12",
+    "count": 619
+  },
+  {
+    "id": 425,
+    "name": "제431회[임시회] 제5차",
+    "date": "2024-09-06",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110431051.html&daesu=12",
+    "count": 506
+  },
+  {
+    "id": 426,
+    "name": "제431회[임시회] 제4차",
+    "date": "2024-09-05",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110431041.html&daesu=12",
+    "count": 171
+  },
+  {
+    "id": 427,
+    "name": "제431회[임시회] 제3차",
+    "date": "2024-09-04",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110431031.html&daesu=12",
+    "count": 441
+  },
+  {
+    "id": 428,
+    "name": "제431회[임시회] 제2차",
+    "date": "2024-09-03",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110431022.html&daesu=12",
+    "count": 670
+  },
+  {
+    "id": 429,
+    "name": "제431회[임시회] 개회식",
+    "date": "2024-09-02",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110431002.html&daesu=12",
+    "count": 3
+  },
+  {
+    "id": 430,
+    "name": "제431회[임시회] 제1차",
+    "date": "2024-09-02",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110431011.html&daesu=12",
+    "count": 34
+  },
+  {
+    "id": 431,
+    "name": "제430회[임시회] 제2차[폐회중]",
+    "date": "2024-08-30",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9060430021.html&daesu=12",
+    "count": 48
+  },
+  {
+    "id": 432,
+    "name": "제430회[임시회] 제3차[폐회중]",
+    "date": "2024-08-30",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9020430032.html&daesu=12",
+    "count": 4
+  },
+  {
+    "id": 433,
+    "name": "제430회[임시회] 제2차[폐회중]",
+    "date": "2024-08-29",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G9760430022.html&daesu=12",
+    "count": 206
+  },
+  {
+    "id": 434,
+    "name": "제430회[임시회] 제3차[폐회중]",
+    "date": "2024-08-29",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9090430031.html&daesu=12",
+    "count": 17
+  },
+  {
+    "id": 435,
+    "name": "제430회[임시회] 제2차[폐회중]",
+    "date": "2024-08-28",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050430021.html&daesu=12",
+    "count": 4
+  },
+  {
+    "id": 436,
+    "name": "제430회[임시회] 제4차[폐회중]",
+    "date": "2024-08-26",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9080430042.html&daesu=12",
+    "count": 4
+  },
+  {
+    "id": 437,
+    "name": "제430회[임시회] 제2차[폐회중]",
+    "date": "2024-08-22",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C8080430022.html&daesu=12",
+    "count": 4
+  },
+  {
+    "id": 438,
+    "name": "제430회[임시회] 제1차[폐회중]",
+    "date": "2024-08-01",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G9750430011.html&daesu=12",
+    "count": 38
+  },
+  {
+    "id": 439,
+    "name": "제430회[임시회] 제1차[폐회중]",
+    "date": "2024-07-29",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G1050430012.html&daesu=12",
+    "count": 14
+  },
+  {
+    "id": 440,
+    "name": "제430회[임시회] 제2차",
+    "date": "2024-07-19",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110430022.html&daesu=12",
+    "count": 51
+  },
+  {
+    "id": 441,
+    "name": "제430회[임시회] 제1차",
+    "date": "2024-07-18",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050430011.html&daesu=12",
+    "count": 796
+  },
+  {
+    "id": 442,
+    "name": "제430회[임시회] 제2차",
+    "date": "2024-07-18",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9020430021.html&daesu=12",
+    "count": 809
+  },
+  {
+    "id": 443,
+    "name": "제430회[임시회] 제3차",
+    "date": "2024-07-18",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9080430032.html&daesu=12",
+    "count": 14
+  },
+  {
+    "id": 444,
+    "name": "제430회[임시회] 제1차",
+    "date": "2024-07-17",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9060430012.html&daesu=12",
+    "count": 1771
+  },
+  {
+    "id": 445,
+    "name": "제430회[임시회] 제2차",
+    "date": "2024-07-17",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9080430022.html&daesu=12",
+    "count": 510
+  },
+  {
+    "id": 446,
+    "name": "제430회[임시회] 제1차",
+    "date": "2024-07-16",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9090430011.html&daesu=12",
+    "count": 1356
+  },
+  {
+    "id": 447,
+    "name": "제430회[임시회] 개회식",
+    "date": "2024-07-15",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110430002.html&daesu=12",
+    "count": 3
+  },
+  {
+    "id": 448,
+    "name": "제430회[임시회] 제1차",
+    "date": "2024-07-15",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110430012.html&daesu=12",
+    "count": 100
+  },
+  {
+    "id": 449,
+    "name": "제429회[임시회] 제1차",
+    "date": "2024-07-03",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C1010429011.html&daesu=12",
+    "count": 92
+  },
+  {
+    "id": 450,
+    "name": "제429회[임시회] 제3차",
+    "date": "2024-07-03",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110429032.html&daesu=12",
+    "count": 11
+  },
+  {
+    "id": 451,
+    "name": "제429회[임시회] 제1차",
+    "date": "2024-07-02",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9060429012.html&daesu=12",
+    "count": 63
+  },
+  {
+    "id": 452,
+    "name": "제429회[임시회] 제2차",
+    "date": "2024-07-02",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110429021.html&daesu=12",
+    "count": 43
+  },
+  {
+    "id": 453,
+    "name": "제429회[임시회] 개회식",
+    "date": "2024-07-01",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110429001.html&daesu=12",
+    "count": 1
+  },
+  {
+    "id": 454,
+    "name": "제429회[임시회] 제1차",
+    "date": "2024-07-01",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110429012.html&daesu=12",
+    "count": 30
+  },
+  {
+    "id": 455,
+    "name": "제428회[제1차 정례회] 제3차[폐회중]",
+    "date": "2024-06-28",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G9740428031.html&daesu=12",
+    "count": 1026
+  },
+  {
+    "id": 456,
+    "name": "제428회[제1차 정례회] 제2차[폐회중]",
+    "date": "2024-06-27",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G9740428021.html&daesu=12",
+    "count": 865
+  },
+  {
+    "id": 457,
+    "name": "제428회[제1차 정례회] 제2차",
+    "date": "2024-06-26",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110428021.html&daesu=12",
+    "count": 41
+  },
+  {
+    "id": 458,
+    "name": "제428회[제1차 정례회] 제8차",
+    "date": "2024-06-26",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G1050428081.html&daesu=12",
+    "count": 24
+  },
+  {
+    "id": 459,
+    "name": "제428회[제1차 정례회] 제3차",
+    "date": "2024-06-25",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110428031.html&daesu=12",
+    "count": 744
+  },
+  {
+    "id": 460,
+    "name": "제428회[제1차 정례회] 제2차",
+    "date": "2024-06-21",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110428022.html&daesu=12",
+    "count": 894
+  },
+  {
+    "id": 461,
+    "name": "제428회[제1차 정례회] 제1차",
+    "date": "2024-06-20",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110428011.html&daesu=12",
+    "count": 975
+  },
+  {
+    "id": 462,
+    "name": "제428회[제1차 정례회] 제6차",
+    "date": "2024-06-19",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G9450428061.html&daesu=12",
+    "count": 28
+  },
+  {
+    "id": 463,
+    "name": "제428회[제1차 정례회] 제1차",
+    "date": "2024-06-18",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9080428011.html&daesu=12",
+    "count": 435
+  },
+  {
+    "id": 464,
+    "name": "제428회[제1차 정례회] 제2차",
+    "date": "2024-06-18",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9060428021.html&daesu=12",
+    "count": 599
+  },
+  {
+    "id": 465,
+    "name": "제428회[제1차 정례회] 제3차",
+    "date": "2024-06-18",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050428032.html&daesu=12",
+    "count": 550
+  },
+  {
+    "id": 466,
+    "name": "제428회[제1차 정례회] 제2차",
+    "date": "2024-06-17",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C8080428022.html&daesu=12",
+    "count": 501
+  },
+  {
+    "id": 467,
+    "name": "제428회[제1차 정례회] 제1차",
+    "date": "2024-06-14",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C8080428011.html&daesu=12",
+    "count": 1188
+  },
+  {
+    "id": 468,
+    "name": "제428회[제1차 정례회] 제2차",
+    "date": "2024-06-14",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050428021.html&daesu=12",
+    "count": 773
+  },
+  {
+    "id": 469,
+    "name": "제428회[제1차 정례회] 제1차",
+    "date": "2024-06-13",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G9740428011.html&daesu=12",
+    "count": 14
+  },
+  {
+    "id": 470,
+    "name": "제428회[제1차 정례회] 제2차",
+    "date": "2024-06-13",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9020428022.html&daesu=12",
+    "count": 298
+  },
+  {
+    "id": 471,
+    "name": "제428회[제1차 정례회] 제1차",
+    "date": "2024-06-12",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050428011.html&daesu=12",
+    "count": 1838
+  },
+  {
+    "id": 472,
+    "name": "제428회[제1차 정례회] 개회식",
+    "date": "2024-06-11",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110428002.html&daesu=12",
+    "count": 3
+  },
+  {
+    "id": 473,
+    "name": "제428회[제1차 정례회] 제1차",
+    "date": "2024-06-11",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110428011.html&daesu=12",
+    "count": 238
+  },
+  {
+    "id": 474,
+    "name": "제428회[제1차 정례회] 제5차",
+    "date": "2024-06-11",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G9500428051.html&daesu=12",
+    "count": 4
+  },
+  {
+    "id": 475,
+    "name": "제427회[임시회] 제2차",
+    "date": "2024-05-24",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110427022.html&daesu=12",
+    "count": 42
+  },
+  {
+    "id": 476,
+    "name": "제427회[임시회] 제4차",
+    "date": "2024-05-24",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110427042.html&daesu=12",
+    "count": 7
+  },
+  {
+    "id": 477,
+    "name": "제427회[임시회] 제3차",
+    "date": "2024-05-23",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110427031.html&daesu=12",
+    "count": 579
+  },
+  {
+    "id": 478,
+    "name": "제427회[임시회] 제2차",
+    "date": "2024-05-22",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110427022.html&daesu=12",
+    "count": 1277
+  },
+  {
+    "id": 479,
+    "name": "제427회[임시회] 제1차",
+    "date": "2024-05-21",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12E0110427011.html&daesu=12",
+    "count": 1035
+  },
+  {
+    "id": 480,
+    "name": "제427회[임시회] 제1차",
+    "date": "2024-05-20",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9060427012.html&daesu=12",
+    "count": 1400
+  },
+  {
+    "id": 481,
+    "name": "제427회[임시회] 제2차",
+    "date": "2024-05-20",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050427022.html&daesu=12",
+    "count": 1630
+  },
+  {
+    "id": 482,
+    "name": "제427회[임시회] 제1차",
+    "date": "2024-05-17",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C8080427012.html&daesu=12",
+    "count": 2788
+  },
+  {
+    "id": 483,
+    "name": "제427회[임시회] 제1차",
+    "date": "2024-05-16",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050427012.html&daesu=12",
+    "count": 2
+  },
+  {
+    "id": 484,
+    "name": "제427회[임시회] 개회식",
+    "date": "2024-05-14",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110427001.html&daesu=12",
+    "count": 3
+  },
+  {
+    "id": 485,
+    "name": "제427회[임시회] 제1차",
+    "date": "2024-05-14",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110427012.html&daesu=12",
+    "count": 250
+  },
+  {
+    "id": 486,
+    "name": "제427회[임시회] 제4차",
+    "date": "2024-05-14",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G9500427041.html&daesu=12",
+    "count": 318
+  },
+  {
+    "id": 487,
+    "name": "제426회[임시회] 제7차",
+    "date": "2024-04-26",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110426071.html&daesu=12",
+    "count": 31
+  },
+  {
+    "id": 488,
+    "name": "제426회[임시회] 제2차",
+    "date": "2024-04-25",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G9730426022.html&daesu=12",
+    "count": 707
+  },
+  {
+    "id": 489,
+    "name": "제426회[임시회] 제1차",
+    "date": "2024-04-24",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9090426011.html&daesu=12",
+    "count": 986
+  },
+  {
+    "id": 490,
+    "name": "제426회[임시회] 제1차",
+    "date": "2024-04-23",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050426011.html&daesu=12",
+    "count": 1006
+  },
+  {
+    "id": 491,
+    "name": "제426회[임시회] 제6차",
+    "date": "2024-04-22",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110426061.html&daesu=12",
+    "count": 140
+  },
+  {
+    "id": 492,
+    "name": "제426회[임시회] 제5차",
+    "date": "2024-04-19",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110426051.html&daesu=12",
+    "count": 443
+  },
+  {
+    "id": 493,
+    "name": "제426회[임시회] 제4차",
+    "date": "2024-04-18",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110426041.html&daesu=12",
+    "count": 360
+  },
+  {
+    "id": 494,
+    "name": "제426회[임시회] 제3차",
+    "date": "2024-04-17",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110426032.html&daesu=12",
+    "count": 269
+  },
+  {
+    "id": 495,
+    "name": "제426회[임시회] 제2차",
+    "date": "2024-04-16",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110426022.html&daesu=12",
+    "count": 411
+  },
+  {
+    "id": 496,
+    "name": "제426회[임시회] 개회식",
+    "date": "2024-04-15",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110426002.html&daesu=12",
+    "count": 8
+  },
+  {
+    "id": 497,
+    "name": "제426회[임시회] 제1차",
+    "date": "2024-04-15",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110426012.html&daesu=12",
+    "count": 37
+  },
+  {
+    "id": 498,
+    "name": "제425회[임시회] 제1차[폐회중]",
+    "date": "2024-04-12",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G9730425011.html&daesu=12",
+    "count": 18
+  },
+  {
+    "id": 499,
+    "name": "제425회[임시회] 제2차[폐회중]",
+    "date": "2024-03-28",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G9720425021.html&daesu=12",
+    "count": 638
+  },
+  {
+    "id": 500,
+    "name": "제425회[임시회] 제2차",
+    "date": "2024-03-27",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110425021.html&daesu=12",
+    "count": 26
+  },
+  {
+    "id": 501,
+    "name": "제425회[임시회] 제1차",
+    "date": "2024-03-25",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C8080425011.html&daesu=12",
+    "count": 1287
+  },
+  {
+    "id": 502,
+    "name": "제425회[임시회] 제1차",
+    "date": "2024-03-22",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9060425011.html&daesu=12",
+    "count": 267
+  },
+  {
+    "id": 503,
+    "name": "제425회[임시회] 제3차",
+    "date": "2024-03-22",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9080425031.html&daesu=12",
+    "count": 1100
+  },
+  {
+    "id": 504,
+    "name": "제425회[임시회] 제1차",
+    "date": "2024-03-21",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9020425011.html&daesu=12",
+    "count": 152
+  },
+  {
+    "id": 505,
+    "name": "제425회[임시회] 제2차",
+    "date": "2024-03-21",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9080425022.html&daesu=12",
+    "count": 923
+  },
+  {
+    "id": 506,
+    "name": "제425회[임시회] 제1차",
+    "date": "2024-03-20",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9080425011.html&daesu=12",
+    "count": 966
+  },
+  {
+    "id": 507,
+    "name": "제425회[임시회] 개회식",
+    "date": "2024-03-19",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110425002.html&daesu=12",
+    "count": 3
+  },
+  {
+    "id": 508,
+    "name": "제425회[임시회] 제1차",
+    "date": "2024-03-19",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110425011.html&daesu=12",
+    "count": 16
+  },
+  {
+    "id": 509,
+    "name": "제424회[임시회] 제1차[폐회중]",
+    "date": "2024-03-14",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G9720424011.html&daesu=12",
+    "count": 12
+  },
+  {
+    "id": 510,
+    "name": "제424회[임시회] 제7차[폐회중]",
+    "date": "2024-03-13",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12G1050424072.html&daesu=12",
+    "count": 539
+  },
+  {
+    "id": 511,
+    "name": "제424회[임시회] 제2차",
+    "date": "2024-02-29",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110424021.html&daesu=12",
+    "count": 30
+  },
+  {
+    "id": 512,
+    "name": "제424회[임시회] 제3차",
+    "date": "2024-02-28",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050424032.html&daesu=12",
+    "count": 646
+  },
+  {
+    "id": 513,
+    "name": "제424회[임시회] 제3차",
+    "date": "2024-02-27",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9060424032.html&daesu=12",
+    "count": 1504
+  },
+  {
+    "id": 514,
+    "name": "제424회[임시회] 제4차",
+    "date": "2024-02-27",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C8080424041.html&daesu=12",
+    "count": 1085
+  },
+  {
+    "id": 515,
+    "name": "제424회[임시회] 제2차",
+    "date": "2024-02-26",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050424021.html&daesu=12",
+    "count": 2815
+  },
+  {
+    "id": 516,
+    "name": "제424회[임시회] 제3차",
+    "date": "2024-02-26",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9090424031.html&daesu=12",
+    "count": 712
+  },
+  {
+    "id": 517,
+    "name": "제424회[임시회] 제1차",
+    "date": "2024-02-22",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9060424012.html&daesu=12",
+    "count": 848
+  },
+  {
+    "id": 518,
+    "name": "제424회[임시회] 제2차",
+    "date": "2024-02-22",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C9090424021.html&daesu=12",
+    "count": 500
+  },
+  {
+    "id": 519,
+    "name": "제424회[임시회] 제3차",
+    "date": "2024-02-22",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C8080424032.html&daesu=12",
+    "count": 700
+  },
+  {
+    "id": 520,
+    "name": "제424회[임시회] 제1차",
+    "date": "2024-02-21",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C2050424011.html&daesu=12",
+    "count": 1376
+  },
+  {
+    "id": 521,
+    "name": "제424회[임시회] 제2차",
+    "date": "2024-02-21",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C8080424021.html&daesu=12",
+    "count": 489
+  },
+  {
+    "id": 522,
+    "name": "제424회[임시회] 제1차",
+    "date": "2024-02-20",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12C8080424011.html&daesu=12",
+    "count": 2112
+  },
+  {
+    "id": 523,
+    "name": "제424회[임시회] 개회식",
+    "date": "2024-02-19",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110424002.html&daesu=12",
+    "count": 3
+  },
+  {
+    "id": 524,
+    "name": "제424회[임시회] 제1차",
+    "date": "2024-02-19",
+    "url": "https://record.council.jeju.kr/CLRecords/Retrieval2/index.php?hfile=12A0110424012.html&daesu=12",
+    "count": 194
   }
 ]

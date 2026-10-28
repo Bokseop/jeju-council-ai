@@ -1,7 +1,7 @@
 /**
  * app.js
  * 제주특별자치도의회 AI 전자회의록 웹 검색 엔진
- * - 53,697건 발언 클라이언트사이드 고속 인덱싱 & 검색
+ * - 2024~2026년 294,780건 발언 클라이언트사이드 고속 인덱싱 & 검색
  * - 공식 전자회의록 원문 라인 자동 이동 & 하이라이트 브릿지
  * - 전체 회의록 시간순 뷰어 모달
  */
@@ -72,7 +72,25 @@ function initEventListeners() {
   });
 }
 
-// Data Loading
+function unpackSpeeches(rawList, meetings) {
+  const len = rawList.length;
+  const result = new Array(len);
+  for (let idx = 0; idx < len; idx++) {
+    const r = rawList[idx];
+    const m = meetings[r[1]] || { name: '', date: '', url: '' };
+    result[idx] = {
+      i: r[0],
+      m: m.name,
+      d: m.date,
+      s: r[2],
+      c: r[3],
+      u: m.url
+    };
+  }
+  return result;
+}
+
+// Data Loading (Progressive Multi-year Loader)
 async function loadData() {
   try {
     statusBar.innerHTML = '<span>⏳ 회의록 데이터베이스를 로드 중입니다...</span>';
@@ -82,16 +100,38 @@ async function loadData() {
     allMeetings = await mRes.json();
     populateMeetingFilter(allMeetings);
 
-    // 2. 발언 데이터 로드
-    const sRes = await fetch('data_web/speeches.json');
-    allSpeeches = await sRes.json();
+    // 2. 2026년 최신 회의록 즉시 로드 (초고속 초기 구동)
+    const s26Res = await fetch('data_web/speeches_2026.json');
+    const raw26 = await s26Res.json();
+    allSpeeches = unpackSpeeches(raw26, allMeetings);
 
     isDataLoaded = true;
-    statBadge.textContent = `📊 ${allSpeeches.length.toLocaleString()}건 발언 적재`;
-    statusBar.innerHTML = `<span>✅ <strong>${allSpeeches.length.toLocaleString()}건</strong>의 공식 회의록 발언이 준비되었습니다. 검색어를 입력해 주세요.</span>`;
+    statBadge.textContent = `📊 ${allSpeeches.length.toLocaleString()}건 (2026년) 로드됨`;
+    statusBar.innerHTML = `<span>⚡ <strong>2026년 회의록 ${allSpeeches.length.toLocaleString()}건</strong> 준비 완료. 2025~2024년 백그라운드 동기화 중...</span>`;
     
     // Initial default search
     performSearch();
+
+    // 3. 2025년 및 2024년 회의록 백그라운드 비동기 병렬 로드
+    Promise.all([
+      fetch('data_web/speeches_2025.json').then(r => r.json()),
+      fetch('data_web/speeches_2024.json').then(r => r.json())
+    ]).then(([raw25, raw24]) => {
+      const unpacked25 = unpackSpeeches(raw25, allMeetings);
+      const unpacked24 = unpackSpeeches(raw24, allMeetings);
+      
+      allSpeeches = allSpeeches.concat(unpacked25, unpacked24);
+      statBadge.textContent = `📊 ${allSpeeches.length.toLocaleString()}건 (2024~2026년) 적재`;
+      statusBar.innerHTML = `<span>✅ <strong>전체 ${allSpeeches.length.toLocaleString()}건</strong> (2024~2026년 공식 회의록) 검색 준비 완료</span>`;
+
+      // 사용자가 이미 검색어를 입력했거나 필터를 변경한 경우 자동 재검색
+      if (searchInput.value.trim() || meetingFilter.value || speakerFilter.value.trim()) {
+        performSearch();
+      }
+    }).catch(bgErr => {
+      console.warn('Background sync warning:', bgErr);
+    });
+
   } catch (err) {
     console.error('Data load error:', err);
     statusBar.innerHTML = `<span style="color:#DC2626;">❌ 데이터 로드 실패: ${err.message}. 새로고침해 주세요.</span>`;
@@ -100,7 +140,7 @@ async function loadData() {
 }
 
 function populateMeetingFilter(meetings) {
-  meetingFilter.innerHTML = '<option value="">전체 회의 (164개 회의)</option>';
+  meetingFilter.innerHTML = `<option value="">전체 회의 (${meetings.length.toLocaleString()}개 회의)</option>`;
   meetings.forEach(m => {
     const opt = document.createElement('option');
     opt.value = m.name;

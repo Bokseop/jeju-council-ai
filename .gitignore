@@ -31,6 +31,13 @@ models/
 제주도의회_AI회의록검색_v1.0/
 *.zip
 
+# Database files
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+jeju_council.db*
+
 # Scratch inspection scripts
 inspect_*.py
 verify_db_clean.py

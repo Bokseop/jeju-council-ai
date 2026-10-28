@@ -1,14 +1,13 @@
 """
 export_web_data.py
-SQLite DB(jeju_council.db)의 53,697건 실제 발언과 회의 메타데이터를
-웹 프론트엔드 및 GitHub Pages용 최적화 JSON 파일로 추출
+SQLite DB(jeju_council.db)의 2024년~2026년 전체 294,780건 공식 회의록 및 발언을
+GitHub Pages 및 브라우저 성능 최적화(연도별 청크 + 컴팩트 어레이 인덱싱) 웹 데이터로 익스포트
 """
 
 import os
 import sys
 import json
 import sqlite3
-import re
 
 if sys.platform == "win32":
     try:
@@ -17,76 +16,90 @@ if sys.platform == "win32":
         pass
 
 DB_PATH = "jeju_council.db"
-WEB_DATA_DIR = os.path.join("data_web")
+WEB_DATA_DIR = "data_web"
 os.makedirs(WEB_DATA_DIR, exist_ok=True)
 
 print("=" * 60)
-print("🌐 [웹용 회의록 데이터 익스포트 시작]")
+print("🌐 [2024~2026 제주도의회 전체 회의록 웹 데이터 익스포트]")
 print("=" * 60)
 
 conn = sqlite3.connect(DB_PATH)
 cur = conn.cursor()
 
-# 1. 회의 메타데이터 추출
+# 1. 회의 메타데이터 추출 (전체 고유 회의)
 cur.execute("""
-    SELECT m.meeting_name, m.meeting_date, m.source_url, m.speech_count
-    FROM meetings m
-    ORDER BY m.meeting_date DESC
+    SELECT meeting_name, meeting_date, source_url, count(*)
+    FROM speeches
+    GROUP BY meeting_name, meeting_date
+    ORDER BY meeting_date DESC
 """)
+meeting_rows = cur.fetchall()
+meeting_map = {}
 meetings = []
-for row in cur.fetchall():
+
+for idx, (m_name, m_date, s_url, count) in enumerate(meeting_rows):
+    meeting_map[(m_name, m_date)] = idx
     meetings.append({
-        "name": row[0],
-        "date": row[1],
-        "url": row[2] or "https://record.council.jeju.kr/source/minutes/pages/search.html",
-        "count": row[3]
+        "id": idx,
+        "name": m_name,
+        "date": m_date,
+        "url": s_url or "https://record.council.jeju.kr/source/minutes/pages/search.html",
+        "count": count
     })
 
 with open(os.path.join(WEB_DATA_DIR, "meetings.json"), "w", encoding="utf-8") as f:
     json.dump(meetings, f, ensure_ascii=False, indent=2)
-print(f"[*] meetings.json 생성: {len(meetings)}개 회의 메타데이터")
+print(f"[*] meetings.json 생성: {len(meetings):,}개 회의 메타데이터")
 
-# 2. 전체 발언 데이터 추출 (초경량 key-value 구조)
-cur.execute("""
-    SELECT s.id, s.meeting_name, s.meeting_date, s.speaker_name, s.speaker_role, s.content, COALESCE(s.source_url, m.source_url, '')
-    FROM speeches s
-    LEFT JOIN meetings m ON s.meeting_name = m.meeting_name AND s.meeting_date = m.meeting_date
-    ORDER BY s.id ASC
-""")
-speeches = []
-for r in cur.fetchall():
-    spk_role = r[4] or ""
-    spk_name = r[3] or ""
-    full_speaker = f"{spk_role} {spk_name}".strip() if spk_role != spk_name else spk_name
-    speeches.append({
-        "i": r[0],
-        "m": r[1],
-        "d": r[2],
-        "s": full_speaker,
-        "c": r[5],
-        "u": r[6]
-    })
+# 2. 연도별 초경량 컴팩트 발언 데이터 추출: [id, meeting_idx, speaker, content]
+years = ["2026", "2025", "2024"]
+total_speeches = 0
+year_counts = {}
+
+for yr in years:
+    cur.execute("""
+        SELECT id, meeting_name, meeting_date, speaker_name, speaker_role, content
+        FROM speeches
+        WHERE substr(meeting_date, 1, 4) = ?
+        ORDER BY id ASC
+    """, (yr,))
+    rows = cur.fetchall()
+
+    compact_speeches = []
+    for r in rows:
+        spk_role = r[4] or ""
+        spk_name = r[3] or ""
+        speaker = f"{spk_role} {spk_name}".strip() if spk_role != spk_name else spk_name
+        m_idx = meeting_map.get((r[1], r[2]), -1)
+        compact_speeches.append([r[0], m_idx, speaker, r[5]])
+
+    fn = os.path.join(WEB_DATA_DIR, f"speeches_{yr}.json")
+    with open(fn, "w", encoding="utf-8") as f:
+        json.dump(compact_speeches, f, ensure_ascii=False)
+
+    sz_mb = os.path.getsize(fn) / (1024 * 1024)
+    print(f"[*] speeches_{yr}.json 생성: {len(compact_speeches):,}건 발언 ({sz_mb:.2f} MB)")
+    total_speeches += len(compact_speeches)
+    year_counts[yr] = len(compact_speeches)
+
+# 3. 매니페스트 및 통계 생성
+manifest = {
+    "years": years,
+    "year_counts": year_counts,
+    "total_speeches": total_speeches,
+    "total_meetings": len(meetings),
+    "latest_date": meetings[0]["date"] if meetings else "2026-10-23",
+    "earliest_date": meetings[-1]["date"] if meetings else "2024-01-01",
+    "version": "4.0.0"
+}
+with open(os.path.join(WEB_DATA_DIR, "manifest.json"), "w", encoding="utf-8") as f:
+    json.dump(manifest, f, ensure_ascii=False, indent=2)
+
+with open(os.path.join(WEB_DATA_DIR, "stats.json"), "w", encoding="utf-8") as f:
+    json.dump(manifest, f, ensure_ascii=False, indent=2)
 
 conn.close()
 
-with open(os.path.join(WEB_DATA_DIR, "speeches.json"), "w", encoding="utf-8") as f:
-    json.dump(speeches, f, ensure_ascii=False)
-
-speeches_mb = os.path.getsize(os.path.join(WEB_DATA_DIR, "speeches.json")) / (1024 * 1024)
-print(f"[*] speeches.json 생성: {len(speeches):,}건 발언록 ({speeches_mb:.2f} MB)")
-
-# 3. 사이트 통계 및 설정 메타데이터
-stats = {
-    "total_speeches": len(speeches),
-    "total_meetings": len(meetings),
-    "latest_date": meetings[0]["date"] if meetings else "2026-10-23",
-    "earliest_date": meetings[-1]["date"] if meetings else "1991-01-01",
-    "version": "1.0.0"
-}
-with open(os.path.join(WEB_DATA_DIR, "stats.json"), "w", encoding="utf-8") as f:
-    json.dump(stats, f, ensure_ascii=False, indent=2)
-print(f"[*] stats.json 생성 완료")
-
 print("=" * 60)
-print("✅ [웹 데이터 추출 완료]")
+print(f"✅ [웹 데이터 추출 완료: 총 {total_speeches:,}건 발언 / {len(meetings):,}개 회의]")
 print("=" * 60)
