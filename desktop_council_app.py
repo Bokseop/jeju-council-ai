@@ -572,6 +572,9 @@ class CouncilDesktopApp:
         default_mode = "context" if (highlight_id is not None and target_idx != -1) else "full"
         mode_var = tk.StringVar(value=default_mode)
 
+        cur_ctx_start = [max(0, target_idx - 2) if target_idx != -1 else 0]
+        cur_ctx_end = [min(total_speeches, target_idx + 3) if target_idx != -1 else total_speeches]
+
         mode_bar = tk.Frame(p, bg="#EEF2F6", bd=1, relief="solid", padx=10, pady=6)
         mode_bar.pack(fill=tk.X, pady=(0, 8))
 
@@ -605,16 +608,17 @@ class CouncilDesktopApp:
         text_area.tag_configure("divider", foreground="#CBD5E0")
         text_area.tag_configure("search_found", background="#FED7D7", foreground="#9B2C2C")
 
-        def render_transcript_view():
+        def render_transcript_view(scroll_target=None):
             mode = mode_var.get()
+            prev_yview = text_area.yview()
             text_area.configure(state=tk.NORMAL)
             text_area.delete("1.0", tk.END)
 
             if mode == "context" and highlight_id is not None and target_idx != -1:
-                ctx_start = max(0, target_idx - 2)
-                ctx_end = min(total_speeches, target_idx + 3)
+                ctx_start = cur_ctx_start[0]
+                ctx_end = cur_ctx_end[0]
 
-                mode_status_lbl.config(text=f"💡 제{target_idx + 1}번째 핵심 발언 및 질의·답변 맥락 즉시 표시 중 (스크롤 지연 없음)")
+                mode_status_lbl.config(text=f"💡 제{target_idx + 1}번째 핵심 발언 및 질의·답변 맥락 표시 중 ({ctx_start + 1}~{ctx_end}번)")
 
                 header = [
                     "=" * 75,
@@ -626,14 +630,16 @@ class CouncilDesktopApp:
                 text_area.insert(tk.END, "\n".join(header))
 
                 if ctx_start > 0:
-                    text_area.insert(tk.END, f"▲ [앞선 발언 {ctx_start}건 생략됨 - 상단 '전체 회의록 전문' 선택 시 모두 표시]\n\n", "divider")
+                    text_area.insert(tk.END, f"▲ [앞선 발언 {ctx_start}건 더보기를 누르면 위로 확장됩니다]\n\n", "divider")
 
+                new_target_pos = None
                 for idx in range(ctx_start, ctx_end):
                     s = speeches[idx]
                     is_target = (s["id"] == highlight_id)
                     spk_title = f"[{idx + 1} / {total_speeches}] ◯{s['speaker']}"
                     if is_target:
                         spk_title += "  ★ [검색된 핵심 발언]"
+                        new_target_pos = text_area.index(tk.END)
 
                     text_area.insert(tk.END, "-" * 75 + "\n", "divider")
                     text_area.insert(tk.END, f"{spk_title}\n", "highlight_box" if is_target else "speaker_header")
@@ -641,10 +647,17 @@ class CouncilDesktopApp:
                     text_area.insert(tk.END, f"{s['content']}\n\n", "highlight_box" if is_target else "")
 
                 if ctx_end < total_speeches:
-                    text_area.insert(tk.END, f"▼ [뒤따르는 발언 {total_speeches - ctx_end}건 생략됨 - 상단 '전체 회의록 전문' 선택 시 모두 표시]\n\n", "divider")
+                    text_area.insert(tk.END, f"▼ [뒤따르는 발언 {total_speeches - ctx_end}건 더보기를 누르면 아래로 확장됩니다]\n\n", "divider")
 
                 text_area.configure(state=tk.DISABLED)
-                text_area.see("1.0")
+                if scroll_target == "bottom":
+                    text_area.see(tk.END)
+                elif scroll_target == "top":
+                    text_area.see("1.0")
+                elif scroll_target == "keep":
+                    text_area.yview_moveto(prev_yview[0])
+                else:
+                    text_area.see("1.0")
 
             else:
                 mode_status_lbl.config(text=f"📜 전체 회의록(총 {total_speeches}건) 전문을 순서대로 표시합니다.")
@@ -677,12 +690,22 @@ class CouncilDesktopApp:
                 else:
                     text_area.see("1.0")
 
+        def load_more_following():
+            if cur_ctx_end[0] < total_speeches:
+                cur_ctx_end[0] = min(total_speeches, cur_ctx_end[0] + 5)
+                render_transcript_view(scroll_target="bottom")
+
+        def load_more_preceding():
+            if cur_ctx_start[0] > 0:
+                cur_ctx_start[0] = max(0, cur_ctx_start[0] - 5)
+                render_transcript_view(scroll_target="top")
+
         rb_ctx = tk.Radiobutton(
             mode_bar,
             text="🎯 해당 발언 및 전후 맥락 (즉시 표시)",
             variable=mode_var,
             value="context",
-            command=render_transcript_view,
+            command=lambda: render_transcript_view(scroll_target="top"),
             bg="#EEF2F6",
             font=("맑은 고딕", 9, "bold"),
             cursor="hand2"
@@ -694,14 +717,43 @@ class CouncilDesktopApp:
             text=f"📜 전체 회의록 전문 모두 보기 ({total_speeches}건)",
             variable=mode_var,
             value="full",
-            command=render_transcript_view,
+            command=lambda: render_transcript_view(scroll_target=None),
             bg="#EEF2F6",
             font=("맑은 고딕", 9),
             cursor="hand2"
         )
         rb_full.pack(side=tk.LEFT, padx=4)
 
-        render_transcript_view()
+        # 맥락 모드일 때 확장 버튼
+        if highlight_id is not None and target_idx != -1:
+            more_btn_box = tk.Frame(mode_bar, bg="#EEF2F6")
+            more_btn_box.pack(side=tk.LEFT, padx=(12, 0))
+
+            tk.Button(
+                more_btn_box,
+                text="▲ 앞선 발언 5건 더보기",
+                command=load_more_preceding,
+                font=("맑은 고딕", 8),
+                bg="#FFFFFF",
+                relief="groove",
+                padx=6,
+                pady=1,
+                cursor="hand2"
+            ).pack(side=tk.LEFT, padx=2)
+
+            tk.Button(
+                more_btn_box,
+                text="▼ 뒤따르는 발언 5건 더보기",
+                command=load_more_following,
+                font=("맑은 고딕", 8),
+                bg="#FFFFFF",
+                relief="groove",
+                padx=6,
+                pady=1,
+                cursor="hand2"
+            ).pack(side=tk.LEFT, padx=2)
+
+        render_transcript_view(scroll_target="top")
 
         # 회의록 내 단어 검색 핸들러
         def find_next_keyword():

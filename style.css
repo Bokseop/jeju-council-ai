@@ -689,12 +689,12 @@ body {
   justify-content: center;
   gap: 6px;
   width: 100%;
-  padding: 8px;
+  padding: 10px;
   background: #F8FAFC;
   border: 1px dashed #94A3B8;
   border-radius: var(--radius-sm);
   color: #2563EB;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.15s;
@@ -703,6 +703,7 @@ body {
 .modal-load-more-btn:hover {
   background: #EFF6FF;
   border-color: #2563EB;
+  transform: translateY(-1px);
 }
 
 .modal-expand-all-btn {
@@ -711,7 +712,7 @@ body {
   justify-content: center;
   gap: 6px;
   width: 100%;
-  padding: 10px;
+  padding: 11px;
   background: #1E293B;
   color: #FFFFFF;
   border: none;
@@ -725,6 +726,21 @@ body {
 
 .modal-expand-all-btn:hover {
   background: #0F172A;
+}
+
+@keyframes speechExpandIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-speech-item.newly-added {
+  animation: speechExpandIn 0.25s ease-out;
 }
 
 /* Modal Body */
