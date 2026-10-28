@@ -790,13 +790,9 @@ function renderModalTranscript() {
 
     // Position the target speech directly at the VERY TOP so dialogue flows downwards!
     if (targetElement) {
-      const alignTargetToTop = () => {
-        targetElement.scrollIntoView({ behavior: 'instant', block: 'start' });
-      };
-      alignTargetToTop();
-      requestAnimationFrame(alignTargetToTop);
-      setTimeout(alignTargetToTop, 40);
-      setTimeout(alignTargetToTop, 100);
+      setTimeout(() => {
+        modalTranscriptBody.scrollTop = Math.max(0, targetElement.offsetTop - 10);
+      }, 30);
     } else {
       modalTranscriptBody.scrollTop = 0;
     }
@@ -816,7 +812,9 @@ function renderModalTranscript() {
 
     // Instant scroll directly to target without animation
     if (targetElement) {
-      targetElement.scrollIntoView({ behavior: 'instant', block: 'center' });
+      setTimeout(() => {
+        modalTranscriptBody.scrollTop = Math.max(0, targetElement.offsetTop - 40);
+      }, 30);
     } else {
       modalTranscriptBody.scrollTop = 0;
     }

@@ -997,7 +997,9 @@ body {
 .modal-body {
   padding: 16px 20px;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   flex: 1;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -1384,66 +1386,230 @@ body {
     font-size: 13px;
   }
 
-  /* Modal on mobile */
+  /* Responsive Modal - Dedicated Mobile Full-Screen Reader View */
   .modal-overlay {
-    padding: 6px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    background: #FFFFFF;
+    z-index: 10000;
   }
 
   .modal-content {
-    max-height: 96vh;
-    border-radius: var(--radius-md);
+    width: 100vw;
+    height: 100dvh;
+    max-height: 100dvh;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #FFFFFF;
+    position: relative;
   }
 
+  /* Compact Sleek Mobile Modal Header */
   .modal-header {
+    position: relative;
     padding: 10px 12px;
+    background: #F1F5F9;
+    border-bottom: 1px solid var(--border);
+    display: flex;
     flex-direction: column;
-    align-items: flex-start;
     gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .modal-title-box {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: calc(100% - 44px);
+  }
+
+  .modal-title-box h2 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #0F172A;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .modal-title-box p {
+    font-size: 11px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .modal-header-actions {
-    flex-wrap: wrap;
-    width: 100%;
+    display: flex;
+    align-items: center;
     gap: 6px;
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
 
+  .modal-header-actions::-webkit-scrollbar {
+    display: none;
+  }
+
+  .btn-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 36px;
+    height: 36px;
+    background: #E2E8F0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #1E293B;
+    padding: 0;
+    cursor: pointer;
+    z-index: 20;
+    border: none;
+  }
+
+  .btn-close:hover {
+    background: #CBD5E1;
+  }
+
+  .btn-select-copy {
+    padding: 5px 10px;
+    font-size: 11.5px;
+  }
+
+  .btn-primary-sm,
+  .btn-outline-sm {
+    padding: 5px 9px;
+    font-size: 11.5px;
+  }
+
+  /* Compact In-meeting Search Bar on Mobile */
   .modal-search-bar {
-    padding: 8px 10px;
-    flex-direction: column;
-    align-items: stretch;
+    padding: 6px 10px;
+    background: #F8FAFC;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
     gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .modal-search-bar span:first-child {
+    font-size: 12px;
+    white-space: nowrap;
   }
 
   .modal-search-bar input {
-    width: 100%;
-    box-sizing: border-box;
+    flex: 1;
+    min-width: 0;
+    width: auto;
+    padding: 5px 8px;
+    font-size: 12.5px;
+    border: 1px solid #CBD5E1;
+    border-radius: var(--radius-sm);
   }
 
+  .btn-secondary-sm {
+    padding: 5px 10px;
+    font-size: 11.5px;
+    white-space: nowrap;
+  }
+
+  /* Compact View Mode Bar on Mobile */
   .modal-view-mode-bar {
-    padding: 8px 10px;
-    flex-direction: column;
-    align-items: stretch;
+    padding: 6px 10px;
+    background: #EEF2F6;
+    border-bottom: 1px solid #CBD5E1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     gap: 6px;
+    flex-shrink: 0;
   }
 
   .view-mode-tabs {
-    flex-direction: column;
-    width: 100%;
+    display: flex;
     gap: 4px;
+    flex: 1;
+    min-width: 0;
   }
 
   .btn-tab {
-    width: 100%;
+    flex: 1;
+    padding: 5px 6px;
+    font-size: 11.5px;
     text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .selection-quick-tools {
-    width: 100%;
-    justify-content: space-between;
+    display: flex;
+    gap: 4px;
+    flex-shrink: 0;
   }
 
+  .btn-quick-select {
+    padding: 4px 7px;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .view-mode-desc {
+    display: none;
+  }
+
+  /* Full-bleed Scrollable Reading Body */
   .modal-body {
-    padding: 10px 8px;
-    gap: 8px;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+    overscroll-behavior-y: contain;
+    padding: 12px 10px 48px 10px;
+    gap: 10px;
+    background: #FFFFFF;
+  }
+
+  .modal-context-banner {
+    padding: 8px 10px;
+    font-size: 11.5px;
+    border-radius: var(--radius-sm);
+  }
+
+  .modal-load-more-btn {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  .modal-speech-item {
+    padding-bottom: 10px;
+  }
+
+  .modal-speech-header {
+    font-size: 12.5px;
+  }
+
+  .modal-speech-body {
+    font-size: 13.5px;
+    line-height: 1.6;
   }
 }
