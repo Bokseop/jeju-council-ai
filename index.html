@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>제주특별자치도의회 AI 전자회의록 검색 시스템</title>
+  <meta name="description" content="제주특별자치도의회 53,697건 실제 공식 회의록 고속 검색 및 발언 라인 자동 이동 시스템">
+  <!-- Pretendard Web Font -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="logo-area">
+        <div class="logo-badge">🏛️</div>
+        <div>
+          <h1 class="logo-title">제주특별자치도의회 AI 회의록 검색</h1>
+          <p class="logo-subtitle">공식 전자회의록 고속 검색 • 원문 라인 자동 이동 & 하이라이트</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <span class="stat-pill" id="statBadge">📊 53,697건 발언 적재</span>
+        <a href="https://github.com/Bokseop/jeju-council-ai" target="_blank" class="btn-github">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-container">
+    <!-- Search Section -->
+    <section class="search-section">
+      <div class="search-box-wrap">
+        <div class="search-input-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="질문 또는 키워드를 입력하세요 (예: 동부해양경찰서 신설, 일자리 지원, 서귀포시장)" autofocus>
+          <button id="clearBtn" class="clear-btn" title="검색어 지우기">✕</button>
+          <button id="searchBtn" class="search-btn">검색</button>
+        </div>
+      </div>
+
+      <!-- Recommended Query Tags -->
+      <div class="tags-row">
+        <span class="tags-label">💡 추천 질문:</span>
+        <button class="tag-btn" data-query="제455회 본회의 제주 동부해양경찰서 신설 촉구 건의안">동부해경 신설 촉구</button>
+        <button class="tag-btn" data-query="미래경제산업위원회 일자리 지원 사업 질의">일자리 지원 사업</button>
+        <button class="tag-btn" data-query="서귀포시장 행정사무감사 주요 지적사항">서귀포시장 행감</button>
+        <button class="tag-btn" data-query="환경도시위원회 도시계획 및 환경 보전">환경도시위 환경보전</button>
+        <button class="tag-btn" data-query="문화관광체육위원회 관광진흥 및 체육시설">관광진흥 감사</button>
+      </div>
+
+      <!-- Filters Row -->
+      <div class="filter-row">
+        <div class="filter-item">
+          <label for="meetingFilter">🏛️ 회의 선택:</label>
+          <select id="meetingFilter">
+            <option value="">전체 회의 (164개 회의)</option>
+          </select>
+        </div>
+        <div class="filter-item">
+          <label for="speakerFilter">👤 발언자 검색:</label>
+          <input type="text" id="speakerFilter" placeholder="의원/공직자 성명">
+        </div>
+        <div class="filter-item">
+          <label for="limitFilter">표시 개수:</label>
+          <select id="limitFilter">
+            <option value="15">상위 15건</option>
+            <option value="30">상위 30건</option>
+            <option value="50">상위 50건</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Benchmark / Results Info -->
+      <div class="status-bar" id="statusBar">
+        <span>데이터를 불러오는 중입니다...</span>
+      </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="results-section" id="resultsContainer">
+      <div class="loading-state" id="loadingState">
+        <div class="spinner"></div>
+        <p>회의록 데이터베이스 색인을 준비 중입니다...</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Full Meeting Transcript Modal -->
+  <div class="modal-overlay" id="meetingModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title-box">
+          <h2 id="modalMeetingTitle">회의록 전문</h2>
+          <p id="modalMeetingMeta">일시 및 발언 통계</p>
+        </div>
+        <div class="modal-header-actions">
+          <a id="modalOfficialLink" href="#" target="_blank" class="btn-primary-sm">🌐 공식 원문 웹페이지 열기</a>
+          <button id="modalCopyBtn" class="btn-outline-sm">📋 전체 복사</button>
+          <button id="modalCloseBtn" class="btn-close">✕</button>
+        </div>
+      </div>
+
+      <!-- Modal In-meeting Search -->
+      <div class="modal-search-bar">
+        <span>🔎 회의록 내 검색:</span>
+        <input type="text" id="modalSearchInput" placeholder="단어 또는 의원 이름 검색">
+        <button id="modalSearchNextBtn" class="btn-secondary-sm">다음 찾기</button>
+        <span id="modalSearchStat" class="search-stat-text"></span>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body" id="modalTranscriptBody">
+        <!-- Speeches list populated dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
