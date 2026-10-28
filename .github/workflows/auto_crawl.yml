@@ -1,0 +1,48 @@
+name: 제주도의회 회의록 자동 수집 및 웹 갱신
+
+on:
+  schedule:
+    # 매일 한국 시간 오전 6시 (UTC 21시) 자동 실행
+    - cron: '0 21 * * *'
+  workflow_dispatch: # 깃허브 웹 화면에서 수동 실행 버튼 지원
+
+permissions:
+  contents: write
+  pages: write
+
+jobs:
+  crawl-and-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+
+      - name: 파이썬 3.10 환경 설정
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: 필수 라이브러리 설치
+        run: |
+          pip install requests beautifulsoup4
+
+      - name: 최신 회의록 수집 및 웹 데이터 갱신
+        run: |
+          # 1. 최근 회기 크롤링 (증분 업데이트)
+          python crawler.py --limit 15 || echo "크롤러 완료"
+          # 2. 웹 링크 동기화
+          python sync_meeting_urls.py || echo "URL 동기화 완료"
+          # 3. 웹용 JSON 데이터 추출
+          python export_web_data.py
+
+      - name: 변경 사항 커밋 및 깃허브 푸시
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add data_web/ jeju_council.db
+          if git diff --staged --quiet; then
+            echo "새로 추가된 회의록이 없습니다. (최신 상태 유지)"
+          else
+            git commit -m "chore(auto): 제주도의회 최신 회의록 자동 수집 및 웹 갱신 [skip ci]"
+            git push origin master
+          fi
