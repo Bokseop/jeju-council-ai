@@ -758,6 +758,7 @@ body {
 .modal-speech-item {
   border-bottom: 1px solid #E2E8F0;
   padding-bottom: 16px;
+  scroll-margin-top: 14px;
   transition: background-color 0.15s, border-color 0.15s;
 }
 

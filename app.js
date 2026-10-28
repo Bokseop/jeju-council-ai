@@ -349,13 +349,15 @@ function openFullMeetingModal(meetingName, meetingDate, highlightSpeechId) {
   const modalTotalSpeechesCount = document.getElementById('modalTotalSpeechesCount');
   if (modalTotalSpeechesCount) modalTotalSpeechesCount.textContent = totalCount;
 
-  // If opened with a specific speech highlight, show focused context immediately without scrolling lag!
+  // If opened with a specific speech highlight, that speech starts directly at the VERY TOP and dialogue flows downwards!
   if (currentHighlightId !== null) {
     const targetIdx = currentModalSpeeches.findIndex(s => s.i === currentHighlightId);
     if (targetIdx !== -1) {
       currentModalViewMode = 'context';
-      contextStartIndex = Math.max(0, targetIdx - 2);
-      contextEndIndex = Math.min(totalCount, targetIdx + 3);
+      // The target speech is at the VERY TOP!
+      contextStartIndex = targetIdx;
+      // Load target speech + following 7 speeches downwards
+      contextEndIndex = Math.min(totalCount, targetIdx + 8);
     } else {
       currentModalViewMode = 'full';
     }
@@ -422,8 +424,8 @@ function renderModalTranscript() {
     const banner = document.createElement('div');
     banner.className = 'modal-context-banner';
     banner.innerHTML = `
-      <span>🎯 <strong>[핵심 발언 집중 보기]</strong> 전체 ${totalCount}건 중 제 ${targetIdx + 1}번째 발언 및 질의·답변 맥락</span>
-      <span style="font-size:11px; opacity:0.85;">긴 스크롤 없이 해당 발언 위치만 즉시 띄웠습니다</span>
+      <span>🎯 <strong>[선택 발언 시작]</strong> 제 ${targetIdx + 1}번째 발언부터 아래로 대화가 이어집니다.</span>
+      <span style="font-size:11px; opacity:0.85;">(이전 발언은 상단 버튼으로 확인 가능)</span>
     `;
     modalTranscriptBody.appendChild(banner);
 
@@ -433,7 +435,7 @@ function renderModalTranscript() {
     if (contextStartIndex > 0) {
       const prevBtn = document.createElement('button');
       prevBtn.className = 'modal-load-more-btn';
-      prevBtn.innerHTML = `▲ 앞선 발언 ${contextStartIndex}건 더보기 (1 ~ ${contextStartIndex}번째)`;
+      prevBtn.innerHTML = `▲ 이 발언 이전의 질의·대화 불러오기 (1 ~ ${contextStartIndex}번째)`;
       prevBtn.onclick = loadMorePrecedingSpeeches;
       prevContainer.appendChild(prevBtn);
     }
@@ -481,16 +483,15 @@ function renderModalTranscript() {
     expandAllContainer.appendChild(expandAllBtn);
     modalTranscriptBody.appendChild(expandAllContainer);
 
-    // Immediately position the target speech directly in view so it appears right in front of user's eyes!
+    // Position the target speech directly at the VERY TOP so dialogue flows downwards!
     if (targetElement) {
-      const alignTarget = () => {
-        const targetOffset = targetElement.offsetTop;
-        modalTranscriptBody.scrollTop = Math.max(0, targetOffset - 40);
+      const alignTargetToTop = () => {
+        targetElement.scrollIntoView({ behavior: 'instant', block: 'start' });
       };
-      alignTarget();
-      requestAnimationFrame(alignTarget);
-      setTimeout(alignTarget, 40);
-      setTimeout(alignTarget, 100);
+      alignTargetToTop();
+      requestAnimationFrame(alignTargetToTop);
+      setTimeout(alignTargetToTop, 40);
+      setTimeout(alignTargetToTop, 100);
     } else {
       modalTranscriptBody.scrollTop = 0;
     }
@@ -611,8 +612,8 @@ function switchModalViewMode(mode) {
   if (mode === 'context' && currentHighlightId !== null) {
     const targetIdx = currentModalSpeeches.findIndex(s => s.i === currentHighlightId);
     if (targetIdx !== -1) {
-      contextStartIndex = Math.max(0, targetIdx - 2);
-      contextEndIndex = Math.min(currentModalSpeeches.length, targetIdx + 3);
+      contextStartIndex = targetIdx;
+      contextEndIndex = Math.min(currentModalSpeeches.length, targetIdx + 8);
     }
   }
   renderModalTranscript();

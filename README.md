@@ -1,79 +1,40 @@
-# 🏛️ 제주특별자치도의회 AI 전자회의록 검색 시스템 (Jeju Council AI)
+# 🏛️ 제주특별자치도의회 AI 전자회의록 웹 검색 시스템
 
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live%20Demo-2563EB?logo=github&style=flat-square)](https://Bokseop.github.io/jeju-council-ai/)
-[![Database](https://img.shields.io/badge/SQLite%20FTS5-53%2C697%20Speeches-0D9488?style=flat-square)](https://github.com/Bokseop/jeju-council-ai)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live%20Service-2563EB?logo=github&style=for-the-badge)](https://Bokseop.github.io/jeju-council-ai/)
+[![Database](https://img.shields.io/badge/Official%20Records-53%2C697%20Speeches-0D9488?style=for-the-badge)](https://Bokseop.github.io/jeju-council-ai/)
+[![Web App](https://img.shields.io/badge/Platform-100%25%20Pure%20Web-orange?style=for-the-badge)](https://Bokseop.github.io/jeju-council-ai/)
 
-> **100% 실제 공식 회의록 데이터 기반 • No-Cloud 로컬 초고속 검색 • 공식 전자회의록 원문 라인 자동 이동 & 하이라이트**
-
----
-
-## 🌟 웹 라이브 서비스 (GitHub Pages)
-
-👉 **[제주특별자치도의회 AI 전자회의록 웹 검색 바로가기](https://Bokseop.github.io/jeju-council-ai/)**
-
-설치 없이 웹 브라우저에서 53,697건의 발언을 0.05초 만에 검색하고, 클릭 한 번으로 도의회 공식 전자회의록 원문 페이지의 **해당 발언 줄로 화면이 부드럽게 자동 스크롤 & 하이라이트**되는 기능을 즉시 체험하실 수 있습니다.
+> **별도 프로그램 설치 없이 웹 브라우저에서 53,697건의 제주특별자치도의회 실제 회의록을 0.05초 만에 검색하고, 원문 페이지 줄 이동 및 발언 선택 복사를 지원하는 100% 웹 전용 AI 회의록 분석 시스템입니다.**
 
 ---
 
-## 📌 주요 특징
+## 🌟 웹 라이브 서비스 접속
 
-### 1. 100% 실제 공식 회의록 데이터 적재
-* 가상/샘플 데이터 0건, 제주특별자치도의회 공식 전자회의록 시스템(`https://record.council.jeju.kr`) 전수 크롤링 데이터
-* **53,697건 발언록** 및 **164개 회의** (제455회 임시회 본회의/상임위원회 및 연도별 주요 회기)
-* SQLite FTS5 전문 역색인 기반 0.002초 초고속 검색
+👉 **[https://Bokseop.github.io/jeju-council-ai/](https://Bokseop.github.io/jeju-council-ai/)**
 
-### 2. 🎯 스마트 공식 웹 라인 자동 스크롤 & 하이라이트 브릿지
-* 도의회 원문 웹페이지는 수십만 자의 회의록이 모여 있어 원하는 발언을 찾기 어렵습니다.
-* 본 시스템은 브라우저 접속 즉시 **해당 발언 위치로 화면을 부드럽게 자동 스크롤(`scrollIntoView`)**하고, **황금빛 테두리 상자와 `★ AI 검색 일치 발언` 알림 뱃지**를 선명하게 표시합니다.
-
-### 3. 📖 이 회의 전체 회의록 보기 (전문 정독 모달)
-* 개회부터 산회까지 모든 발언을 시간순으로 정렬하여 출력
-* 검색된 발언 위치로 자동 포커싱되어 **"앞뒤로 오간 질문과 답변의 전체 맥락"**을 한눈에 파악 가능
-* 회의록 내 실시간 키워드 찾기 기능 지원
-
-### 4. 🖥️ 데스크톱 GUI 프로그램 (`desktop_council_app.py`)
-* 파이썬 내장 Tkinter 기반 경량 데스크톱 프로그램
-* **탭 1**: 키워드 & 추천 질문 AI 검색, 발언 전문 띄우기, 전체 회의록 뷰어, 웹 라인 이동 브릿지
-* **탭 2**: 한글 문서(`.hwpx`), 텍스트(`.txt`), 엑셀(`.xlsx`), `.json`, `.csv` 일괄 임포트
-* **탭 3**: 도의회 전자회의록 실시간 크롤러 (월별/일자별 기간 수집 및 증분 업데이트)
-
-### 5. 🔌 Claude Desktop / Cursor 연동 표준 MCP 서버 (`mcp_server.py`)
-* JSON-RPC 2.0 표준 stdio 프로토콜 지원
-* Claude Desktop, Cursor 등 외부 LLM에서 로컬 회의록을 사실 기반으로 직접 검색·인용 가능
+* **PC, 스마트폰, 태블릿 등 모든 브라우저**에서 즉시 사용 가능 (설치 파일 0개)
+* 클라우드 유료 API 비용 0원, 브라우저 클라이언트 사이드 초고속 인덱싱
 
 ---
 
-## 🚀 빠른 시작 가이드
+## 📌 핵심 기능
 
-### 1. 웹 브라우저 모드 (GitHub Pages 또는 로컬 웹서버)
-* **온라인 접속**: [https://Bokseop.github.io/jeju-council-ai/](https://Bokseop.github.io/jeju-council-ai/)
-* **로컬 웹서버 실행**:
-  ```bash
-  python web_app.py
-  # 브라우저에서 http://localhost:8000 자동 오픈
-  ```
+### 1. 🎯 검색된 핵심 발언 상단 고정 & 아래로 이어지는 대화 뷰어
+* 검색 결과에서 **[📖 이 회의 전체 회의록 보기]**를 누르면, **검색된 핵심 발언 번호가 모달 최상단에 즉시 표시**됩니다.
+* 해당 발언 아래로 질의와 답변 대화가 순서대로 자연스럽게 펼쳐져, **아래로 스크롤하며 앞뒤 문맥을 즉시 정독**할 수 있습니다.
+* 필요 시 상단의 `[▲ 이 발언 이전의 질의·대화 불러오기]`를 통해 이전 상황도 손쉽게 확인할 수 있습니다.
 
-### 2. 데스크톱 앱 실행
-* **윈도우 원클릭 실행**: `실행하기_제주도의회AI검색.bat` 더블 클릭
-* **파이썬 실행**:
-  ```bash
-  pip install -r requirements.txt
-  python desktop_council_app.py
-  ```
+### 2. ☑️ 발언별 체크박스 및 선택 복사
+* 회의록 내 모든 발언에 **체크박스**가 제공됩니다.
+* 검색된 핵심 발언은 기본으로 체크되어 있으며, 필요한 질문과 답변들을 복수 선택할 수 있습니다.
+* 상단의 **`[☑️ 선택 복사 (N건)]`** 버튼을 누르면 선택한 발언들만 회의명·일시·발언자 정보와 함께 클립보드에 깔끔하게 복사됩니다.
+* `[☑️ 전체 선택]`, `[⬜ 선택 해제]`, 개별 `[📋 단일 복사]` 지원
 
-### 3. Claude Desktop MCP 연동
-`claude_desktop_config.json`에 아래 설정을 추가합니다:
-```json
-{
-  "mcpServers": {
-    "jeju-council": {
-      "command": "python",
-      "args": ["<저장경로>/mcp_server.py"]
-    }
-  }
-}
-```
+### 3. 🌐 공식 전자회의록 원문 라인 자동 이동 & 하이라이트 브릿지
+* **[🎯 공식 원문 라인 이동 & 열기]** 클릭 시, 도의회 공식 전자회의록 웹페이지(`record.council.jeju.kr`)가 열리며 **해당 발언 줄로 화면이 자동 스크롤**됩니다.
+
+### 4. 🔄 GitHub Actions 매일 최신 회의록 자동 수집 및 배포
+* `.github/workflows/auto_crawl.yml` 워크플로우가 매일 자동으로 최신 제주도의회 전자회의록을 수집하여 웹 데이터(`data_web/`)를 최신 상태로 유지합니다.
 
 ---
 
@@ -81,30 +42,36 @@
 
 ```
 jeju-council-ai/
-├── index.html                  # GitHub Pages & 웹 검색 메인 페이지
+├── index.html                  # 메인 웹 애플리케이션 인터페이스
 ├── style.css                   # 모던 반응형 스타일시트
-├── app.js                      # 5.3만건 고속 클라이언트 검색 엔진
-├── web_app.py                  # 로컬 내장 HTTP 웹 서버
-├── data_web/                   # 웹 서빙용 최적화 JSON 데이터 (5.4MB 압축)
-│   ├── meetings.json           # 164개 회의 메타데이터
+├── app.js                      # 5.3만 건 클라이언트사이드 고속 검색 및 모달 엔진
+├── data_web/                   # 브라우저 서빙용 최적화 데이터 (압축 JSON)
+│   ├── meetings.json           # 회의 목록 메타데이터
 │   ├── speeches.json           # 53,697건 발언 데이터
 │   └── stats.json              # DB 통계 정보
-├── jeju_council.db             # 50.8MB SQLite 원본 데이터베이스 (FTS5 색인)
-├── desktop_council_app.py      # 데스크톱 GUI 애플리케이션
-├── web_highlighter.py          # 웹 라인 자동 스크롤 & 하이라이트 브릿지
-├── local_pipeline.py           # FTS5 + Cross-Encoder 로컬 판별 파이프라인
-├── keyword_extractor.py        # 로컬 한국어 형태소/조사 분리 토크나이저
-├── batch_importer.py           # HWPX, TXT, JSON, CSV, XLSX 파서
-├── crawler.py                  # 도의회 전자회의록 실시간 웹 수집기
-├── mcp_server.py               # JSON-RPC 2.0 표준 MCP 서버
-├── build_package.py            # 배포용 ZIP 패키징 빌더
-├── export_web_data.py          # DB -> 웹 JSON 추출기
-├── requirements.txt            # 파이썬 필수 의존성
-└── 실행하기_제주도의회AI검색.bat # 윈도우 원클릭 실행 배치 스크립트
+├── .github/workflows/
+│   └── auto_crawl.yml          # GitHub Actions 매일 자동 크롤링 & 배포
+├── crawler.py                  # 도의회 공식 전자회의록 수집 스크립트
+├── export_web_data.py          # SQLite DB -> 웹용 JSON 변환기
+└── jeju_council.db             # SQLite 백본 데이터베이스 (50.8MB)
 ```
 
 ---
 
-## 📜 라이선스 및 데이터 출처
-* 회의록 원문 데이터의 모든 저작권은 **제주특별자치도의회**에 있으며, 공공누리 제1유형(출처표시 조건 자유이용)에 따라 공공 데이터로 활용됩니다.
-* 프로그램 소스 코드는 MIT License에 따라 자유롭게 사용 및 배포 가능합니다.
+## 💻 로컬 실행 방법 (개발용)
+
+별도의 의존성 없이 Python 내장 서버로 즉시 구동할 수 있습니다:
+
+```bash
+# 로컬 웹서버 실행
+python -m http.server 8000
+
+# 브라우저에서 접속
+http://localhost:8000
+```
+
+---
+
+## 📜 데이터 출처 및 라이선스
+* 데이터 출처: [제주특별자치도의회 전자회의록 시스템](https://record.council.jeju.kr/) (공공누리 제1유형: 출처표시, 상업적·비상업적 이용 가능)
+* 라이선스: MIT License
