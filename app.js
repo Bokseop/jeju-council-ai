@@ -405,13 +405,7 @@ function renderResults(results, queryTokens) {
     const isTruncated = cleanText.length > 1500;
     const contentHtml = formatSpeechHtml(cleanText, queryTokens, 1500, isExpanded);
 
-    const expandBtnHtml = isTruncated ? `
-      <div style="margin-top: 8px;">
-        <button class="btn-toggle-expand" onclick="toggleExpandCard(${s.i})" id="btn-expand-${s.i}">
-          ${isExpanded ? '▲ 요약 접기 (1,500자 요약)' : `📖 전체 발언 펼치기 (${s.c.length.toLocaleString()}자)`}
-        </button>
-      </div>
-    ` : '';
+    const expandBtnHtml = isTruncated ? `<div class="expand-btn-wrapper"><button class="btn-toggle-expand" onclick="toggleExpandCard(${s.i})" id="btn-expand-${s.i}">${isExpanded ? '▲ 요약 접기 (1,500자 요약)' : `📖 전체 발언 펼치기 (${s.c.length.toLocaleString()}자)`}</button></div>` : '';
 
     // Official line jump URL with Text Fragment
     const officialLineUrl = buildTextFragmentUrl(s.u, s.s, s.c);
@@ -430,10 +424,7 @@ function renderResults(results, queryTokens) {
         <div class="speaker-avatar">${s.s ? s.s.charAt(0) : '발'}</div>
         <div class="speaker-name">👤 ${s.s || '발언자'}</div>
       </div>
-      <div class="card-content-box" id="card-content-${s.i}">
-        <div class="speech-text-view">${contentHtml}</div>
-        ${expandBtnHtml}
-      </div>
+      <div class="card-content-box" id="card-content-${s.i}"><div class="speech-text-view">${contentHtml.trim()}</div>${expandBtnHtml}</div>
       <div class="card-actions">
         <div class="card-actions-left">
           <a href="${officialLineUrl}" target="_blank" class="btn-link-line" title="브라우저에서 도의회 원문 페이지가 열리며 해당 발언 줄로 자동 스크롤됩니다">
@@ -547,7 +538,9 @@ function toggleExpandCard(speechId) {
   const query = searchInput.value.trim();
   const tokens = tokenize(query);
 
-  textView.innerHTML = formatSpeechHtml(speech.c, tokens, 1500, newExp);
+  if (textView) {
+    textView.innerHTML = formatSpeechHtml(speech.c, tokens, 1500, newExp).trim();
+  }
   btn.innerHTML = newExp ? '▲ 요약 접기 (1,500자 요약)' : `📖 전체 발언 펼치기 (${speech.c.length.toLocaleString()}자)`;
 }
 
@@ -564,7 +557,9 @@ function toggleExpandModalSpeech(speechId) {
   const speech = currentModalSpeeches.find(s => s.i === speechId) || allSpeeches.find(s => s.i === speechId);
   if (!speech) return;
 
-  textView.innerHTML = formatSpeechHtml(speech.c, currentSearchTokens, 1500, newExp);
+  if (textView) {
+    textView.innerHTML = formatSpeechHtml(speech.c, currentSearchTokens, 1500, newExp).trim();
+  }
   btn.innerHTML = newExp ? '▲ 요약 접기 (1,500자 요약)' : `📖 전체 발언 펼치기 (${speech.c.length.toLocaleString()}자)`;
 }
 
@@ -673,13 +668,7 @@ function createModalSpeechElement(s, idx, totalCount, isTarget) {
   const isTruncated = cleanText.length > 1500;
   const contentHtml = formatSpeechHtml(cleanText, currentSearchTokens, 1500, isExpanded);
 
-  const expandBtnHtml = isTruncated ? `
-    <div style="margin-top: 8px;">
-      <button class="btn-toggle-expand" onclick="toggleExpandModalSpeech(${s.i})" id="btn-modal-expand-${s.i}">
-        ${isExpanded ? '▲ 요약 접기 (1,500자 요약)' : `📖 전체 발언 펼치기 (${cleanText.length.toLocaleString()}자)`}
-      </button>
-    </div>
-  ` : '';
+  const expandBtnHtml = isTruncated ? `<div class="expand-btn-wrapper"><button class="btn-toggle-expand" onclick="toggleExpandModalSpeech(${s.i})" id="btn-modal-expand-${s.i}">${isExpanded ? '▲ 요약 접기 (1,500자 요약)' : `📖 전체 발언 펼치기 (${cleanText.length.toLocaleString()}자)`}</button></div>` : '';
 
   itemEl.innerHTML = `
     <div class="modal-speech-header">
@@ -694,10 +683,7 @@ function createModalSpeechElement(s, idx, totalCount, isTarget) {
         <button class="btn-item-copy" onclick="copySingleSpeech(${s.i})" title="이 발언 1건만 복사">📋 단일 복사</button>
       </div>
     </div>
-    <div class="modal-speech-body" id="modal-speech-body-${s.i}">
-      <div class="speech-text-view">${contentHtml}</div>
-      ${expandBtnHtml}
-    </div>
+    <div class="modal-speech-body" id="modal-speech-body-${s.i}"><div class="speech-text-view">${contentHtml.trim()}</div>${expandBtnHtml}</div>
   `;
   return itemEl;
 }
