@@ -503,10 +503,12 @@ class CouncilDesktopApp:
         # 검색 대상 발언 추출
         target_spk = ""
         target_cnt = ""
-        for s in speeches:
+        target_idx = -1
+        for idx, s in enumerate(speeches):
             if highlight_id is not None and s["id"] == highlight_id:
                 target_spk = s.get("speaker_name") or s.get("speaker", "")
                 target_cnt = s.get("content", "")
+                target_idx = idx
                 break
 
         modal = tk.Toplevel(self.root)
@@ -566,6 +568,24 @@ class CouncilDesktopApp:
         url_link.pack(side=tk.LEFT, padx=6)
         url_link.bind("<Button-1>", lambda e, u=source_url, s=target_spk, c=target_cnt: self._open_web_url(u, speaker_name=s, content=c))
 
+        # 보기 모드 전환 바 (스크롤 지연 없이 즉시 해당 부분만 표시)
+        default_mode = "context" if (highlight_id is not None and target_idx != -1) else "full"
+        mode_var = tk.StringVar(value=default_mode)
+
+        mode_bar = tk.Frame(p, bg="#EEF2F6", bd=1, relief="solid", padx=10, pady=6)
+        mode_bar.pack(fill=tk.X, pady=(0, 8))
+
+        tk.Label(mode_bar, text="👁️ 보기 방식:", font=("맑은 고딕", 9, "bold"), bg="#EEF2F6", fg="#2D3748").pack(side=tk.LEFT, padx=(0, 8))
+
+        mode_status_lbl = tk.Label(
+            mode_bar,
+            text="",
+            font=("맑은 고딕", 9),
+            bg="#EEF2F6",
+            fg="#2B6CB0"
+        )
+        mode_status_lbl.pack(side=tk.RIGHT, padx=6)
+
         # 회의록 내 실시간 검색/필터 바
         search_filter_bar = ttk.Frame(p)
         search_filter_bar.pack(fill=tk.X, pady=(0, 8))
@@ -585,46 +605,112 @@ class CouncilDesktopApp:
         text_area.tag_configure("divider", foreground="#CBD5E0")
         text_area.tag_configure("search_found", background="#FED7D7", foreground="#9B2C2C")
 
-        full_text_buffer = []
-        target_pos = None
+        def render_transcript_view():
+            mode = mode_var.get()
+            text_area.configure(state=tk.NORMAL)
+            text_area.delete("1.0", tk.END)
 
-        full_text_buffer.append(f"================================================================================")
-        full_text_buffer.append(f"  {meeting_name} 전체 회의록 전문")
-        full_text_buffer.append(f"  • 일시: {meeting_date}")
-        full_text_buffer.append(f"  • 공식 링크: {source_url}")
-        full_text_buffer.append(f"  • 총 발언: {total_speeches}건")
-        full_text_buffer.append(f"================================================================================\n")
+            if mode == "context" and highlight_id is not None and target_idx != -1:
+                ctx_start = max(0, target_idx - 2)
+                ctx_end = min(total_speeches, target_idx + 3)
 
-        text_area.insert(tk.END, "\n".join(full_text_buffer))
+                mode_status_lbl.config(text=f"💡 제{target_idx + 1}번째 핵심 발언 및 질의·답변 맥락 즉시 표시 중 (스크롤 지연 없음)")
 
-        # 개별 발언 순차 삽입
-        for idx, s in enumerate(speeches, start=1):
-            is_target = (highlight_id is not None and s["id"] == highlight_id)
-            spk_title = f"[{idx} / {total_speeches}] ◯{s['speaker']}"
-            if is_target:
-                spk_title += "  ★ [검색된 핵심 발언]"
+                header = [
+                    "=" * 75,
+                    f"  🎯 [핵심 발언 집중 보기] {meeting_name}",
+                    f"  • 일시: {meeting_date}  |  전체 {total_speeches}건 중 제 {target_idx + 1}번째 발언 및 질의·답변 문맥",
+                    f"  • 불필요한 스크롤 없이 해당 발언만 즉시 띄웠습니다.",
+                    "=" * 75 + "\n"
+                ]
+                text_area.insert(tk.END, "\n".join(header))
 
-            start_idx = text_area.index(tk.END)
-            if is_target:
-                target_pos = start_idx
+                if ctx_start > 0:
+                    text_area.insert(tk.END, f"▲ [앞선 발언 {ctx_start}건 생략됨 - 상단 '전체 회의록 전문' 선택 시 모두 표시]\n\n", "divider")
 
-            text_area.insert(tk.END, "-" * 75 + "\n", "divider")
-            text_area.insert(tk.END, f"{spk_title}\n", "highlight_box" if is_target else "speaker_header")
-            text_area.insert(tk.END, "-" * 75 + "\n", "divider")
-            text_area.insert(tk.END, f"{s['content']}\n\n", "highlight_box" if is_target else "")
+                for idx in range(ctx_start, ctx_end):
+                    s = speeches[idx]
+                    is_target = (s["id"] == highlight_id)
+                    spk_title = f"[{idx + 1} / {total_speeches}] ◯{s['speaker']}"
+                    if is_target:
+                        spk_title += "  ★ [검색된 핵심 발언]"
 
-        text_area.configure(state=tk.DISABLED)
+                    text_area.insert(tk.END, "-" * 75 + "\n", "divider")
+                    text_area.insert(tk.END, f"{spk_title}\n", "highlight_box" if is_target else "speaker_header")
+                    text_area.insert(tk.END, "-" * 75 + "\n", "divider")
+                    text_area.insert(tk.END, f"{s['content']}\n\n", "highlight_box" if is_target else "")
 
-        # 검색된 발언이 있으면 자동으로 해당 위치로 스크롤 (레이아웃 완료 후 100% 보장)
-        if target_pos:
-            modal.after(100, lambda: text_area.see(target_pos))
-            modal.after(300, lambda: text_area.see(target_pos))
+                if ctx_end < total_speeches:
+                    text_area.insert(tk.END, f"▼ [뒤따르는 발언 {total_speeches - ctx_end}건 생략됨 - 상단 '전체 회의록 전문' 선택 시 모두 표시]\n\n", "divider")
+
+                text_area.configure(state=tk.DISABLED)
+                text_area.see("1.0")
+
+            else:
+                mode_status_lbl.config(text=f"📜 전체 회의록(총 {total_speeches}건) 전문을 순서대로 표시합니다.")
+                full_text_buffer = [
+                    "=" * 75,
+                    f"  {meeting_name} 전체 회의록 전문",
+                    f"  • 일시: {meeting_date}",
+                    f"  • 공식 링크: {source_url}",
+                    f"  • 총 발언: {total_speeches}건",
+                    "=" * 75 + "\n"
+                ]
+                text_area.insert(tk.END, "\n".join(full_text_buffer))
+
+                target_pos = None
+                for idx, s in enumerate(speeches, start=1):
+                    is_target = (highlight_id is not None and s["id"] == highlight_id)
+                    spk_title = f"[{idx} / {total_speeches}] ◯{s['speaker']}"
+                    if is_target:
+                        spk_title += "  ★ [검색된 핵심 발언]"
+                        target_pos = text_area.index(tk.END)
+
+                    text_area.insert(tk.END, "-" * 75 + "\n", "divider")
+                    text_area.insert(tk.END, f"{spk_title}\n", "highlight_box" if is_target else "speaker_header")
+                    text_area.insert(tk.END, "-" * 75 + "\n", "divider")
+                    text_area.insert(tk.END, f"{s['content']}\n\n", "highlight_box" if is_target else "")
+
+                text_area.configure(state=tk.DISABLED)
+                if target_pos:
+                    text_area.see(target_pos)
+                else:
+                    text_area.see("1.0")
+
+        rb_ctx = tk.Radiobutton(
+            mode_bar,
+            text="🎯 해당 발언 및 전후 맥락 (즉시 표시)",
+            variable=mode_var,
+            value="context",
+            command=render_transcript_view,
+            bg="#EEF2F6",
+            font=("맑은 고딕", 9, "bold"),
+            cursor="hand2"
+        )
+        rb_ctx.pack(side=tk.LEFT, padx=4)
+
+        rb_full = tk.Radiobutton(
+            mode_bar,
+            text=f"📜 전체 회의록 전문 모두 보기 ({total_speeches}건)",
+            variable=mode_var,
+            value="full",
+            command=render_transcript_view,
+            bg="#EEF2F6",
+            font=("맑은 고딕", 9),
+            cursor="hand2"
+        )
+        rb_full.pack(side=tk.LEFT, padx=4)
+
+        render_transcript_view()
 
         # 회의록 내 단어 검색 핸들러
         def find_next_keyword():
             kw = filter_var.get().strip()
             if not kw:
                 return
+            if mode_var.get() != "full":
+                mode_var.set("full")
+                render_transcript_view()
             text_area.tag_remove("search_found", "1.0", tk.END)
             start = "1.0"
             count = 0
@@ -665,55 +751,6 @@ class CouncilDesktopApp:
             bottom_box,
             text="🎯 웹에서 해당 라인 이동 & 표시",
             command=lambda u=source_url, s=target_spk, c=target_cnt: self._open_web_url(u, speaker_name=s, content=c)
-        ).pack(side=tk.LEFT, padx=8)
-
-        ttk.Button(bottom_box, text="닫기", command=modal.destroy).pack(side=tk.RIGHT)
-
-        # 회의록 내 단어 검색 핸들러
-        def find_next_keyword():
-            kw = filter_var.get().strip()
-            if not kw:
-                return
-            text_area.tag_remove("search_found", "1.0", tk.END)
-            start = "1.0"
-            count = 0
-            first_found = None
-            while True:
-                pos = text_area.search(kw, start, stopindex=tk.END, nocase=True)
-                if not pos:
-                    break
-                end_pos = f"{pos}+{len(kw)}c"
-                text_area.tag_add("search_found", pos, end_pos)
-                if not first_found:
-                    first_found = pos
-                start = end_pos
-                count += 1
-            if first_found:
-                text_area.see(first_found)
-                find_stat_lbl.config(text=f"'{kw}' {count}건 발견")
-            else:
-                find_stat_lbl.config(text=f"'{kw}' 없음")
-
-        filter_entry.bind("<Return>", lambda e: find_next_keyword())
-        ttk.Button(search_filter_bar, text="다음 찾기", command=find_next_keyword).pack(side=tk.LEFT)
-        find_stat_lbl = ttk.Label(search_filter_bar, text="", foreground="#718096")
-        find_stat_lbl.pack(side=tk.LEFT, padx=6)
-
-        # 하단 액션 버튼 바
-        bottom_box = ttk.Frame(p, padding=(0, 10, 0, 0))
-        bottom_box.pack(fill=tk.X)
-
-        def copy_all_transcript():
-            all_txt = text_area.get("1.0", tk.END)
-            self.root.clipboard_clear()
-            self.root.clipboard_append(all_txt)
-            messagebox.showinfo("복사 완료", f"전체 회의록 전문(발언 {total_speeches}건)이 클립보드에 복사되었습니다.", parent=modal)
-
-        ttk.Button(bottom_box, text="📋 전체 회의록 텍스트 복사", command=copy_all_transcript).pack(side=tk.LEFT)
-        ttk.Button(
-            bottom_box,
-            text="🌐 도의회 공식 웹 링크 열기",
-            command=lambda u=source_url: self._open_web_url(u)
         ).pack(side=tk.LEFT, padx=8)
 
         ttk.Button(bottom_box, text="닫기", command=modal.destroy).pack(side=tk.RIGHT)

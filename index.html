@@ -113,6 +113,21 @@
         <span id="modalSearchStat" class="search-stat-text"></span>
       </div>
 
+      <!-- Modal View Mode Switcher -->
+      <div class="modal-view-mode-bar" id="modalViewModeBar">
+        <div class="view-mode-tabs">
+          <button id="btnViewContext" class="btn-tab active" onclick="switchModalViewMode('context')">
+            🎯 해당 발언 및 전후 맥락 (즉시 표시)
+          </button>
+          <button id="btnViewFull" class="btn-tab" onclick="switchModalViewMode('full')">
+            📜 전체 회의록 모두 보기 (<span id="modalTotalSpeechesCount">0</span>건)
+          </button>
+        </div>
+        <div class="view-mode-desc" id="modalViewDesc">
+          💡 검색된 발언과 질의·답변 문맥이 스크롤 없이 바로 표시됩니다.
+        </div>
+      </div>
+
       <!-- Modal Body -->
       <div class="modal-body" id="modalTranscriptBody">
         <!-- Speeches list populated dynamically -->

@@ -316,60 +316,186 @@ function buildTextFragmentUrl(sourceUrl, speaker, content) {
   return sourceUrl;
 }
 
-// Full Meeting Transcript Modal
+// Full Meeting Transcript Modal State
+let currentModalSpeeches = [];
+let currentHighlightId = null;
+let currentModalViewMode = 'context'; // 'context' or 'full'
+let contextStartIndex = 0;
+let contextEndIndex = 0;
+
 function openFullMeetingModal(meetingName, meetingDate, highlightSpeechId) {
   currentModalMeeting = { name: meetingName, date: meetingDate };
+  currentHighlightId = (highlightSpeechId !== undefined) ? highlightSpeechId : null;
   modalMeetingTitle.textContent = `🏛️ ${meetingName}`;
-  modalMeetingMeta.textContent = `📅 일시: ${meetingDate}`;
 
   // Filter all speeches of this meeting
-  const meetingSpeeches = allSpeeches.filter(s => s.m === meetingName && s.d === meetingDate);
-  const totalCount = meetingSpeeches.length;
+  currentModalSpeeches = allSpeeches.filter(s => s.m === meetingName && s.d === meetingDate);
+  const totalCount = currentModalSpeeches.length;
   modalMeetingMeta.textContent = `📅 일시: ${meetingDate}  |  📊 총 ${totalCount}건 발언 수록  |  공식 전자회의록 기록`;
 
   // Set official link
-  const sampleSpeech = meetingSpeeches[0];
+  const sampleSpeech = currentModalSpeeches[0];
   const officialUrl = (sampleSpeech && sampleSpeech.u) ? sampleSpeech.u : 'https://record.council.jeju.kr';
   modalOfficialLink.href = officialUrl;
 
-  modalTranscriptBody.innerHTML = '';
+  const modalTotalSpeechesCount = document.getElementById('modalTotalSpeechesCount');
+  if (modalTotalSpeechesCount) modalTotalSpeechesCount.textContent = totalCount;
 
-  let targetElement = null;
-
-  meetingSpeeches.forEach((s, idx) => {
-    const isTarget = (highlightSpeechId !== undefined && s.i === highlightSpeechId);
-    const itemEl = document.createElement('div');
-    itemEl.className = `modal-speech-item ${isTarget ? 'highlighted' : ''}`;
-    itemEl.id = `modal-speech-${s.i}`;
-
-    const speakerTitle = `[${idx + 1} / ${totalCount}] ◯${s.s || '발언자'}`;
-
-    itemEl.innerHTML = `
-      <div class="modal-speech-header">
-        <span>${speakerTitle}</span>
-        ${isTarget ? '<span style="color:#B45309; font-weight:bold; font-size:12px;">★ [검색된 핵심 발언]</span>' : ''}
-      </div>
-      <div class="modal-speech-body">${escapeHtml(s.c)}</div>
-    `;
-
-    modalTranscriptBody.appendChild(itemEl);
-
-    if (isTarget) {
-      targetElement = itemEl;
+  // If opened with a specific speech highlight, show focused context immediately without scrolling lag!
+  if (currentHighlightId !== null) {
+    const targetIdx = currentModalSpeeches.findIndex(s => s.i === currentHighlightId);
+    if (targetIdx !== -1) {
+      currentModalViewMode = 'context';
+      contextStartIndex = Math.max(0, targetIdx - 2);
+      contextEndIndex = Math.min(totalCount, targetIdx + 3);
+    } else {
+      currentModalViewMode = 'full';
     }
-  });
+  } else {
+    currentModalViewMode = 'full';
+  }
 
   meetingModal.classList.add('active');
   document.body.style.overflow = 'hidden';
 
-  // Smooth scroll to target speech
-  if (targetElement) {
-    setTimeout(() => {
-      targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 150);
-  } else {
-    modalTranscriptBody.scrollTop = 0;
+  renderModalTranscript();
+}
+
+function renderModalTranscript() {
+  const totalCount = currentModalSpeeches.length;
+  const btnViewContext = document.getElementById('btnViewContext');
+  const btnViewFull = document.getElementById('btnViewFull');
+  const modalViewDesc = document.getElementById('modalViewDesc');
+
+  if (btnViewContext && btnViewFull) {
+    if (currentModalViewMode === 'context') {
+      btnViewContext.classList.add('active');
+      btnViewFull.classList.remove('active');
+      if (modalViewDesc) modalViewDesc.textContent = '💡 검색된 발언과 질의·답변 문맥이 스크롤 없이 바로 표시됩니다.';
+    } else {
+      btnViewContext.classList.remove('active');
+      btnViewFull.classList.add('active');
+      if (modalViewDesc) modalViewDesc.textContent = '📜 회의록 전체 발언을 처음부터 순서대로 표시합니다.';
+    }
   }
+
+  modalTranscriptBody.innerHTML = '';
+  let targetElement = null;
+
+  if (currentModalViewMode === 'context' && currentHighlightId !== null) {
+    const targetIdx = currentModalSpeeches.findIndex(s => s.i === currentHighlightId);
+
+    // Context Banner
+    const banner = document.createElement('div');
+    banner.className = 'modal-context-banner';
+    banner.innerHTML = `
+      <span>🎯 <strong>[핵심 발언 집중 보기]</strong> 전체 ${totalCount}건 중 제 ${targetIdx + 1}번째 발언 및 질의·답변 맥락</span>
+      <span style="font-size:11px; opacity:0.85;">긴 스크롤 없이 해당 발언 위치만 즉시 띄웠습니다</span>
+    `;
+    modalTranscriptBody.appendChild(banner);
+
+    // Prev speeches expand button
+    if (contextStartIndex > 0) {
+      const prevBtn = document.createElement('button');
+      prevBtn.className = 'modal-load-more-btn';
+      prevBtn.innerHTML = `▲ 앞선 발언 ${contextStartIndex}건 더보기 (1 ~ ${contextStartIndex}번째)`;
+      prevBtn.onclick = () => {
+        contextStartIndex = Math.max(0, contextStartIndex - 5);
+        renderModalTranscript();
+      };
+      modalTranscriptBody.appendChild(prevBtn);
+    }
+
+    // Render slice speeches
+    for (let idx = contextStartIndex; idx < contextEndIndex; idx++) {
+      const s = currentModalSpeeches[idx];
+      const isTarget = (s.i === currentHighlightId);
+      const itemEl = document.createElement('div');
+      itemEl.className = `modal-speech-item ${isTarget ? 'highlighted' : ''}`;
+      itemEl.id = `modal-speech-${s.i}`;
+
+      const speakerTitle = `[${idx + 1} / ${totalCount}] ◯${s.s || '발언자'}`;
+
+      itemEl.innerHTML = `
+        <div class="modal-speech-header">
+          <span>${speakerTitle}</span>
+          ${isTarget ? '<span style="color:#B45309; font-weight:bold; font-size:12px;">★ [검색된 핵심 발언]</span>' : ''}
+        </div>
+        <div class="modal-speech-body">${escapeHtml(s.c)}</div>
+      `;
+
+      modalTranscriptBody.appendChild(itemEl);
+      if (isTarget) targetElement = itemEl;
+    }
+
+    // Next speeches expand button
+    if (contextEndIndex < totalCount) {
+      const nextBtn = document.createElement('button');
+      nextBtn.className = 'modal-load-more-btn';
+      nextBtn.innerHTML = `▼ 뒤따르는 발언 ${totalCount - contextEndIndex}건 더보기 (${contextEndIndex + 1} ~ ${totalCount}번째)`;
+      nextBtn.onclick = () => {
+        contextEndIndex = Math.min(totalCount, contextEndIndex + 5);
+        renderModalTranscript();
+      };
+      modalTranscriptBody.appendChild(nextBtn);
+    }
+
+    // Expand all button
+    const expandAllBtn = document.createElement('button');
+    expandAllBtn.className = 'modal-expand-all-btn';
+    expandAllBtn.innerHTML = `📜 이 회의 전체 발언(총 ${totalCount}건) 모두 펼치기`;
+    expandAllBtn.onclick = () => {
+      switchModalViewMode('full');
+    };
+    modalTranscriptBody.appendChild(expandAllBtn);
+
+    // Instant top position without any animation
+    modalTranscriptBody.scrollTop = 0;
+
+  } else {
+    // Full view mode
+    currentModalSpeeches.forEach((s, idx) => {
+      const isTarget = (currentHighlightId !== null && s.i === currentHighlightId);
+      const itemEl = document.createElement('div');
+      itemEl.className = `modal-speech-item ${isTarget ? 'highlighted' : ''}`;
+      itemEl.id = `modal-speech-${s.i}`;
+
+      const speakerTitle = `[${idx + 1} / ${totalCount}] ◯${s.s || '발언자'}`;
+
+      itemEl.innerHTML = `
+        <div class="modal-speech-header">
+          <span>${speakerTitle}</span>
+          ${isTarget ? '<span style="color:#B45309; font-weight:bold; font-size:12px;">★ [검색된 핵심 발언]</span>' : ''}
+        </div>
+        <div class="modal-speech-body">${escapeHtml(s.c)}</div>
+      `;
+
+      modalTranscriptBody.appendChild(itemEl);
+
+      if (isTarget) {
+        targetElement = itemEl;
+      }
+    });
+
+    // Instant scroll directly to target without animation
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: 'instant', block: 'center' });
+    } else {
+      modalTranscriptBody.scrollTop = 0;
+    }
+  }
+}
+
+function switchModalViewMode(mode) {
+  currentModalViewMode = mode;
+  if (mode === 'context' && currentHighlightId !== null) {
+    const targetIdx = currentModalSpeeches.findIndex(s => s.i === currentHighlightId);
+    if (targetIdx !== -1) {
+      contextStartIndex = Math.max(0, targetIdx - 2);
+      contextEndIndex = Math.min(currentModalSpeeches.length, targetIdx + 3);
+    }
+  }
+  renderModalTranscript();
 }
 
 function closeModal() {
@@ -390,6 +516,12 @@ function findInModal() {
     return;
   }
 
+  // Switch to full mode automatically if currently in context slice
+  if (currentModalViewMode !== 'full') {
+    currentModalViewMode = 'full';
+    renderModalTranscript();
+  }
+
   modalMatchedElements = [];
   const items = modalTranscriptBody.querySelectorAll('.modal-speech-item');
 
@@ -407,7 +539,7 @@ function findInModal() {
 
   modalSearchIndex = (modalSearchIndex + 1) % modalMatchedElements.length;
   const current = modalMatchedElements[modalSearchIndex];
-  current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  current.scrollIntoView({ behavior: 'instant', block: 'center' });
   modalSearchStat.textContent = `${modalSearchIndex + 1} / ${modalMatchedElements.length}건`;
 }
 
@@ -421,14 +553,19 @@ function copyCardContent(speechId) {
 }
 
 function copyModalTranscript() {
-  let fullText = `${modalMeetingTitle.textContent}\n${modalMeetingMeta.textContent}\n\n`;
+  let fullText = `${modalMeetingTitle.textContent}\n${modalMeetingMeta.textContent}\n`;
+  if (currentModalViewMode === 'context') {
+    fullText += `[핵심 발언 및 전후 문맥 발췌]\n\n`;
+  } else {
+    fullText += `[전체 회의록 전문]\n\n`;
+  }
   const items = modalTranscriptBody.querySelectorAll('.modal-speech-item');
   items.forEach(it => {
     fullText += it.innerText + '\n' + '='.repeat(60) + '\n';
   });
 
   navigator.clipboard.writeText(fullText).then(() => {
-    showToast('전체 회의록 전문이 클립보드에 복사되었습니다.');
+    showToast(currentModalViewMode === 'context' ? '발언 및 문맥 텍스트가 복사되었습니다.' : '전체 회의록 전문이 복사되었습니다.');
   });
 }
 
