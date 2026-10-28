@@ -110,7 +110,8 @@ async function loadData() {
 
     isDataLoaded = true;
     statBadge.textContent = `🏛️ 2024년~현재 ${allMeetings.length.toLocaleString()}회 회의`;
-    statusBar.innerHTML = `<span>⚡ <strong>2024년~현재 총 ${allMeetings.length.toLocaleString()}회 회의</strong> (2026년 데이터 준비 완료, 이전 회기 동기화 중...)</span>`;
+    statusBar.innerHTML = `<span>⚡ <strong>2024년~현재 총 ${allMeetings.length.toLocaleString()}회 회의</strong> (2026년 데이터 준비 완료, 이전 회기 동기화 중...)</span>
+      <span>🔄 매일 아침 06:00 최신화</span>`;
     
     // Initial default search
     performSearch();
@@ -125,7 +126,8 @@ async function loadData() {
       
       allSpeeches = allSpeeches.concat(unpacked25, unpacked24);
       statBadge.textContent = `🏛️ 2024년~현재 ${allMeetings.length.toLocaleString()}회 회의`;
-      statusBar.innerHTML = `<span>✅ <strong>2024년부터 현재까지 총 ${allMeetings.length.toLocaleString()}회 회의</strong> 검색 준비 완료</span>`;
+      statusBar.innerHTML = `<span>✅ <strong>2024년부터 현재까지 총 ${allMeetings.length.toLocaleString()}회 회의</strong> 검색 준비 완료</span>
+        <span>🔄 매일 아침 06:00 최신화</span>`;
 
       // 사용자가 이미 검색어를 입력했거나 필터를 변경한 경우 자동 재검색
       if (searchInput.value.trim() || meetingFilter.value || speakerFilter.value.trim()) {
@@ -250,9 +252,10 @@ function performSearch() {
   // Update Status Bar
   if (queryTokens.length > 0) {
     statusBar.innerHTML = `<span>🔍 검색 결과: <strong>${totalFound.toLocaleString()}건</strong> 발견 (${elapsed}ms 소요)</span>
-      <span>${selectedMeeting ? `🏛️ ${selectedMeeting}` : '전체 회의 대상'}</span>`;
+      <span>${selectedMeeting ? `🏛️ ${selectedMeeting}` : '2024년~현재 전체 회의'} • 🔄 매일 아침 06:00 최신화</span>`;
   } else {
-    statusBar.innerHTML = `<span>2024년~현재 총 ${allMeetings.length.toLocaleString()}회 회의 (최신 등록 발언)</span>`;
+    statusBar.innerHTML = `<span>2024년~현재 총 ${allMeetings.length.toLocaleString()}회 회의 (최신 등록 발언)</span>
+      <span>🔄 매일 아침 06:00 최신화</span>`;
   }
 
   renderResults(displayResults, queryTokens);
