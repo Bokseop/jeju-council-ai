@@ -184,6 +184,7 @@ body {
 
 .search-input-box input {
   flex: 1;
+  min-width: 0;
   border: none;
   background: transparent;
   font-size: 16px;
@@ -202,6 +203,7 @@ body {
   padding: 4px 8px;
   border-radius: 50%;
   visibility: hidden;
+  flex-shrink: 0;
 }
 
 .clear-btn.visible {
@@ -223,6 +225,8 @@ body {
   border-radius: var(--radius-sm);
   cursor: pointer;
   margin-left: 8px;
+  flex-shrink: 0;
+  white-space: nowrap;
   transition: background 0.2s;
 }
 
@@ -1201,25 +1205,245 @@ body {
 
 /* Responsive */
 @media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden;
+  }
+
   .header-inner {
     flex-direction: column;
     align-items: flex-start;
+    padding: 12px 16px;
+    gap: 10px;
   }
+
+  .logo-title {
+    font-size: 17px;
+  }
+
+  .logo-subtitle {
+    font-size: 11.5px;
+  }
+
+  .header-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+  }
+
+  .stat-pill {
+    font-size: 11.5px;
+    padding: 3px 8px;
+  }
+
+  .visitor-pill {
+    font-size: 11px;
+    padding: 2px 6px;
+  }
+
+  .main-container {
+    padding: 14px 10px;
+  }
+
+  .search-section {
+    padding: 14px 10px;
+    margin-bottom: 14px;
+    border-radius: var(--radius-md);
+  }
+
+  .search-input-box {
+    padding: 4px 6px;
+  }
+
+  .search-icon {
+    font-size: 15px;
+    margin-left: 4px;
+    margin-right: 6px;
+  }
+
+  .search-input-box input {
+    font-size: 15px;
+    padding: 6px 0;
+    min-width: 0;
+  }
+
+  .search-btn {
+    padding: 8px 14px;
+    font-size: 14px;
+    margin-left: 4px;
+  }
+
+  /* Year Filter Row on mobile */
+  .year-filter-row {
+    padding: 8px 10px;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .year-buttons-group {
+    gap: 6px;
+  }
+
+  .year-btn-pill {
+    padding: 4px 9px;
+    font-size: 12px;
+  }
+
+  .btn-all-years {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+
+  .year-summary-badge {
+    width: 100%;
+    margin-left: 0;
+    text-align: center;
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+
   .filter-row {
     flex-direction: column;
     align-items: stretch;
+    gap: 8px;
+    padding-top: 10px;
+    margin-top: 10px;
   }
+
+  .filter-item {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    width: 100%;
+  }
+
   .filter-item select,
   .filter-item input {
     max-width: 100%;
     width: 100%;
+    box-sizing: border-box;
+    font-size: 13px;
+    padding: 7px 10px;
   }
+
+  .status-bar {
+    font-size: 11.5px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    margin-top: 10px;
+  }
+
+  /* Speech Cards on mobile */
+  .speech-card {
+    padding: 12px 10px;
+  }
+
+  .card-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    margin-bottom: 6px;
+  }
+
+  .card-meta {
+    flex-wrap: wrap;
+    gap: 6px;
+    font-size: 11px;
+  }
+
+  .card-content-box {
+    padding: 8px 10px;
+    margin-bottom: 8px;
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+
   .card-actions {
     flex-direction: column;
     align-items: stretch;
+    gap: 6px;
   }
+
+  .card-actions-left,
+  .card-actions-right {
+    flex-direction: column;
+    width: 100%;
+    gap: 6px;
+  }
+
   .btn-link-line,
-  .btn-view-all {
+  .btn-view-all,
+  .btn-copy-card {
+    width: 100%;
     justify-content: center;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  /* Modal on mobile */
+  .modal-overlay {
+    padding: 6px;
+  }
+
+  .modal-content {
+    max-height: 96vh;
+    border-radius: var(--radius-md);
+  }
+
+  .modal-header {
+    padding: 10px 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .modal-header-actions {
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 6px;
+  }
+
+  .modal-search-bar {
+    padding: 8px 10px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+
+  .modal-search-bar input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .modal-view-mode-bar {
+    padding: 8px 10px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+
+  .view-mode-tabs {
+    flex-direction: column;
+    width: 100%;
+    gap: 4px;
+  }
+
+  .btn-tab {
+    width: 100%;
+    text-align: center;
+  }
+
+  .selection-quick-tools {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .modal-body {
+    padding: 10px 8px;
+    gap: 8px;
   }
 }
