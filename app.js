@@ -270,13 +270,31 @@ function tokenize(text) {
 function performSearch() {
   if (!isDataLoaded) return;
 
-  const query = searchInput.value.trim();
+  const rawQuery = searchInput.value.trim();
   const selectedMeeting = meetingFilter.value;
   const speakerFilterVal = speakerFilter.value.trim().toLowerCase();
   const limit = parseInt(limitFilter.value, 10) || 15;
 
   const t0 = performance.now();
-  const queryTokens = tokenize(query);
+
+  // 1. 따옴표를 통한 정확한 문구 검색 지원 (예: "우주산업 육성")
+  const quotedPhrases = [];
+  const quoteRegex = /"([^"]+)"/g;
+  let qMatch;
+  while ((qMatch = quoteRegex.exec(rawQuery.toLowerCase())) !== null) {
+    if (qMatch[1].trim()) quotedPhrases.push(qMatch[1].trim());
+  }
+
+  // 2. 명시적 OR 문법 지원 (예: "우주산업 OR 서광로" 또는 "우주산업 | 서광로")
+  const isExplicitOr = /\s+or\s+|\s*\|\s*/i.test(rawQuery);
+  let orBranches = [];
+  if (isExplicitOr) {
+    const parts = rawQuery.split(/\s+or\s+|\s*\|\s*/i);
+    orBranches = parts.map(p => tokenize(p)).filter(arr => arr.length > 0);
+  }
+
+  // 3. 검색 토큰 추출 ('or' 키워드는 제외)
+  let queryTokens = tokenize(rawQuery).filter(t => t !== 'or');
   currentSearchTokens = queryTokens;
 
   let candidates = getActiveSpeeches();
@@ -284,81 +302,183 @@ function performSearch() {
   const activeMeetings = getActiveMeetings();
   const yearsLabel = selectedYears.length === 3 ? '2024년~현재' : `${selectedYears.join(', ')}년`;
 
-  // Filter by meeting if selected
+  // 회의 필터 적용
   if (selectedMeeting) {
     candidates = candidates.filter(s => s.m === selectedMeeting);
   }
 
-  // Filter by speaker if entered
+  // 발언자 필터 적용
   if (speakerFilterVal) {
     candidates = candidates.filter(s => s.s && s.s.toLowerCase().includes(speakerFilterVal));
   }
 
-  // Score candidates
-  let scoredResults = [];
+  // 정확한 구문(Phrase) 부스트를 위한 정규화 검색어
+  const cleanFullQuery = rawQuery.toLowerCase().replace(/[^\w가-힣\s]/g, ' ').replace(/\s+or\s+/g, ' ').replace(/\s+/g, ' ').trim();
+  const noSpaceFullQuery = cleanFullQuery.replace(/\s+/g, '');
 
-  if (queryTokens.length === 0) {
-    // No query entered: return recent speeches
+  let scoredResults = [];
+  let searchMode = 'AND'; // 'AND' | 'OR_FALLBACK' | 'EXPLICIT_OR' | 'RECENT'
+
+  if (queryTokens.length === 0 && quotedPhrases.length === 0) {
+    // 검색어 미입력 시 최신 발언 표시
+    searchMode = 'RECENT';
     scoredResults = candidates.slice(0, limit).map((s, idx) => ({
       item: s,
       score: 1.0 - (idx * 0.01),
       matchedTokens: []
     }));
   } else {
+    const allMatches = [];
+
     for (let i = 0; i < candidates.length; i++) {
       const s = candidates[i];
       const contentLower = s.c.toLowerCase();
       const speakerLower = s.s ? s.s.toLowerCase() : '';
       const meetingLower = s.m.toLowerCase();
+      const fullText = `${speakerLower} ${meetingLower} ${contentLower}`;
 
-      let matchCount = 0;
-      let matchedTokens = [];
+      // 1. 따옴표 문구 조건 검사 (불일치 시 탈락)
+      if (quotedPhrases.length > 0) {
+        let phraseMismatch = false;
+        for (let p = 0; p < quotedPhrases.length; p++) {
+          if (!fullText.includes(quotedPhrases[p])) {
+            phraseMismatch = true;
+            break;
+          }
+        }
+        if (phraseMismatch) continue;
+      }
+
+      // 2. 단어(토큰) 일치 및 출현 빈도(TF) 계산
+      const matchedTokens = [];
+      const tokenCounts = {};
 
       for (let t = 0; t < queryTokens.length; t++) {
         const token = queryTokens[t];
-        let tokenMatched = false;
-
-        if (contentLower.includes(token)) {
-          matchCount += 3;
-          tokenMatched = true;
-        }
-        if (speakerLower.includes(token)) {
-          matchCount += 5;
-          tokenMatched = true;
-        }
-        if (meetingLower.includes(token)) {
-          matchCount += 2;
-          tokenMatched = true;
+        let count = 0;
+        let pos = fullText.indexOf(token);
+        while (pos !== -1) {
+          count++;
+          pos = fullText.indexOf(token, pos + token.length);
         }
 
-        if (tokenMatched) {
+        if (count > 0) {
           matchedTokens.push(token);
+          tokenCounts[token] = count;
         }
       }
 
-      if (matchCount > 0) {
-        // Boost if multiple tokens match
-        const tokenCoverage = matchedTokens.length / queryTokens.length;
-        const finalScore = (matchCount * 0.1) + (tokenCoverage * 0.5);
-        scoredResults.push({
-          item: s,
-          score: Math.min(finalScore, 1.0),
-          matchedTokens: matchedTokens
-        });
+      if (matchedTokens.length === 0 && quotedPhrases.length === 0) {
+        continue;
       }
+
+      // 명시적 OR 문법인 경우 분기 매칭 확인
+      if (isExplicitOr && orBranches.length > 0) {
+        const branchMatch = orBranches.some(branch => branch.every(t => fullText.includes(t)));
+        if (!branchMatch) continue;
+      }
+
+      const totalTokens = queryTokens.length > 0 ? queryTokens.length : 1;
+      const coverage = queryTokens.length > 0 ? (matchedTokens.length / totalTokens) : 1.0;
+
+      // 3. 완전 구문 일치(Exact Phrase) 확인
+      const hasExactPhrase = (cleanFullQuery.length >= 3 && fullText.includes(cleanFullQuery)) ||
+                             (noSpaceFullQuery.length >= 4 && fullText.includes(noSpaceFullQuery));
+
+      // 4. 단어 빈도(TF) 점수 (log 스케일)
+      let tfScore = 0;
+      for (let m = 0; m < matchedTokens.length; m++) {
+        const cnt = tokenCounts[matchedTokens[m]] || 1;
+        tfScore += (1 + Math.log(cnt));
+      }
+
+      // 5. 문서 길이 정규화 (긴 발언이 단순 단어 나열로 과도하게 유리해지는 것 방지)
+      const docLen = contentLower.length;
+      const normFactor = 1.0 + Math.log10(Math.max(100, docLen) / 300);
+
+      // 6. 단어 간 근접도(Proximity Boost): 검색어들이 같은 문맥/문장에 모여 있을수록 대폭 가산
+      let proximityBoost = 1.0;
+      if (matchedTokens.length > 1 && coverage === 1.0) {
+        const positions = matchedTokens.map(t => contentLower.indexOf(t)).filter(p => p !== -1);
+        if (positions.length === matchedTokens.length) {
+          const dist = Math.max(...positions) - Math.min(...positions);
+          if (dist < 120) {
+            proximityBoost = 1.5;
+          } else if (dist < 300) {
+            proximityBoost = 1.25;
+          } else if (dist < 600) {
+            proximityBoost = 1.1;
+          }
+        }
+      }
+
+      // 7. 발언자 성명 일치 가산점
+      let speakerBonus = 0;
+      for (let m = 0; m < matchedTokens.length; m++) {
+        if (speakerLower.includes(matchedTokens[m])) {
+          speakerBonus += 3.0;
+        }
+      }
+
+      // 최종 일치도 점수 (0.0 ~ 1.0 정규화)
+      let finalScore = 0.5;
+      if (isExplicitOr) {
+        finalScore = Math.min(1.0, 0.80 + (tfScore / normFactor) * 0.03 + (hasExactPhrase ? 0.1 : 0) + speakerBonus * 0.02);
+      } else if (coverage === 1.0) {
+        // 모든 단어 일치(AND): 0.80 ~ 1.0
+        const base = 0.80;
+        const bonus = (tfScore / normFactor) * 0.03 + (hasExactPhrase ? 0.08 : 0) + speakerBonus * 0.02;
+        finalScore = Math.min(1.0, (base + bonus) * (hasExactPhrase ? 1.05 : proximityBoost));
+      } else {
+        // 일부 단어 일치(부분): 0.30 ~ 0.70
+        finalScore = Math.min(0.70, (coverage * 0.50) + (tfScore / normFactor) * 0.02 + speakerBonus * 0.02);
+      }
+
+      allMatches.push({
+        item: s,
+        score: finalScore,
+        coverage: coverage,
+        matchedTokens: matchedTokens,
+        hasExactPhrase: hasExactPhrase
+      });
     }
 
-    // Sort by score descending
-    scoredResults.sort((a, b) => b.score - a.score);
+    // 점수 높은 순으로 내림차순 정렬
+    allMatches.sort((a, b) => b.score - a.score);
+
+    if (isExplicitOr) {
+      searchMode = 'EXPLICIT_OR';
+      scoredResults = allMatches;
+    } else {
+      // 🌟 [핵심 개선] AND 우선 모드: 모든 단어가 일치하는 발언(coverage === 1.0)이 있다면 그 결과만 엄격히 반환!
+      const fullMatches = allMatches.filter(r => r.coverage === 1.0);
+      if (fullMatches.length > 0) {
+        searchMode = 'AND';
+        scoredResults = fullMatches;
+      } else {
+        // 모든 단어가 동시에 들어간 발언이 없을 때만 차선책(부분 일치) 폴백
+        searchMode = 'OR_FALLBACK';
+        scoredResults = allMatches;
+      }
+    }
   }
 
   const elapsed = Math.round(performance.now() - t0);
   const totalFound = scoredResults.length;
   const displayResults = scoredResults.slice(0, limit);
 
-  // Update Status Bar
-  if (queryTokens.length > 0) {
-    statusBar.innerHTML = `<span>🔍 검색 결과: <strong>${totalFound.toLocaleString()}건</strong> 발견 (${elapsed}ms 소요)</span>
+  // 상태 표시줄 업데이트 (검색 모드 명시)
+  if (queryTokens.length > 0 || quotedPhrases.length > 0) {
+    let modeBadge = '';
+    if (searchMode === 'AND') {
+      modeBadge = queryTokens.length > 1 ? '<span style="color:#2563EB; font-weight:700;">[모든 단어 일치 (AND)]</span> ' : '';
+    } else if (searchMode === 'EXPLICIT_OR') {
+      modeBadge = '<span style="color:#059669; font-weight:700;">[선택 단어 일치 (OR)]</span> ';
+    } else if (searchMode === 'OR_FALLBACK') {
+      modeBadge = '<span style="color:#D97706; font-weight:700;">[일부 단어 포함 (부분 일치)]</span> ';
+    }
+
+    statusBar.innerHTML = `<span>🔍 ${modeBadge}검색 결과: <strong>${totalFound.toLocaleString()}건</strong> 발견 (${elapsed}ms 소요)</span>
       <span>${selectedMeeting ? `🏛️ ${selectedMeeting}` : `${yearsLabel} 회의 대상`} • 🔄 매일 아침 06:00 최신화</span>`;
   } else {
     statusBar.innerHTML = `<span>${yearsLabel} 총 ${activeMeetings.length.toLocaleString()}회 회의 (최신 등록 발언)</span>
@@ -934,10 +1054,12 @@ function findInModal() {
 
   modalMatchedElements = [];
   const items = modalTranscriptBody.querySelectorAll('.modal-speech-item');
+  const tokens = tokenize(kw);
 
   items.forEach(item => {
     const text = item.textContent.toLowerCase();
-    if (text.includes(kw)) {
+    const isMatch = tokens.length > 0 ? tokens.every(t => text.includes(t)) : text.includes(kw);
+    if (isMatch) {
       modalMatchedElements.push(item);
     }
   });
