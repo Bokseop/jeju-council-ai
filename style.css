@@ -402,6 +402,42 @@ body {
   white-space: pre-wrap;
 }
 
+.omitted-notice {
+  display: block;
+  background: #F1F5F9;
+  color: #64748B;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin: 6px 0;
+  text-align: center;
+  border: 1px dashed #CBD5E1;
+  user-select: none;
+}
+
+.btn-toggle-expand {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #EFF6FF;
+  color: var(--primary);
+  border: 1px solid #BFDBFE;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 16px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: all 0.15s;
+}
+
+.btn-toggle-expand:hover {
+  background: #DBEAFE;
+  color: #1D4ED8;
+  transform: translateY(-1px);
+}
+
 .card-content-box mark {
   background: #FEF08A;
   color: #854D0E;

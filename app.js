@@ -10,6 +10,9 @@ let allSpeeches = [];
 let allMeetings = [];
 let isDataLoaded = false;
 let currentModalMeeting = null;
+let currentSearchTokens = [];
+const expandedSpeechState = new Map();
+const expandedModalState = new Map();
 
 // DOM Elements
 const searchInput = document.getElementById('searchInput');
@@ -168,6 +171,7 @@ function performSearch() {
 
   const t0 = performance.now();
   const queryTokens = tokenize(query);
+  currentSearchTokens = queryTokens;
 
   let candidates = allSpeeches;
 
@@ -277,8 +281,18 @@ function renderResults(results, queryTokens) {
     const card = document.createElement('div');
     card.className = 'speech-card';
 
-    // Highlight query tokens in content
-    const highlightedContent = highlightText(s.c, queryTokens);
+    // 1500자 초과 시 검색 단어 중심 앞뒤 중략 스니펫 생성
+    const isExpanded = expandedSpeechState.get(s.i) || false;
+    const isTruncated = s.c.length > 1500;
+    const contentHtml = formatSpeechHtml(s.c, queryTokens, 1500, isExpanded);
+
+    const expandBtnHtml = isTruncated ? `
+      <div style="margin-top: 8px;">
+        <button class="btn-toggle-expand" onclick="toggleExpandCard(${s.i})" id="btn-expand-${s.i}">
+          ${isExpanded ? '▲ 요약 접기 (1,500자 요약)' : `📖 전체 발언 펼치기 (${s.c.length.toLocaleString()}자)`}
+        </button>
+      </div>
+    ` : '';
 
     // Official line jump URL with Text Fragment
     const officialLineUrl = buildTextFragmentUrl(s.u, s.s, s.c);
@@ -297,7 +311,10 @@ function renderResults(results, queryTokens) {
         <div class="speaker-avatar">${s.s ? s.s.charAt(0) : '발'}</div>
         <div class="speaker-name">👤 ${s.s || '발언자'}</div>
       </div>
-      <div class="card-content-box">${highlightedContent}</div>
+      <div class="card-content-box" id="card-content-${s.i}">
+        <div class="speech-text-view">${contentHtml}</div>
+        ${expandBtnHtml}
+      </div>
       <div class="card-actions">
         <div class="card-actions-left">
           <a href="${officialLineUrl}" target="_blank" class="btn-link-line" title="브라우저에서 도의회 원문 페이지가 열리며 해당 발언 줄로 자동 스크롤됩니다">
@@ -317,6 +334,118 @@ function renderResults(results, queryTokens) {
 
     resultsContainer.appendChild(card);
   });
+}
+
+/**
+ * 1500자 초과 시 검색 단어(키워드) 중심으로 앞뒤를 중략하여 최대 1500자로 슬라이스
+ */
+function getSmartSnippet(content, tokens, maxChars = 1500) {
+  if (!content || content.length <= maxChars) {
+    return {
+      text: content,
+      isTruncated: false,
+      hasPrefix: false,
+      hasSuffix: false
+    };
+  }
+
+  // 1. 발언 본문에서 검색 키워드가 최초로 나타나는 위치 탐색
+  let firstMatchIndex = -1;
+  if (tokens && tokens.length > 0) {
+    const lower = content.toLowerCase();
+    for (const token of tokens) {
+      if (token.length >= 2) {
+        const idx = lower.indexOf(token.toLowerCase());
+        if (idx !== -1 && (firstMatchIndex === -1 || idx < firstMatchIndex)) {
+          firstMatchIndex = idx;
+        }
+      }
+    }
+  }
+
+  // 2. 키워드가 없는 경우 (예: 기본 정렬 목록) -> 처음부터 1500자
+  if (firstMatchIndex === -1) {
+    return {
+      text: content.substring(0, maxChars),
+      isTruncated: true,
+      hasPrefix: false,
+      hasSuffix: true
+    };
+  }
+
+  // 3. 키워드가 있는 경우 -> 키워드를 중앙(중심)에 배치하고 앞뒤로 최대 1500자 구성
+  const halfWindow = Math.floor(maxChars / 2);
+  let start = Math.max(0, firstMatchIndex - halfWindow);
+  let end = Math.min(content.length, start + maxChars);
+
+  if (end - start < maxChars) {
+    start = Math.max(0, end - maxChars);
+  }
+
+  return {
+    text: content.substring(start, end),
+    isTruncated: true,
+    hasPrefix: start > 0,
+    hasSuffix: end < content.length
+  };
+}
+
+/**
+ * 본문 HTML 포맷팅 (1500자 초과 시 중략 태그 삽입 및 하이라이트)
+ */
+function formatSpeechHtml(content, tokens, maxChars = 1500, isExpanded = false) {
+  if (!content) return '';
+  if (content.length <= maxChars || isExpanded) {
+    return highlightText(content, tokens);
+  }
+
+  const snip = getSmartSnippet(content, tokens, maxChars);
+  let html = '';
+  if (snip.hasPrefix) {
+    html += '<div class="omitted-notice">... [앞부분 중략] ...</div>';
+  }
+  html += highlightText(snip.text, tokens);
+  if (snip.hasSuffix) {
+    html += '<div class="omitted-notice">... [뒷부분 중략] ...</div>';
+  }
+  return html;
+}
+
+function toggleExpandCard(speechId) {
+  const isExp = expandedSpeechState.get(speechId) || false;
+  const newExp = !isExp;
+  expandedSpeechState.set(speechId, newExp);
+
+  const container = document.getElementById(`card-content-${speechId}`);
+  const btn = document.getElementById(`btn-expand-${speechId}`);
+  if (!container || !btn) return;
+
+  const textView = container.querySelector('.speech-text-view');
+  const speech = allSpeeches.find(s => s.i === speechId);
+  if (!speech) return;
+
+  const query = searchInput.value.trim();
+  const tokens = tokenize(query);
+
+  textView.innerHTML = formatSpeechHtml(speech.c, tokens, 1500, newExp);
+  btn.innerHTML = newExp ? '▲ 요약 접기 (1,500자 요약)' : `📖 전체 발언 펼치기 (${speech.c.length.toLocaleString()}자)`;
+}
+
+function toggleExpandModalSpeech(speechId) {
+  const isExp = expandedModalState.get(speechId) || false;
+  const newExp = !isExp;
+  expandedModalState.set(speechId, newExp);
+
+  const bodyEl = document.getElementById(`modal-speech-body-${speechId}`);
+  const btn = document.getElementById(`btn-modal-expand-${speechId}`);
+  if (!bodyEl || !btn) return;
+
+  const textView = bodyEl.querySelector('.speech-text-view');
+  const speech = currentModalSpeeches.find(s => s.i === speechId) || allSpeeches.find(s => s.i === speechId);
+  if (!speech) return;
+
+  textView.innerHTML = formatSpeechHtml(speech.c, currentSearchTokens, 1500, newExp);
+  btn.innerHTML = newExp ? '▲ 요약 접기 (1,500자 요약)' : `📖 전체 발언 펼치기 (${speech.c.length.toLocaleString()}자)`;
 }
 
 function highlightText(text, tokens) {
@@ -409,6 +538,19 @@ function createModalSpeechElement(s, idx, totalCount, isTarget) {
 
   const speakerTitle = `[${idx + 1} / ${totalCount}] ◯${s.s || '발언자'}`;
 
+  // 모달에서도 1500자 초과 시 검색 키워드 중심 스니펫 적용 및 펼치기 버튼 지원
+  const isExpanded = expandedModalState.get(s.i) || false;
+  const isTruncated = s.c.length > 1500;
+  const contentHtml = formatSpeechHtml(s.c, currentSearchTokens, 1500, isExpanded);
+
+  const expandBtnHtml = isTruncated ? `
+    <div style="margin-top: 8px;">
+      <button class="btn-toggle-expand" onclick="toggleExpandModalSpeech(${s.i})" id="btn-modal-expand-${s.i}">
+        ${isExpanded ? '▲ 요약 접기 (1,500자 요약)' : `📖 전체 발언 펼치기 (${s.c.length.toLocaleString()}자)`}
+      </button>
+    </div>
+  ` : '';
+
   itemEl.innerHTML = `
     <div class="modal-speech-header">
       <div class="speech-header-left">
@@ -422,7 +564,10 @@ function createModalSpeechElement(s, idx, totalCount, isTarget) {
         <button class="btn-item-copy" onclick="copySingleSpeech(${s.i})" title="이 발언 1건만 복사">📋 단일 복사</button>
       </div>
     </div>
-    <div class="modal-speech-body">${escapeHtml(s.c)}</div>
+    <div class="modal-speech-body" id="modal-speech-body-${s.i}">
+      <div class="speech-text-view">${contentHtml}</div>
+      ${expandBtnHtml}
+    </div>
   `;
   return itemEl;
 }
