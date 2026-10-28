@@ -10,7 +10,7 @@
   <meta name="description" content="제주특별자치도의회 2024~2026년 294,780건 실제 공식 회의록 고속 검색 및 발언 라인 자동 이동 시스템">
   <!-- Pretendard Web Font -->
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-  <link rel="stylesheet" href="style.css?v=4.4">
+  <link rel="stylesheet" href="style.css?v=4.5">
 </head>
 <body>
   <!-- Header -->
@@ -47,6 +47,27 @@
           <button id="clearBtn" class="clear-btn" title="검색어 지우기">✕</button>
           <button id="searchBtn" class="search-btn">검색</button>
         </div>
+      </div>
+
+      <!-- Year Scope Filter -->
+      <div class="year-filter-row">
+        <span class="year-filter-label">📅 검색 대상 연도:</span>
+        <div class="year-buttons-group">
+          <label class="year-btn-label" title="2026년 회의록 검색 포함">
+            <input type="checkbox" class="year-checkbox" value="2026" checked>
+            <span class="year-btn-pill">2026년 (최신)</span>
+          </label>
+          <label class="year-btn-label" title="2025년 회의록 검색 포함">
+            <input type="checkbox" class="year-checkbox" value="2025">
+            <span class="year-btn-pill">2025년</span>
+          </label>
+          <label class="year-btn-label" title="2024년 회의록 검색 포함">
+            <input type="checkbox" class="year-checkbox" value="2024">
+            <span class="year-btn-pill">2024년</span>
+          </label>
+        </div>
+        <button type="button" class="btn-all-years" id="btnToggleAllYears">전체 연도 선택</button>
+        <span class="year-summary-badge" id="yearSummaryBadge">2026년 대상 검색 중</span>
       </div>
 
       <!-- Filters Row -->
@@ -142,6 +163,6 @@
   <!-- Notification Toast -->
   <div class="toast" id="toast"></div>
 
-  <script src="app.js?v=4.4"></script>
+  <script src="app.js?v=4.5"></script>
 </body>
 </html>
