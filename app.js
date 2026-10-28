@@ -281,13 +281,22 @@ function renderResults(results, queryTokens) {
     const stars = "★".repeat(Math.max(1, Math.min(5, Math.floor(scorePct / 20)))) +
                   "☆".repeat(Math.max(0, 5 - Math.max(1, Math.min(5, Math.floor(scorePct / 20)))));
 
+    const cleanText = (s.c || '').trim();
+    const textLen = cleanText.length;
+    let sizeClass = '';
+    if (textLen <= 120) {
+      sizeClass = 'speech-card-compact';
+    } else if (textLen <= 400) {
+      sizeClass = 'speech-card-medium';
+    }
+
     const card = document.createElement('div');
-    card.className = 'speech-card';
+    card.className = `speech-card ${sizeClass}`.trim();
 
     // 1500자 초과 시 검색 단어 중심 앞뒤 중략 스니펫 생성
     const isExpanded = expandedSpeechState.get(s.i) || false;
-    const isTruncated = s.c.length > 1500;
-    const contentHtml = formatSpeechHtml(s.c, queryTokens, 1500, isExpanded);
+    const isTruncated = cleanText.length > 1500;
+    const contentHtml = formatSpeechHtml(cleanText, queryTokens, 1500, isExpanded);
 
     const expandBtnHtml = isTruncated ? `
       <div style="margin-top: 8px;">
@@ -321,12 +330,12 @@ function renderResults(results, queryTokens) {
       <div class="card-actions">
         <div class="card-actions-left">
           <a href="${officialLineUrl}" target="_blank" class="btn-link-line" title="브라우저에서 도의회 원문 페이지가 열리며 해당 발언 줄로 자동 스크롤됩니다">
-            🎯 공식 원문 라인 이동 & 열기
+            🎯 공식 원문 이동
           </a>
         </div>
         <div class="card-actions-right">
           <button class="btn-view-all" onclick="openFullMeetingModal('${escapeHtml(s.m)}', '${s.d}', ${s.i})">
-            📖 이 회의 전체 회의록 보기
+            📖 전체 회의록 보기
           </button>
           <button class="btn-copy-card" onclick="copyCardContent('${s.i}')">
             📋 복사
@@ -398,11 +407,12 @@ function getSmartSnippet(content, tokens, maxChars = 1500) {
  */
 function formatSpeechHtml(content, tokens, maxChars = 1500, isExpanded = false) {
   if (!content) return '';
-  if (content.length <= maxChars || isExpanded) {
-    return highlightText(content, tokens);
+  const trimmed = content.trim();
+  if (trimmed.length <= maxChars || isExpanded) {
+    return highlightText(trimmed, tokens);
   }
 
-  const snip = getSmartSnippet(content, tokens, maxChars);
+  const snip = getSmartSnippet(trimmed, tokens, maxChars);
   let html = '';
   if (snip.hasPrefix) {
     html += '<div class="omitted-notice">... [앞부분 중략] ...</div>';
@@ -536,20 +546,30 @@ function openFullMeetingModal(meetingName, meetingDate, highlightSpeechId) {
 function createModalSpeechElement(s, idx, totalCount, isTarget) {
   const itemEl = document.createElement('div');
   const isSelected = selectedSpeechIds.has(s.i);
-  itemEl.className = `modal-speech-item ${isTarget ? 'highlighted' : ''} ${isSelected ? 'selected' : ''}`;
+
+  const cleanText = (s.c || '').trim();
+  const textLen = cleanText.length;
+  let sizeClass = '';
+  if (textLen <= 120) {
+    sizeClass = 'modal-speech-compact';
+  } else if (textLen <= 400) {
+    sizeClass = 'modal-speech-medium';
+  }
+
+  itemEl.className = `modal-speech-item ${sizeClass} ${isTarget ? 'highlighted' : ''} ${isSelected ? 'selected' : ''}`.trim();
   itemEl.id = `modal-speech-${s.i}`;
 
   const speakerTitle = `[${idx + 1} / ${totalCount}] ◯${s.s || '발언자'}`;
 
   // 모달에서도 1500자 초과 시 검색 키워드 중심 스니펫 적용 및 펼치기 버튼 지원
   const isExpanded = expandedModalState.get(s.i) || false;
-  const isTruncated = s.c.length > 1500;
-  const contentHtml = formatSpeechHtml(s.c, currentSearchTokens, 1500, isExpanded);
+  const isTruncated = cleanText.length > 1500;
+  const contentHtml = formatSpeechHtml(cleanText, currentSearchTokens, 1500, isExpanded);
 
   const expandBtnHtml = isTruncated ? `
     <div style="margin-top: 8px;">
       <button class="btn-toggle-expand" onclick="toggleExpandModalSpeech(${s.i})" id="btn-modal-expand-${s.i}">
-        ${isExpanded ? '▲ 요약 접기 (1,500자 요약)' : `📖 전체 발언 펼치기 (${s.c.length.toLocaleString()}자)`}
+        ${isExpanded ? '▲ 요약 접기 (1,500자 요약)' : `📖 전체 발언 펼치기 (${cleanText.length.toLocaleString()}자)`}
       </button>
     </div>
   ` : '';
@@ -624,7 +644,7 @@ function renderModalTranscript() {
     speechListContainer.id = 'modalSpeechListContainer';
     speechListContainer.style.display = 'flex';
     speechListContainer.style.flexDirection = 'column';
-    speechListContainer.style.gap = '16px';
+    speechListContainer.style.gap = '12px';
 
     let targetElement = null;
     for (let idx = contextStartIndex; idx < contextEndIndex; idx++) {
