@@ -429,11 +429,13 @@ function renderModalTranscript() {
     speechListContainer.style.flexDirection = 'column';
     speechListContainer.style.gap = '16px';
 
+    let targetElement = null;
     for (let idx = contextStartIndex; idx < contextEndIndex; idx++) {
       const s = currentModalSpeeches[idx];
       const isTarget = (s.i === currentHighlightId);
       const itemEl = createModalSpeechElement(s, idx, totalCount, isTarget);
       speechListContainer.appendChild(itemEl);
+      if (isTarget) targetElement = itemEl;
     }
     modalTranscriptBody.appendChild(speechListContainer);
 
@@ -462,8 +464,19 @@ function renderModalTranscript() {
     expandAllContainer.appendChild(expandAllBtn);
     modalTranscriptBody.appendChild(expandAllContainer);
 
-    // Initial position to top (only on initial modal render)
-    modalTranscriptBody.scrollTop = 0;
+    // Immediately position the target speech directly in view so it appears right in front of user's eyes!
+    if (targetElement) {
+      const alignTarget = () => {
+        const targetOffset = targetElement.offsetTop;
+        modalTranscriptBody.scrollTop = Math.max(0, targetOffset - 40);
+      };
+      alignTarget();
+      requestAnimationFrame(alignTarget);
+      setTimeout(alignTarget, 40);
+      setTimeout(alignTarget, 100);
+    } else {
+      modalTranscriptBody.scrollTop = 0;
+    }
 
   } else {
     // Full view mode
@@ -524,7 +537,15 @@ function loadMoreFollowingSpeeches() {
 
   // Smoothly scroll down so the newly opened speeches unfold downwards before the user's eyes!
   if (firstNewElement) {
-    firstNewElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const scrollDownToNew = () => {
+      const newOffset = firstNewElement.offsetTop;
+      modalTranscriptBody.scrollTo({
+        top: Math.max(0, newOffset - 30),
+        behavior: 'smooth'
+      });
+    };
+    requestAnimationFrame(scrollDownToNew);
+    setTimeout(scrollDownToNew, 50);
   }
 }
 
