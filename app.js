@@ -60,16 +60,6 @@ function initEventListeners() {
   speakerFilter.addEventListener('input', debounce(performSearch, 300));
   limitFilter.addEventListener('change', performSearch);
 
-  // Recommended tag clicks
-  document.querySelectorAll('.tag-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const q = btn.getAttribute('data-query');
-      searchInput.value = q;
-      clearBtn.classList.add('visible');
-      performSearch();
-    });
-  });
-
   // Modal events
   modalCloseBtn.addEventListener('click', closeModal);
   meetingModal.addEventListener('click', (e) => {
@@ -230,7 +220,7 @@ function renderResults(results, queryTokens) {
     resultsContainer.innerHTML = `
       <div class="empty-state">
         <p style="font-size:18px; font-weight:700; margin-bottom:6px;">검색 결과가 없습니다.</p>
-        <p>다른 검색어나 추천 키워드(예: '동부해경', '일자리', '서귀포시장')를 선택해 보세요.</p>
+        <p>다른 검색어 또는 키워드를 입력해 보세요.</p>
       </div>`;
     return;
   }
