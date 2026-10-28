@@ -106,8 +106,8 @@ async function loadData() {
     allSpeeches = unpackSpeeches(raw26, allMeetings);
 
     isDataLoaded = true;
-    statBadge.textContent = `📊 ${allSpeeches.length.toLocaleString()}건 (2026년) 로드됨`;
-    statusBar.innerHTML = `<span>⚡ <strong>2026년 회의록 ${allSpeeches.length.toLocaleString()}건</strong> 준비 완료. 2025~2024년 백그라운드 동기화 중...</span>`;
+    statBadge.textContent = `🏛️ 2024년~현재 ${allMeetings.length.toLocaleString()}회 회의`;
+    statusBar.innerHTML = `<span>⚡ <strong>2024년~현재 총 ${allMeetings.length.toLocaleString()}회 회의</strong> (2026년 데이터 준비 완료, 이전 회기 동기화 중...)</span>`;
     
     // Initial default search
     performSearch();
@@ -121,8 +121,8 @@ async function loadData() {
       const unpacked24 = unpackSpeeches(raw24, allMeetings);
       
       allSpeeches = allSpeeches.concat(unpacked25, unpacked24);
-      statBadge.textContent = `📊 ${allSpeeches.length.toLocaleString()}건 (2024~2026년) 적재`;
-      statusBar.innerHTML = `<span>✅ <strong>전체 ${allSpeeches.length.toLocaleString()}건</strong> (2024~2026년 공식 회의록) 검색 준비 완료</span>`;
+      statBadge.textContent = `🏛️ 2024년~현재 ${allMeetings.length.toLocaleString()}회 회의`;
+      statusBar.innerHTML = `<span>✅ <strong>2024년부터 현재까지 총 ${allMeetings.length.toLocaleString()}회 회의</strong> 검색 준비 완료</span>`;
 
       // 사용자가 이미 검색어를 입력했거나 필터를 변경한 경우 자동 재검색
       if (searchInput.value.trim() || meetingFilter.value || speakerFilter.value.trim()) {
@@ -248,7 +248,7 @@ function performSearch() {
     statusBar.innerHTML = `<span>🔍 검색 결과: <strong>${totalFound.toLocaleString()}건</strong> 발견 (${elapsed}ms 소요)</span>
       <span>${selectedMeeting ? `🏛️ ${selectedMeeting}` : '전체 회의 대상'}</span>`;
   } else {
-    statusBar.innerHTML = `<span>최신 등록 발언 목록 (총 ${allSpeeches.length.toLocaleString()}건)</span>`;
+    statusBar.innerHTML = `<span>2024년~현재 총 ${allMeetings.length.toLocaleString()}회 회의 (최신 등록 발언)</span>`;
   }
 
   renderResults(displayResults, queryTokens);
