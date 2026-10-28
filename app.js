@@ -322,11 +322,19 @@ let currentHighlightId = null;
 let currentModalViewMode = 'context'; // 'context' or 'full'
 let contextStartIndex = 0;
 let contextEndIndex = 0;
+let selectedSpeechIds = new Set();
 
 function openFullMeetingModal(meetingName, meetingDate, highlightSpeechId) {
   currentModalMeeting = { name: meetingName, date: meetingDate };
   currentHighlightId = (highlightSpeechId !== undefined) ? highlightSpeechId : null;
   modalMeetingTitle.textContent = `🏛️ ${meetingName}`;
+
+  // Reset and pre-select target speech if specified
+  selectedSpeechIds.clear();
+  if (currentHighlightId !== null) {
+    selectedSpeechIds.add(currentHighlightId);
+  }
+  updateSelectedCountBadge();
 
   // Filter all speeches of this meeting
   currentModalSpeeches = allSpeeches.filter(s => s.m === meetingName && s.d === meetingDate);
@@ -363,15 +371,24 @@ function openFullMeetingModal(meetingName, meetingDate, highlightSpeechId) {
 
 function createModalSpeechElement(s, idx, totalCount, isTarget) {
   const itemEl = document.createElement('div');
-  itemEl.className = `modal-speech-item ${isTarget ? 'highlighted' : ''}`;
+  const isSelected = selectedSpeechIds.has(s.i);
+  itemEl.className = `modal-speech-item ${isTarget ? 'highlighted' : ''} ${isSelected ? 'selected' : ''}`;
   itemEl.id = `modal-speech-${s.i}`;
 
   const speakerTitle = `[${idx + 1} / ${totalCount}] ◯${s.s || '발언자'}`;
 
   itemEl.innerHTML = `
     <div class="modal-speech-header">
-      <span>${speakerTitle}</span>
-      ${isTarget ? '<span style="color:#B45309; font-weight:bold; font-size:12px;">★ [검색된 핵심 발언]</span>' : ''}
+      <div class="speech-header-left">
+        <label class="speech-check-label" title="선택 복사 체크">
+          <input type="checkbox" class="speech-checkbox" data-id="${s.i}" ${isSelected ? 'checked' : ''} onchange="toggleSpeechSelection(${s.i}, this.checked)">
+        </label>
+        <span class="speech-speaker-name">${speakerTitle}</span>
+        ${isTarget ? '<span style="color:#B45309; font-weight:bold; font-size:12px;">★ [검색된 핵심 발언]</span>' : ''}
+      </div>
+      <div class="speech-header-right">
+        <button class="btn-item-copy" onclick="copySingleSpeech(${s.i})" title="이 발언 1건만 복사">📋 단일 복사</button>
+      </div>
     </div>
     <div class="modal-speech-body">${escapeHtml(s.c)}</div>
   `;
@@ -644,6 +661,109 @@ function findInModal() {
   const current = modalMatchedElements[modalSearchIndex];
   current.scrollIntoView({ behavior: 'instant', block: 'center' });
   modalSearchStat.textContent = `${modalSearchIndex + 1} / ${modalMatchedElements.length}건`;
+}
+
+// Speech Checkbox & Selection Management
+function toggleSpeechSelection(speechId, isChecked) {
+  if (isChecked) {
+    selectedSpeechIds.add(speechId);
+  } else {
+    selectedSpeechIds.delete(speechId);
+  }
+  const el = document.getElementById(`modal-speech-${speechId}`);
+  if (el) {
+    el.classList.toggle('selected', isChecked);
+    const cb = el.querySelector('.speech-checkbox');
+    if (cb) cb.checked = isChecked;
+  }
+  updateSelectedCountBadge();
+}
+
+function selectAllModalSpeeches() {
+  const checkboxes = modalTranscriptBody.querySelectorAll('.speech-checkbox');
+  checkboxes.forEach(cb => {
+    const id = parseInt(cb.getAttribute('data-id'), 10);
+    if (!isNaN(id)) {
+      selectedSpeechIds.add(id);
+      cb.checked = true;
+      const parent = document.getElementById(`modal-speech-${id}`);
+      if (parent) parent.classList.add('selected');
+    }
+  });
+  updateSelectedCountBadge();
+  showToast(`화면의 발언 ${checkboxes.length}건이 모두 선택되었습니다.`);
+}
+
+function clearModalSpeechSelection() {
+  selectedSpeechIds.clear();
+  const checkboxes = modalTranscriptBody.querySelectorAll('.speech-checkbox');
+  checkboxes.forEach(cb => {
+    cb.checked = false;
+    const id = parseInt(cb.getAttribute('data-id'), 10);
+    const parent = document.getElementById(`modal-speech-${id}`);
+    if (parent) parent.classList.remove('selected');
+  });
+  updateSelectedCountBadge();
+  showToast('발언 선택이 모두 해제되었습니다.');
+}
+
+function updateSelectedCountBadge() {
+  const badge = document.getElementById('selectedCountBadge');
+  const btn = document.getElementById('modalCopySelectedBtn');
+  const count = selectedSpeechIds.size;
+  if (badge) badge.textContent = count;
+  if (btn) {
+    if (count > 0) {
+      btn.style.opacity = '1';
+      btn.style.cursor = 'pointer';
+    } else {
+      btn.style.opacity = '0.7';
+    }
+  }
+}
+
+function copySelectedSpeeches() {
+  if (selectedSpeechIds.size === 0) {
+    showToast('선택된 발언이 없습니다. 발언 앞의 체크박스를 체크해 주세요.');
+    return;
+  }
+
+  // Filter selected speeches in chronological order
+  const selectedList = currentModalSpeeches.filter(s => selectedSpeechIds.has(s.i));
+  const totalCount = currentModalSpeeches.length;
+
+  let text = `================================================================================\n`;
+  text += `🏛️ ${modalMeetingTitle.textContent}\n`;
+  text += `📅 ${modalMeetingMeta.textContent}\n`;
+  text += `📋 선택 발언 복사: 총 ${selectedList.length}건\n`;
+  text += `================================================================================\n\n`;
+
+  selectedList.forEach((s) => {
+    const origIdx = currentModalSpeeches.findIndex(item => item.i === s.i);
+    text += `[${origIdx + 1} / ${totalCount}] ◯${s.s || '발언자'}\n`;
+    text += `${s.c}\n\n`;
+    text += `${'-'.repeat(70)}\n\n`;
+  });
+
+  navigator.clipboard.writeText(text).then(() => {
+    showToast(`선택한 발언 ${selectedList.length}건이 클립보드에 복사되었습니다!`);
+  }).catch(() => {
+    showToast('복사에 실패했습니다. 브라우저 권한을 확인해 주세요.');
+  });
+}
+
+function copySingleSpeech(speechId) {
+  const speech = currentModalSpeeches.find(s => s.i === speechId) || allSpeeches.find(s => s.i === speechId);
+  if (!speech) return;
+
+  const totalCount = currentModalSpeeches.length || allSpeeches.length;
+  const origIdx = currentModalSpeeches.findIndex(item => item.i === speech.i);
+  const idxStr = (origIdx !== -1) ? `[${origIdx + 1} / ${totalCount}] ` : '';
+
+  const text = `${idxStr}◯${speech.s || '발언자'} (${speech.d || ''})\n\n${speech.c}`;
+  navigator.clipboard.writeText(text).then(() => {
+    showToast(`◯${speech.s || '발언자'}의 발언이 복사되었습니다.`);
+  });
 }
 
 function copyCardContent(speechId) {

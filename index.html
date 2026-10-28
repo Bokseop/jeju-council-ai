@@ -7,7 +7,7 @@
   <meta name="description" content="제주특별자치도의회 53,697건 실제 공식 회의록 고속 검색 및 발언 라인 자동 이동 시스템">
   <!-- Pretendard Web Font -->
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-  <link rel="stylesheet" href="style.css?v=2.1">
+  <link rel="stylesheet" href="style.css?v=2.2">
 </head>
 <body>
   <!-- Header -->
@@ -100,6 +100,9 @@
         </div>
         <div class="modal-header-actions">
           <a id="modalOfficialLink" href="#" target="_blank" class="btn-primary-sm">🌐 공식 원문 웹페이지 열기</a>
+          <button id="modalCopySelectedBtn" class="btn-select-copy" onclick="copySelectedSpeeches()" title="체크된 발언들만 선택 복사">
+            ☑️ 선택 복사 (<span id="selectedCountBadge">0</span>)
+          </button>
           <button id="modalCopyBtn" class="btn-outline-sm">📋 전체 복사</button>
           <button id="modalCloseBtn" class="btn-close">✕</button>
         </div>
@@ -123,6 +126,10 @@
             📜 전체 회의록 모두 보기 (<span id="modalTotalSpeechesCount">0</span>건)
           </button>
         </div>
+        <div class="selection-quick-tools">
+          <button class="btn-quick-select" onclick="selectAllModalSpeeches()" title="현재 화면의 발언 전체 선택">☑️ 전체 선택</button>
+          <button class="btn-quick-select" onclick="clearModalSpeechSelection()" title="선택 모두 해제">⬜ 선택 해제</button>
+        </div>
         <div class="view-mode-desc" id="modalViewDesc">
           💡 검색된 발언과 질의·답변 문맥이 스크롤 없이 바로 표시됩니다.
         </div>
@@ -138,6 +145,6 @@
   <!-- Notification Toast -->
   <div class="toast" id="toast"></div>
 
-  <script src="app.js?v=2.1"></script>
+  <script src="app.js?v=2.2"></script>
 </body>
 </html>
