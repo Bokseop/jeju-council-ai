@@ -28,12 +28,7 @@ jobs:
 
       - name: 최신 회의록 수집 및 웹 데이터 갱신
         run: |
-          # 1. 최근 회기 크롤링 (증분 업데이트)
-          python crawler.py --limit 15 || echo "크롤러 완료"
-          # 2. 웹 링크 동기화
-          python sync_meeting_urls.py || echo "URL 동기화 완료"
-          # 3. 웹용 JSON 데이터 추출
-          python export_web_data.py
+          python crawl_and_update_web.py --max-pages 3
 
       - name: 변경 사항 커밋 및 깃허브 푸시
         run: |

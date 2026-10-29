@@ -248,6 +248,19 @@ def import_speeches_to_db(speeches: List[Dict[str, Any]], db_path: str = DB_PATH
     cursor = conn.cursor()
 
     cursor.execute("""
+    CREATE TABLE IF NOT EXISTS speeches (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        meeting_name TEXT NOT NULL,
+        meeting_date TEXT NOT NULL,
+        speaker_name TEXT NOT NULL,
+        speaker_role TEXT,
+        content TEXT NOT NULL,
+        source_url TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+    """)
+
+    cursor.execute("""
     CREATE TABLE IF NOT EXISTS meetings (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         meeting_name TEXT NOT NULL,

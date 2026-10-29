@@ -26,6 +26,19 @@ print("=" * 60)
 conn = sqlite3.connect(DB_PATH)
 cur = conn.cursor()
 
+cur.execute("""
+CREATE TABLE IF NOT EXISTS speeches (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    meeting_name TEXT NOT NULL,
+    meeting_date TEXT NOT NULL,
+    speaker_name TEXT NOT NULL,
+    speaker_role TEXT,
+    content TEXT NOT NULL,
+    source_url TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+""")
+
 # 1. 회의 메타데이터 추출 (전체 고유 회의)
 cur.execute("""
     SELECT meeting_name, meeting_date, source_url, count(*)
@@ -34,6 +47,11 @@ cur.execute("""
     ORDER BY meeting_date DESC
 """)
 meeting_rows = cur.fetchall()
+
+if not meeting_rows:
+    print("[!] DB에 저장된 발언이 없습니다. 기존 data_web/ 데이터를 보존합니다.")
+    conn.close()
+    sys.exit(0)
 meeting_map = {}
 meetings = []
 

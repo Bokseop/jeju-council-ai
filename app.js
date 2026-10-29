@@ -129,7 +129,9 @@ function getActiveSpeeches() {
 
 function getActiveMeetings() {
   const selectedYears = getSelectedYears();
-  return allMeetings.filter(m => selectedYears.some(yr => m.date.startsWith(yr)));
+  return allMeetings
+    .filter(m => selectedYears.some(yr => m.date.startsWith(yr)))
+    .sort((a, b) => b.date.localeCompare(a.date));
 }
 
 function updateYearSummaryBadge() {

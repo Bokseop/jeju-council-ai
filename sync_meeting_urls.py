@@ -43,6 +43,19 @@ def sync_urls(db_path: str = DB_PATH):
     )
     """)
 
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS speeches (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        meeting_name TEXT NOT NULL,
+        meeting_date TEXT NOT NULL,
+        speaker_name TEXT NOT NULL,
+        speaker_role TEXT,
+        content TEXT NOT NULL,
+        source_url TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+    """)
+
     cur.execute("SELECT DISTINCT meeting_name, meeting_date FROM speeches")
     db_meetings = cur.fetchall()
     print(f"[*] DB 내 고유 회의 수: {len(db_meetings)}개")
