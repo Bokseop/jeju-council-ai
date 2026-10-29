@@ -1,10 +1,10 @@
 # 🏛️ 제주특별자치도의회 AI 전자회의록 웹 검색 시스템
 
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live%20Service-2563EB?logo=github&style=for-the-badge)](https://Bokseop.github.io/jeju-council-ai/)
-[![Database](https://img.shields.io/badge/Official%20Records-294%2C780%20Speeches-0D9488?style=for-the-badge)](https://Bokseop.github.io/jeju-council-ai/)
+[![Database](https://img.shields.io/badge/Official%20Records-296%2C188%20Speeches-0D9488?style=for-the-badge)](https://Bokseop.github.io/jeju-council-ai/)
 [![Web App](https://img.shields.io/badge/Platform-100%25%20Pure%20Web-orange?style=for-the-badge)](https://Bokseop.github.io/jeju-council-ai/)
 
-> **별도 프로그램 설치 없이 웹 브라우저에서 294,780건(2024년~현재 전수)의 제주특별자치도의회 실제 회의록을 0.05초 만에 검색하고, 원문 페이지 줄 이동 및 발언 선택 복사를 지원하는 100% 웹 전용 AI 회의록 분석 시스템입니다.**
+> **별도 프로그램 설치 없이 웹 브라우저에서 296,188건(2024년~현재 전수)의 제주특별자치도의회 실제 회의록을 0.05초 만에 검색하고, 원문 페이지 줄 이동 및 발언 선택 복사를 지원하는 100% 웹 전용 AI 회의록 분석 시스템입니다.**
 
 ---
 
@@ -13,8 +13,9 @@
 👉 **[https://Bokseop.github.io/jeju-council-ai/](https://Bokseop.github.io/jeju-council-ai/)**
 
 * **PC, 스마트폰, 태블릿 등 모든 브라우저**에서 즉시 사용 가능 (설치 파일 0개)
-* 2024년 1월부터 최근 2026년 10월까지의 **525개 전체 회의, 294,780건 발언 전수 적재**
+* 2024년 1월부터 최근 2026년 10월까지의 **527개 전체 회의, 296,188건 발언 전수 적재**
 * 클라우드 유료 API 비용 0원, 브라우저 클라이언트 사이드 초고속 인덱싱
+* 매일 아침 06:00 GitHub Actions 기반 최신 회의록 자동 크롤링 및 인덱스 갱신
 
 ---
 
@@ -45,15 +46,15 @@
 jeju-council-ai/
 ├── index.html                  # 메인 웹 애플리케이션 인터페이스
 ├── style.css                   # 모던 반응형 스타일시트
-├── app.js                      # 29.4만 건 클라이언트사이드 고속 검색 및 모달 엔진
+├── app.js                      # 29.6만 건 클라이언트사이드 고속 검색 및 모달 엔진
 ├── data_web/                   # 브라우저 서빙용 최적화 데이터 (압축 JSON)
-│   ├── meetings.json           # 525개 회의 목록 메타데이터
-│   ├── speeches_2026.json      # 2026년 발언 데이터 (73,232건)
+│   ├── meetings.json           # 527개 회의 목록 메타데이터
+│   ├── speeches_2026.json      # 2026년 발언 데이터 (74,640건)
 │   ├── speeches_2025.json      # 2025년 발언 데이터 (102,340건)
 │   ├── speeches_2024.json      # 2024년 발언 데이터 (119,208건)
 │   ├── manifest.json           # 다중 연도 인덱스 메타데이터
 │   └── stats.json              # 통계 정보
-├── crawl_2024_to_recent.py     # 도의회 공식 전자회의록 전수 병렬 수집 파이프라인
+├── crawl_and_update_web.py     # 도의회 공식 전자회의록 매일 자동 증분 크롤링 및 웹 배포 파이프라인
 └── export_web_data.py          # SQLite DB -> 브라우저 최적화 JSON 추출기
 ```
 
