@@ -810,6 +810,19 @@ function createModalSpeechElement(s, idx, totalCount, isTarget) {
   return itemEl;
 }
 
+function scrollToTargetSpeech(targetElement) {
+  if (!targetElement || !modalTranscriptBody) return;
+  const doScroll = () => {
+    const bodyRect = modalTranscriptBody.getBoundingClientRect();
+    const targetRect = targetElement.getBoundingClientRect();
+    const relativeOffset = targetRect.top - bodyRect.top;
+    modalTranscriptBody.scrollTop += (relativeOffset - 6);
+  };
+  requestAnimationFrame(doScroll);
+  setTimeout(doScroll, 40);
+  setTimeout(doScroll, 120);
+}
+
 function renderModalTranscript() {
   const totalCount = currentModalSpeeches.length;
   const btnViewContext = document.getElementById('btnViewContext');
@@ -898,9 +911,7 @@ function renderModalTranscript() {
 
     // Position the target speech directly at the VERY TOP so dialogue flows downwards!
     if (targetElement) {
-      setTimeout(() => {
-        modalTranscriptBody.scrollTop = Math.max(0, targetElement.offsetTop - 10);
-      }, 30);
+      scrollToTargetSpeech(targetElement);
     } else {
       modalTranscriptBody.scrollTop = 0;
     }
@@ -920,9 +931,7 @@ function renderModalTranscript() {
 
     // Instant scroll directly to target without animation
     if (targetElement) {
-      setTimeout(() => {
-        modalTranscriptBody.scrollTop = Math.max(0, targetElement.offsetTop - 40);
-      }, 30);
+      scrollToTargetSpeech(targetElement);
     } else {
       modalTranscriptBody.scrollTop = 0;
     }
