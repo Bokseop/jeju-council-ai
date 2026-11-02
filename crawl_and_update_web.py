@@ -303,11 +303,25 @@ def run_update(max_pages: int = 3, dry_run: bool = False):
     # 신규 회의들을 오래된 순서대로 정렬하여 순차적으로 ID 부여
     new_candidates.sort(key=lambda x: x["date"])
 
-    # 기존 발언 최대 ID 및 연도별 파일 로드
+    # 기존 발언 최대 ID 및 연도별 파일 동적 로드 (manifest.json 기반)
     years_loaded = {}
     max_speech_id = 0
 
-    for yr in ["2026", "2025", "2024", "2023"]:
+    known_years = []
+    if os.path.exists(manifest_file):
+        try:
+            with open(manifest_file, "r", encoding="utf-8") as mf:
+                m_data = json.load(mf)
+                known_years = m_data.get("years", [])
+        except Exception:
+            pass
+
+    if not known_years:
+        import glob
+        existing_files = glob.glob(os.path.join(WEB_DATA_DIR, "speeches_*.json"))
+        known_years = sorted([os.path.basename(f).replace("speeches_", "").replace(".json", "") for f in existing_files], reverse=True)
+
+    for yr in known_years:
         fn = os.path.join(WEB_DATA_DIR, f"speeches_{yr}.json")
         if os.path.exists(fn):
             with open(fn, "r", encoding="utf-8") as f:
@@ -318,7 +332,7 @@ def run_update(max_pages: int = 3, dry_run: bool = False):
         else:
             years_loaded[yr] = []
 
-    print(f"[*] 현재 최대 발언 ID: {max_speech_id}")
+    print(f"[*] 현재 최대 발언 ID: {max_speech_id} (기존 연도: {', '.join(known_years)})")
 
     newly_added_meetings = []
     all_new_db_speeches = []

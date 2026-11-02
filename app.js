@@ -8,11 +8,11 @@
 
 let allSpeeches = [];
 let allMeetings = [];
-let speechesByYear = {
-  '2026': [],
-  '2025': [],
-  '2024': [],
-  '2023': []
+let speechesByYear = {};
+let appManifest = {
+  years: ['2026', '2025', '2024', '2023'],
+  total_speeches: 420960,
+  total_meetings: 720
 };
 let isDataLoaded = false;
 let currentModalMeeting = null;
@@ -69,27 +69,22 @@ function initEventListeners() {
   speakerFilter.addEventListener('input', debounce(performSearch, 300));
   limitFilter.addEventListener('change', performSearch);
 
-  // Year scope filter event listeners
-  const yearCheckboxes = document.querySelectorAll('.year-checkbox');
-  yearCheckboxes.forEach(cb => {
-    cb.addEventListener('change', () => {
-      const checked = getSelectedYears();
-      if (checked.length === 0) {
-        cb.checked = true;
-        showToast('⚠️ 최소 한 개 이상의 연도를 선택해야 합니다.');
-        return;
-      }
-      onYearFilterChange();
-    });
-  });
+  // Initial Year scope filter binding
+  bindYearCheckboxEvents();
 
   const btnToggleAll = document.getElementById('btnToggleAllYears');
   if (btnToggleAll) {
     btnToggleAll.addEventListener('click', () => {
+      const yearCheckboxes = document.querySelectorAll('.year-checkbox');
       const checked = getSelectedYears();
+      const availableYears = (appManifest && appManifest.years && appManifest.years.length > 0)
+        ? appManifest.years
+        : ['2026', '2025', '2024', '2023'];
+      const latestYear = availableYears[0];
+
       if (checked.length === yearCheckboxes.length) {
         yearCheckboxes.forEach(cb => {
-          cb.checked = (cb.value === '2026');
+          cb.checked = (cb.value === latestYear);
         });
       } else {
         yearCheckboxes.forEach(cb => {
@@ -110,6 +105,54 @@ function initEventListeners() {
   modalSearchInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') findInModal();
   });
+}
+
+function bindYearCheckboxEvents() {
+  const cbs = document.querySelectorAll('.year-checkbox');
+  cbs.forEach(cb => {
+    cb.onchange = () => {
+      const checked = getSelectedYears();
+      if (checked.length === 0) {
+        cb.checked = true;
+        showToast('⚠️ 최소 한 개 이상의 연도를 선택해야 합니다.');
+        return;
+      }
+      onYearFilterChange();
+    };
+  });
+}
+
+function renderYearButtons(years) {
+  const container = document.getElementById('yearButtonsGroup');
+  if (!container || !years || years.length === 0) return;
+
+  const latestYear = years[0];
+  const existingChecked = getSelectedYears().filter(y => years.includes(y));
+  
+  // 첫 방문이거나 기존 기본 선택 상태였던 경우 최신 연도를 기본 체크
+  let checkedYears = new Set();
+  if (existingChecked.length === 0 || (existingChecked.length === 1 && existingChecked[0] !== latestYear)) {
+    checkedYears.add(latestYear);
+  } else {
+    checkedYears = new Set(existingChecked);
+  }
+
+  container.innerHTML = '';
+  years.forEach((yr, idx) => {
+    const isLatest = (idx === 0);
+    const label = document.createElement('label');
+    label.className = 'year-btn-label';
+    label.title = `${yr}년 회의록 검색 포함`;
+
+    const isChecked = checkedYears.has(yr);
+    label.innerHTML = `
+      <input type="checkbox" class="year-checkbox" value="${yr}" ${isChecked ? 'checked' : ''}>
+      <span class="year-btn-pill">${yr}년${isLatest ? ' (최신)' : ''}</span>
+    `;
+    container.appendChild(label);
+  });
+
+  bindYearCheckboxEvents();
 }
 
 function getSelectedYears() {
@@ -140,15 +183,21 @@ function updateYearSummaryBadge() {
   const btnToggleAll = document.getElementById('btnToggleAllYears');
   if (!badge) return;
 
+  const allKnownYears = (appManifest && appManifest.years && appManifest.years.length > 0)
+    ? appManifest.years
+    : ['2026', '2025', '2024', '2023'];
+  const latestYear = allKnownYears[0];
+  const earliestYear = allKnownYears[allKnownYears.length - 1];
+
   const selectedYears = getSelectedYears().sort().reverse();
   const activeSpeeches = getActiveSpeeches();
   const activeMeetings = getActiveMeetings();
 
-  if (selectedYears.length === 4) {
-    badge.textContent = `2023~2026년 전체 검색 (${activeMeetings.length}회 회의, ${activeSpeeches.length.toLocaleString()}건 발언)`;
-    if (btnToggleAll) btnToggleAll.textContent = '2026년만 선택';
-  } else if (selectedYears.length === 1 && selectedYears[0] === '2026') {
-    badge.textContent = `2026년 최신 대상 검색 중 (${activeMeetings.length}회 회의, ${activeSpeeches.length.toLocaleString()}건 발언)`;
+  if (selectedYears.length === allKnownYears.length) {
+    badge.textContent = `${earliestYear}~${latestYear}년 전체 검색 (${activeMeetings.length}회 회의, ${activeSpeeches.length.toLocaleString()}건 발언)`;
+    if (btnToggleAll) btnToggleAll.textContent = `${latestYear}년만 선택`;
+  } else if (selectedYears.length === 1 && selectedYears[0] === latestYear) {
+    badge.textContent = `${latestYear}년 최신 대상 검색 중 (${activeMeetings.length}회 회의, ${activeSpeeches.length.toLocaleString()}건 발언)`;
     if (btnToggleAll) btnToggleAll.textContent = '전체 연도 선택';
   } else {
     badge.textContent = `${selectedYears.join(', ')}년 검색 (${activeMeetings.length}회 회의, ${activeSpeeches.length.toLocaleString()}건 발언)`;
@@ -156,8 +205,8 @@ function updateYearSummaryBadge() {
   }
 
   // Update header stat badge to reflect active selection
-  if (selectedYears.length === 4) {
-    statBadge.textContent = `🏛️ 2023년~현재 ${activeMeetings.length.toLocaleString()}회 회의`;
+  if (selectedYears.length === allKnownYears.length) {
+    statBadge.textContent = `🏛️ ${earliestYear}년~현재 ${activeMeetings.length.toLocaleString()}회 회의`;
   } else {
     statBadge.textContent = `🏛️ ${selectedYears.join(', ')}년 ${activeMeetings.length.toLocaleString()}회 회의`;
   }
@@ -206,50 +255,74 @@ function unpackSpeeches(rawList, meetings) {
   return result;
 }
 
-// Data Loading (Progressive Multi-year Loader)
+// Data Loading (Progressive Multi-year Loader - Fully Dynamic)
 async function loadData() {
   try {
     statusBar.innerHTML = '<span>⏳ 회의록 데이터베이스를 로드 중입니다...</span>';
 
-    // 1. 회의 메타데이터 로드
-    const mRes = await fetch('data_web/meetings.json');
-    allMeetings = await mRes.json();
+    // 1. 매니페스트 및 회의 메타데이터 병렬 로드
+    const [manifestRes, mRes] = await Promise.all([
+      fetch('data_web/manifest.json?v=' + Date.now()).then(r => r.json()).catch(() => null),
+      fetch('data_web/meetings.json').then(r => r.json())
+    ]);
+
+    if (manifestRes && Array.isArray(manifestRes.years) && manifestRes.years.length > 0) {
+      appManifest = manifestRes;
+    }
+    allMeetings = mRes;
+
+    const availableYears = appManifest.years;
+    const latestYear = availableYears[0];
+    const pastYears = availableYears.slice(1);
+
+    // 연도 탭 버튼을 manifest 기준으로 동적 렌더링 (2027년, 2028년 등 자동 생성!)
+    renderYearButtons(availableYears);
     updateMeetingFilterForSelectedYears();
 
-    // 2. 2026년 최신 회의록 즉시 로드 (2026년이 기본 선택됨)
-    const s26Res = await fetch('data_web/speeches_2026.json');
-    const raw26 = await s26Res.json();
-    speechesByYear['2026'] = unpackSpeeches(raw26, allMeetings);
-    allSpeeches = speechesByYear['2026'];
+    // 2. 최신 연도 회의록 즉시 로드 (사용자가 바로 검색할 수 있도록 0순위 서빙)
+    const latestRes = await fetch(`data_web/speeches_${latestYear}.json`);
+    const rawLatest = await latestRes.json();
+    speechesByYear[latestYear] = unpackSpeeches(rawLatest, allMeetings);
+    allSpeeches = speechesByYear[latestYear];
 
     isDataLoaded = true;
     updateYearSummaryBadge();
-    statusBar.innerHTML = `<span>⚡ <strong>2026년 최신 데이터 준비 완료</strong> (총 ${speechesByYear['2026'].length.toLocaleString()}건 발언 준비 완료, 이전 연도 백그라운드 동기화 중...)</span>
+    statusBar.innerHTML = `<span>⚡ <strong>${latestYear}년 최신 데이터 준비 완료</strong> (총 ${speechesByYear[latestYear].length.toLocaleString()}건 발언 준비 완료, 이전 연도 백그라운드 동기화 중...)</span>
       <span>🔄 매일 아침 06:00 최신화</span>`;
     
     // Initial default search
     performSearch();
 
-    // 3. 2025년, 2024년 및 2023년 회의록 백그라운드 비동기 병렬 로드
-    Promise.all([
-      fetch('data_web/speeches_2025.json').then(r => r.json()),
-      fetch('data_web/speeches_2024.json').then(r => r.json()),
-      fetch('data_web/speeches_2023.json').then(r => r.json())
-    ]).then(([raw25, raw24, raw23]) => {
-      speechesByYear['2025'] = unpackSpeeches(raw25, allMeetings);
-      speechesByYear['2024'] = unpackSpeeches(raw24, allMeetings);
-      speechesByYear['2023'] = unpackSpeeches(raw23, allMeetings);
-      
-      allSpeeches = speechesByYear['2026'].concat(speechesByYear['2025'], speechesByYear['2024'], speechesByYear['2023']);
+    // 3. 나머지 과거 연도들 동적 비동기 병렬 백그라운드 로드
+    const pastFetchPromises = pastYears.map(yr => 
+      fetch(`data_web/speeches_${yr}.json`)
+        .then(r => r.json())
+        .then(raw => {
+          speechesByYear[yr] = unpackSpeeches(raw, allMeetings);
+          return { yr, count: speechesByYear[yr].length };
+        })
+        .catch(err => {
+          console.warn(`speeches_${yr}.json load failed:`, err);
+          speechesByYear[yr] = [];
+          return { yr, count: 0 };
+        })
+    );
+
+    Promise.all(pastFetchPromises).then(() => {
+      let merged = [];
+      availableYears.forEach(yr => {
+        if (speechesByYear[yr]) {
+          merged = merged.concat(speechesByYear[yr]);
+        }
+      });
+      allSpeeches = merged;
       updateYearSummaryBadge();
 
-      // 사용자가 2026년 외의 연도를 이미 체크해둔 경우 자동 재검색
+      // 사용자가 최신 연도 외의 연도를 이미 체크해둔 경우 자동 재검색
       const currentSelected = getSelectedYears();
-      if (currentSelected.some(yr => yr !== '2026')) {
+      if (currentSelected.some(yr => yr !== latestYear)) {
         onYearFilterChange();
       }
-    }).catch(bgErr => {
-      console.warn('Background sync warning:', bgErr);
     });
 
   } catch (err) {
@@ -305,7 +378,11 @@ function performSearch() {
   let candidates = getActiveSpeeches();
   const selectedYears = getSelectedYears().sort().reverse();
   const activeMeetings = getActiveMeetings();
-  const yearsLabel = selectedYears.length === 4 ? '2023년~현재' : `${selectedYears.join(', ')}년`;
+  const allKnownYears = (appManifest && appManifest.years && appManifest.years.length > 0)
+    ? appManifest.years
+    : ['2026', '2025', '2024', '2023'];
+  const earliestYear = allKnownYears[allKnownYears.length - 1];
+  const yearsLabel = selectedYears.length === allKnownYears.length ? `${earliestYear}년~현재` : `${selectedYears.join(', ')}년`;
 
   // 회의 필터 적용
   if (selectedMeeting) {
