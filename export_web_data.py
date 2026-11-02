@@ -7,6 +7,7 @@ GitHub Pages 및 브라우저 성능 최적화(연도별 청크 + 컴팩트 어�
 import os
 import sys
 import json
+import time
 import sqlite3
 
 if sys.platform == "win32":
@@ -70,7 +71,7 @@ with open(os.path.join(WEB_DATA_DIR, "meetings.json"), "w", encoding="utf-8") as
 print(f"[*] meetings.json 생성: {len(meetings):,}개 회의 메타데이터")
 
 # 2. 연도별 초경량 컴팩트 발언 데이터 추출: [id, meeting_idx, speaker, content]
-years = ["2026", "2025", "2024"]
+years = ["2026", "2025", "2024", "2023"]
 total_speeches = 0
 year_counts = {}
 
@@ -107,8 +108,9 @@ manifest = {
     "total_speeches": total_speeches,
     "total_meetings": len(meetings),
     "latest_date": meetings[0]["date"] if meetings else "2026-10-23",
-    "earliest_date": meetings[-1]["date"] if meetings else "2024-01-01",
-    "version": "4.0.0"
+    "earliest_date": meetings[-1]["date"] if meetings else "2023-01-01",
+    "version": "4.2.0",
+    "last_updated": time.strftime("%Y-%m-%d %H:%M:%S")
 }
 with open(os.path.join(WEB_DATA_DIR, "manifest.json"), "w", encoding="utf-8") as f:
     json.dump(manifest, f, ensure_ascii=False, indent=2)

@@ -307,7 +307,7 @@ def run_update(max_pages: int = 3, dry_run: bool = False):
     years_loaded = {}
     max_speech_id = 0
 
-    for yr in ["2026", "2025", "2024"]:
+    for yr in ["2026", "2025", "2024", "2023"]:
         fn = os.path.join(WEB_DATA_DIR, f"speeches_{yr}.json")
         if os.path.exists(fn):
             with open(fn, "r", encoding="utf-8") as f:
@@ -397,7 +397,7 @@ def run_update(max_pages: int = 3, dry_run: bool = False):
     year_counts = {yr: len(d) for yr, d in years_loaded.items()}
     all_dates = [m["date"] for m in existing_meetings if m.get("date")]
     latest_date = max(all_dates) if all_dates else datetime.now().strftime("%Y-%m-%d")
-    earliest_date = min(all_dates) if all_dates else "2024-01-01"
+    earliest_date = min(all_dates) if all_dates else "2023-01-01"
 
     manifest = {
         "years": sorted(list(years_loaded.keys()), reverse=True),

@@ -1,7 +1,7 @@
 /**
  * app.js
  * 제주특별자치도의회 AI 전자회의록 웹 검색 엔진
- * - 2024~2026년 294,780건 발언 클라이언트사이드 고속 인덱싱 & 검색
+ * - 2023~2026년 420,960건 발언 클라이언트사이드 고속 인덱싱 & 검색
  * - 공식 전자회의록 원문 라인 자동 이동 & 하이라이트 브릿지
  * - 전체 회의록 시간순 뷰어 모달
  */
@@ -11,7 +11,8 @@ let allMeetings = [];
 let speechesByYear = {
   '2026': [],
   '2025': [],
-  '2024': []
+  '2024': [],
+  '2023': []
 };
 let isDataLoaded = false;
 let currentModalMeeting = null;
@@ -86,7 +87,7 @@ function initEventListeners() {
   if (btnToggleAll) {
     btnToggleAll.addEventListener('click', () => {
       const checked = getSelectedYears();
-      if (checked.length === 3) {
+      if (checked.length === yearCheckboxes.length) {
         yearCheckboxes.forEach(cb => {
           cb.checked = (cb.value === '2026');
         });
@@ -143,8 +144,8 @@ function updateYearSummaryBadge() {
   const activeSpeeches = getActiveSpeeches();
   const activeMeetings = getActiveMeetings();
 
-  if (selectedYears.length === 3) {
-    badge.textContent = `2024~2026년 전체 검색 (${activeMeetings.length}회 회의, ${activeSpeeches.length.toLocaleString()}건 발언)`;
+  if (selectedYears.length === 4) {
+    badge.textContent = `2023~2026년 전체 검색 (${activeMeetings.length}회 회의, ${activeSpeeches.length.toLocaleString()}건 발언)`;
     if (btnToggleAll) btnToggleAll.textContent = '2026년만 선택';
   } else if (selectedYears.length === 1 && selectedYears[0] === '2026') {
     badge.textContent = `2026년 최신 대상 검색 중 (${activeMeetings.length}회 회의, ${activeSpeeches.length.toLocaleString()}건 발언)`;
@@ -155,8 +156,8 @@ function updateYearSummaryBadge() {
   }
 
   // Update header stat badge to reflect active selection
-  if (selectedYears.length === 3) {
-    statBadge.textContent = `🏛️ 2024년~현재 ${activeMeetings.length.toLocaleString()}회 회의`;
+  if (selectedYears.length === 4) {
+    statBadge.textContent = `🏛️ 2023년~현재 ${activeMeetings.length.toLocaleString()}회 회의`;
   } else {
     statBadge.textContent = `🏛️ ${selectedYears.join(', ')}년 ${activeMeetings.length.toLocaleString()}회 회의`;
   }
@@ -229,20 +230,22 @@ async function loadData() {
     // Initial default search
     performSearch();
 
-    // 3. 2025년 및 2024년 회의록 백그라운드 비동기 병렬 로드
+    // 3. 2025년, 2024년 및 2023년 회의록 백그라운드 비동기 병렬 로드
     Promise.all([
       fetch('data_web/speeches_2025.json').then(r => r.json()),
-      fetch('data_web/speeches_2024.json').then(r => r.json())
-    ]).then(([raw25, raw24]) => {
+      fetch('data_web/speeches_2024.json').then(r => r.json()),
+      fetch('data_web/speeches_2023.json').then(r => r.json())
+    ]).then(([raw25, raw24, raw23]) => {
       speechesByYear['2025'] = unpackSpeeches(raw25, allMeetings);
       speechesByYear['2024'] = unpackSpeeches(raw24, allMeetings);
+      speechesByYear['2023'] = unpackSpeeches(raw23, allMeetings);
       
-      allSpeeches = speechesByYear['2026'].concat(speechesByYear['2025'], speechesByYear['2024']);
+      allSpeeches = speechesByYear['2026'].concat(speechesByYear['2025'], speechesByYear['2024'], speechesByYear['2023']);
       updateYearSummaryBadge();
 
-      // 사용자가 2025년이나 2024년을 이미 체크해둔 경우 자동 재검색
+      // 사용자가 2026년 외의 연도를 이미 체크해둔 경우 자동 재검색
       const currentSelected = getSelectedYears();
-      if (currentSelected.includes('2025') || currentSelected.includes('2024')) {
+      if (currentSelected.some(yr => yr !== '2026')) {
         onYearFilterChange();
       }
     }).catch(bgErr => {
@@ -302,7 +305,7 @@ function performSearch() {
   let candidates = getActiveSpeeches();
   const selectedYears = getSelectedYears().sort().reverse();
   const activeMeetings = getActiveMeetings();
-  const yearsLabel = selectedYears.length === 3 ? '2024년~현재' : `${selectedYears.join(', ')}년`;
+  const yearsLabel = selectedYears.length === 4 ? '2023년~현재' : `${selectedYears.join(', ')}년`;
 
   // 회의 필터 적용
   if (selectedMeeting) {

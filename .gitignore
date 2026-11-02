@@ -43,8 +43,15 @@ inspect_*.py
 verify_db_clean.py
 check_year_html_content.py
 crawl_and_refresh_db.py
+check_cookies.py
+decode_test.py
+decoded.txt
+print_cookies.py
+setup_login.py
+test_*.py
 
 # Unrelated previous workspace projects
+run.py
 han_concat*
 InterviewLedger*
 interview_*
