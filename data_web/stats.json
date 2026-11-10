@@ -6,15 +6,15 @@
     "2023"
   ],
   "year_counts": {
-    "2026": 84240,
+    "2026": 84243,
     "2025": 102340,
     "2024": 119216,
     "2023": 121750
   },
-  "total_speeches": 427546,
-  "total_meetings": 731,
+  "total_speeches": 427549,
+  "total_meetings": 732,
   "latest_date": "2026-10-23",
   "earliest_date": "2023-02-24",
   "version": "4.1.0",
-  "last_updated": "2026-11-09 00:24:53"
+  "last_updated": "2026-11-10 03:06:16"
 }
