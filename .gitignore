@@ -112,3 +112,17 @@ README_원본대조필_사용안내.md
 # System files
 .DS_Store
 Thumbs.db
+
+# YouTube Live AI Transcriber project files
+!app.py
+!desktop_app.py
+!hwpx_writer.py
+!build_exe.py
+!build_exe.bat
+!YouTubeLiveTranscriber.spec
+!live_transcriber.py
+!YouTube_Live_AI_속기_사용설명서.md
+!YouTube_Live_AI_속기_사용설명서.html
+!YouTube_Live_AI_속기_사용설명서.pdf
+!YouTube_Live_AI_속기_사용설명서_images/
+!YouTube_Live_AI_속기_사용설명서_images/**
