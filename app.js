@@ -26,6 +26,7 @@ const clearBtn = document.getElementById('clearBtn');
 const searchBtn = document.getElementById('searchBtn');
 const meetingFilter = document.getElementById('meetingFilter');
 const speakerFilter = document.getElementById('speakerFilter');
+const sortFilter = document.getElementById('sortFilter');
 const limitFilter = document.getElementById('limitFilter');
 const statusBar = document.getElementById('statusBar');
 const resultsContainer = document.getElementById('resultsContainer');
@@ -67,6 +68,7 @@ function initEventListeners() {
 
   meetingFilter.addEventListener('change', performSearch);
   speakerFilter.addEventListener('input', debounce(performSearch, 300));
+  if (sortFilter) sortFilter.addEventListener('change', performSearch);
   limitFilter.addEventListener('change', performSearch);
 
   // Initial Year scope filter binding
@@ -351,6 +353,7 @@ function performSearch() {
   const rawQuery = searchInput.value.trim();
   const selectedMeeting = meetingFilter.value;
   const speakerFilterVal = speakerFilter.value.trim().toLowerCase();
+  const sortBy = sortFilter ? sortFilter.value : 'relevance';
   const limit = parseInt(limitFilter.value, 10) || 15;
 
   const t0 = performance.now();
@@ -402,9 +405,30 @@ function performSearch() {
   let searchMode = 'AND'; // 'AND' | 'OR_FALLBACK' | 'EXPLICIT_OR' | 'RECENT'
 
   if (queryTokens.length === 0 && quotedPhrases.length === 0) {
-    // 검색어 미입력 시 최신 발언 표시
+    // 검색어 미입력 시 최신/과거 발언 표시 (실제 회의 일시 기준 정렬)
     searchMode = 'RECENT';
-    scoredResults = candidates.slice(0, limit).map((s, idx) => ({
+    let recentPool = candidates;
+    if (!speakerFilterVal && !selectedMeeting && candidates.length > 2000 && activeMeetings.length > 0) {
+      const orderedMeetings = (sortBy === 'oldest') ? [...activeMeetings].reverse() : activeMeetings;
+      const targetDates = new Set();
+      let accumulated = 0;
+      for (let i = 0; i < orderedMeetings.length; i++) {
+        targetDates.add(orderedMeetings[i].date);
+        accumulated += (orderedMeetings[i].count || 1);
+        if (accumulated >= limit) break;
+      }
+      const filteredPool = candidates.filter(s => targetDates.has(s.d));
+      if (filteredPool.length >= limit || filteredPool.length === candidates.length) {
+        recentPool = filteredPool;
+      }
+    }
+    const sortedRecent = [...recentPool].sort((a, b) => {
+      if (a.d !== b.d) {
+        return sortBy === 'oldest' ? (a.d < b.d ? -1 : 1) : (a.d > b.d ? -1 : 1);
+      }
+      return a.i - b.i;
+    });
+    scoredResults = sortedRecent.slice(0, limit).map((s, idx) => ({
       item: s,
       score: 1.0 - (idx * 0.01),
       matchedTokens: []
@@ -525,8 +549,12 @@ function performSearch() {
       });
     }
 
-    // 점수 높은 순으로 내림차순 정렬
-    allMatches.sort((a, b) => b.score - a.score);
+    // 점수 높은 순으로 내림차순 정렬 (동점 시 최신 발언 우선)
+    allMatches.sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score;
+      if (a.item.d !== b.item.d) return a.item.d > b.item.d ? -1 : 1;
+      return a.item.i - b.item.i;
+    });
 
     if (isExplicitOr) {
       searchMode = 'EXPLICIT_OR';
@@ -543,14 +571,30 @@ function performSearch() {
         scoredResults = allMatches;
       }
     }
+
+    // 사용자 선택 정렬 기준 적용 (최신 발언 순 / 과거 발언 순)
+    if (sortBy === 'latest') {
+      scoredResults.sort((a, b) => {
+        if (a.item.d !== b.item.d) return a.item.d > b.item.d ? -1 : 1;
+        if (b.score !== a.score) return b.score - a.score;
+        return a.item.i - b.item.i;
+      });
+    } else if (sortBy === 'oldest') {
+      scoredResults.sort((a, b) => {
+        if (a.item.d !== b.item.d) return a.item.d < b.item.d ? -1 : 1;
+        if (b.score !== a.score) return b.score - a.score;
+        return a.item.i - b.item.i;
+      });
+    }
   }
 
   const elapsed = Math.round(performance.now() - t0);
   const totalFound = scoredResults.length;
   const displayResults = scoredResults.slice(0, limit);
+  const isKeywordSearch = (queryTokens.length > 0 || quotedPhrases.length > 0);
 
-  // 상태 표시줄 업데이트 (검색 모드 명시)
-  if (queryTokens.length > 0 || quotedPhrases.length > 0) {
+  // 상태 표시줄 업데이트 (검색 모드 및 정렬 기준 명시)
+  if (isKeywordSearch) {
     let modeBadge = '';
     if (searchMode === 'AND') {
       modeBadge = queryTokens.length > 1 ? '<span style="color:#2563EB; font-weight:700;">[모든 단어 일치 (AND)]</span> ' : '';
@@ -560,18 +604,26 @@ function performSearch() {
       modeBadge = '<span style="color:#D97706; font-weight:700;">[일부 단어 포함 (부분 일치)]</span> ';
     }
 
-    statusBar.innerHTML = `<span>🔍 ${modeBadge}검색 결과: <strong>${totalFound.toLocaleString()}건</strong> 발견 (${elapsed}ms 소요)</span>
+    let sortBadge = '';
+    if (sortBy === 'latest') {
+      sortBadge = '<span style="color:#0F766E; font-weight:700;">[🕒 최신 발언 순]</span> ';
+    } else if (sortBy === 'oldest') {
+      sortBadge = '<span style="color:#64748B; font-weight:700;">[🕰️ 과거 발언 순]</span> ';
+    }
+
+    statusBar.innerHTML = `<span>🔍 ${modeBadge}${sortBadge}검색 결과: <strong>${totalFound.toLocaleString()}건</strong> 발견 (${elapsed}ms 소요)</span>
       <span>${selectedMeeting ? `🏛️ ${selectedMeeting}` : `${yearsLabel} 회의 대상`} • 🔄 매일 아침 06:00 최신화</span>`;
   } else {
-    statusBar.innerHTML = `<span>${yearsLabel} 총 ${activeMeetings.length.toLocaleString()}회 회의 (최신 등록 발언)</span>
+    const orderLabel = sortBy === 'oldest' ? '과거 등록 발언 순' : '최신 등록 발언 순';
+    statusBar.innerHTML = `<span>${yearsLabel} 총 ${activeMeetings.length.toLocaleString()}회 회의 (${orderLabel})</span>
       <span>🔄 매일 아침 06:00 최신화</span>`;
   }
 
-  renderResults(displayResults, queryTokens);
+  renderResults(displayResults, queryTokens, sortBy, isKeywordSearch);
 }
 
 // Render Results
-function renderResults(results, queryTokens) {
+function renderResults(results, queryTokens, sortBy = 'relevance', isKeywordSearch = true) {
   if (results.length === 0) {
     resultsContainer.innerHTML = `
       <div class="empty-state">
@@ -589,6 +641,15 @@ function renderResults(results, queryTokens) {
     const scorePct = Math.round(res.score * 100);
     const stars = "★".repeat(Math.max(1, Math.min(5, Math.floor(scorePct / 20)))) +
                   "☆".repeat(Math.max(0, 5 - Math.max(1, Math.min(5, Math.floor(scorePct / 20)))));
+
+    let rankBadgeText = `[${rank}순위] 일치도 ${scorePct}% (${stars})`;
+    if (!isKeywordSearch) {
+      rankBadgeText = sortBy === 'oldest' ? `[과거 ${rank}]` : `[최신 ${rank}]`;
+    } else if (sortBy === 'latest') {
+      rankBadgeText = `[최신 ${rank}] 일치도 ${scorePct}% (${stars})`;
+    } else if (sortBy === 'oldest') {
+      rankBadgeText = `[과거 ${rank}] 일치도 ${scorePct}% (${stars})`;
+    }
 
     const cleanText = (s.c || '').trim();
     const textLen = cleanText.length;
@@ -615,7 +676,7 @@ function renderResults(results, queryTokens) {
     card.innerHTML = `
       <div class="card-top">
         <div class="card-rank-badge">
-          [${rank}순위] 일치도 ${scorePct}% (${stars})
+          ${rankBadgeText}
         </div>
         <div class="card-meta">
           <span>📅 ${s.d}</span>
