@@ -168,7 +168,8 @@ def build_hwpx(title: str, meta_lines, items) -> bytes:
         paras.append(_para([(CHAR_META, line)]))
     paras.append(_para([]))
     for it in items:
-        paras.append(_para([(CHAR_TIME, f"[{it.get('time', '')}] "), (CHAR_BODY, it.get("text", ""))]))
+        spk = f"[{it['speaker']}] " if it.get("speaker") else ""
+        paras.append(_para([(CHAR_TIME, f"[{it.get('time', '')}] {spk}"), (CHAR_BODY, it.get("text", ""))]))
     section = f'{XML_DECL}<hs:sec {NS}>{"".join(paras)}</hs:sec>'
 
     now = datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -209,7 +210,10 @@ def build_hwpx(title: str, meta_lines, items) -> bytes:
             '<ha:CaretPosition listIDRef="0" paraIDRef="0" pos="0"/></ha:HWPApplicationSetting>'
         ),
         "Preview/PrvText.txt": "\r\n".join(
-            [title] + list(meta_lines) + [f"[{i.get('time', '')}] {i.get('text', '')}" for i in items[:50]]
+            [title] + list(meta_lines) + [
+                f"[{i.get('time', '')}] " + (f"[{i['speaker']}] " if i.get('speaker') else "") + f"{i.get('text', '')}"
+                for i in items[:50]
+            ]
         )[:1024],
     }
 

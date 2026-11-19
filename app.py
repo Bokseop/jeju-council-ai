@@ -14,7 +14,7 @@ import urllib.error
 import urllib.request
 from urllib.parse import urljoin
 from datetime import datetime
-from typing import Optional, List, Dict, Any
+from typing import Optional, List, Dict, Any, Tuple
 
 # Ensure UTF-8 and SSL bypass (stdout is None in a windowed PyInstaller build)
 if sys.stdout is not None:
@@ -112,6 +112,7 @@ class TranscriberState:
         self.worker_thread: Optional[threading.Thread] = None
         self.whisper_model = None
         self.use_vad = False
+        self.speaker_labels: Dict[int, str] = {}
 
     def get_whisper(self):
         if self.whisper_model is None:
@@ -177,6 +178,28 @@ def safe_remove(path: str, retries: int = 5, delay: float = 0.15) -> bool:
             return False
     return False
 
+def format_transcript_line(item: Dict[str, Any]) -> str:
+    spk = f" [{item['speaker']}]" if item.get('speaker') else ""
+    return f"[{item.get('time', '')}]{spk} {item.get('text', '')}"
+
+def _save_transcript_files_locked(rewrite_txt: bool = False):
+    if rewrite_txt:
+        tmp_txt = f"{TRANSCRIPT_TXT}.{os.getpid()}.tmp"
+        try:
+            with open(tmp_txt, "w", encoding="utf-8") as f:
+                for it in state.transcript_items:
+                    f.write(format_transcript_line(it) + "\n")
+            os.replace(tmp_txt, TRANSCRIPT_TXT)
+        except Exception:
+            safe_remove(tmp_txt, retries=1)
+    tmp_json = f"{TRANSCRIPT_JSON}.{os.getpid()}.tmp"
+    try:
+        with open(tmp_json, "w", encoding="utf-8") as f:
+            json.dump(state.transcript_items, f, ensure_ascii=False, indent=2)
+        os.replace(tmp_json, TRANSCRIPT_JSON)
+    except Exception:
+        safe_remove(tmp_json, retries=1)
+
 def broadcast_message(item: Dict[str, Any], save_to_disk: bool = True):
     with state.lock:
         state.transcript_items.append(item)
@@ -184,19 +207,34 @@ def broadcast_message(item: Dict[str, Any], save_to_disk: bool = True):
             state.latest_seq = max(state.latest_seq, item['seq_end'])
 
         if save_to_disk:
-            # Append to live_transcript.txt
-            with open(TRANSCRIPT_TXT, "a", encoding="utf-8") as f:
-                f.write(f"[{item['time']}] {item['text']}\n")
-            # Save JSON atomically to avoid WinError 32 or partial reads
-            tmp_json = f"{TRANSCRIPT_JSON}.{os.getpid()}.tmp"
             try:
-                with open(tmp_json, "w", encoding="utf-8") as f:
-                    json.dump(state.transcript_items, f, ensure_ascii=False, indent=2)
-                os.replace(tmp_json, TRANSCRIPT_JSON)
+                with open(TRANSCRIPT_TXT, "a", encoding="utf-8") as f:
+                    f.write(format_transcript_line(item) + "\n")
             except Exception:
-                safe_remove(tmp_json, retries=1)
+                pass
+            _save_transcript_files_locked(rewrite_txt=False)
 
     notify_subscribers(json.dumps(item, ensure_ascii=False))
+
+def rename_speaker_cluster(speaker_id: int, new_label: str) -> int:
+    new_label = new_label.strip()
+    if not new_label:
+        return 0
+    updated = 0
+    with state.lock:
+        state.speaker_labels[speaker_id] = new_label
+        for it in state.transcript_items:
+            if it.get('speaker_id') == speaker_id:
+                it['speaker'] = new_label
+                updated += 1
+        if updated:
+            _save_transcript_files_locked(rewrite_txt=True)
+    notify_subscribers(json.dumps({
+        "type": "speaker_rename",
+        "speaker_id": speaker_id,
+        "speaker": new_label
+    }, ensure_ascii=False))
+    return updated
 
 def sync_disk_transcripts():
     """Background watcher that automatically syncs live_transcript.json if modified externally"""
@@ -328,6 +366,254 @@ def load_wav(path: str) -> np.ndarray:
     from faster_whisper import decode_audio
     return decode_audio(path, sampling_rate=SAMPLE_RATE)
 
+# ---------------------------------------------------------------------------
+# Lightweight Hybrid Speaker Diarization (Acoustic FFT + Council Context Cues)
+# ---------------------------------------------------------------------------
+_RE_CHAIR_SPEECH = re.compile(
+    r'(?:질의해\s*주시기\s*바랍니다|질의하실\s*(?:위원|의원|원)|회의를\s*(?:속개|개의|산회)|정회를\s*선포|(?:의원|위원|원)님?\s*수고하셨습니다)'
+)
+_RE_NEXT_CALL = re.compile(
+    r'(?:다음은|이어서|다음)\s*([가-힣\s]{2,5}?)\s*(?:의원|위원|원)님'
+)
+_RE_MEMBER_INTRO = re.compile(
+    r'(?:^|[.,?!]\s*|안녕하십니까\s*|반갑습니다\s*)([가-힣\s]{2,5}?)\s*(?:의원|위원|원)입니다'
+)
+_RE_OFFICIAL_INTRO = re.compile(
+    r'(?:^|[.,?!]\s*|예\s*|네\s*)([가-힣]{2,10}?(?:부지사|국장|본부장|과장|원장|실장|단장|담당관|소장|센터장))\s*([가-힣]{2,4})?입니다'
+)
+_RE_QUESTION_END = re.compile(
+    r'(?:습니까|십니까|나요|까요|신가요|입니까|생각하십니까|보십니까|계십니까|어떻습니까|말씀해\s*주십시오|답변.*바랍니다|질의.*바랍니다|나와\s*주십시오|아십니까|맞습니까|치겠습니다|마치겠습니다|이상입니다)[\s?.!]*$'
+)
+_RE_ANSWER_START = re.compile(
+    r'^(?:네[,.\s]|예[,.\s]|위원님|의원님|존경하는|말씀하신|그\s*부분|저희가|답변\s*드리|우선\s*말씀)'
+)
+
+def extract_voice_embedding(audio_slice: np.ndarray, sr: int = SAMPLE_RATE) -> Optional[np.ndarray]:
+    """Compute a 20-D L2-normalized voice fingerprint (16 log-spectral formant bands + pitch/centroid) using pure NumPy."""
+    if audio_slice is None or len(audio_slice) < int(sr * 0.35):
+        return None
+    n_fft, hop = 512, 256
+    n_frames = 1 + (len(audio_slice) - n_fft) // hop
+    if n_frames < 4:
+        return None
+    idx = np.arange(n_fft)[None, :] + np.arange(n_frames)[:, None] * hop
+    frames = audio_slice[idx].astype(np.float32) * np.hanning(n_fft).astype(np.float32)
+    rms = np.sqrt(np.mean(frames * frames, axis=1) + 1e-12)
+    thr = max(float(np.percentile(rms, 35)), 1.5e-4)
+    voiced = rms >= thr
+    if int(np.sum(voiced)) < 3:
+        return None
+    frames = frames[voiced]
+    spec = np.abs(np.fft.rfft(frames, n=n_fft)) + 1e-8  # (F, 257), 31.25 Hz per bin
+
+    # 16 log-spaced sub-bands between ~62 Hz (bin 2) and ~4200 Hz (bin 135)
+    edges = np.unique(np.geomspace(2, 135, num=17).astype(int))
+    band_energies = []
+    for b0, b1 in zip(edges[:-1], edges[1:]):
+        b1 = max(b1, b0 + 1)
+        band_energies.append(np.mean(np.log(np.mean(spec[:, b0:b1] ** 2, axis=1) + 1e-12)))
+    while len(band_energies) < 16:
+        band_energies.append(band_energies[-1])
+    bands = np.array(band_energies[:16], dtype=np.float32)
+    # Volume-invariant spectral envelope (zero-mean, unit-std)
+    bands = (bands - np.mean(bands)) / (np.std(bands) + 1e-5)
+
+    # Cepstral pitch (F0 in 80..340 Hz => quefrency bins 47..200)
+    log_spec = np.log(spec)
+    cep = np.fft.irfft(log_spec, n=n_fft)
+    q_min, q_max = int(sr / 340), int(sr / 80)
+    peak_q = q_min + np.argmax(cep[:, q_min:q_max], axis=1)
+    f0 = sr / peak_q.astype(np.float32)
+    f0_med = (float(np.median(f0)) - 165.0) / 70.0
+    f0_iqr = (float(np.percentile(f0, 75) - np.percentile(f0, 25))) / 55.0
+
+    # Spectral centroid & rolloff (85%)
+    freqs = np.linspace(0.0, sr / 2.0, spec.shape[1], dtype=np.float32)
+    mag_sum = np.sum(spec, axis=1) + 1e-8
+    centroid = float(np.median(np.sum(spec * freqs[None, :], axis=1) / mag_sum))
+    centroid_norm = (centroid - 1200.0) / 700.0
+
+    cum_energy = np.cumsum(spec, axis=1)
+    roll_idx = np.argmax(cum_energy >= 0.85 * mag_sum[:, None], axis=1)
+    rolloff_norm = (float(np.median(freqs[roll_idx])) - 2400.0) / 1200.0
+
+    extra = np.array([f0_med, f0_iqr, centroid_norm, rolloff_norm], dtype=np.float32)
+    extra = np.clip(extra, -2.5, 2.5)
+
+    vec = np.concatenate([bands * 0.78, extra * 0.62])
+    norm = float(np.linalg.norm(vec))
+    return (vec / norm) if norm > 1e-6 else None
+
+
+class SpeakerTracker:
+    """Online speaker clustering combining voice spectrum/pitch embeddings with Korean meeting turn-taking cues."""
+
+    def __init__(self, max_speakers: int = 6):
+        self.max_speakers = max_speakers
+        self.clusters: List[Dict[str, Any]] = []  # [{'id': int, 'vec': np.ndarray, 'count': int}]
+        self.current_id: int = 1
+        self.prev_text: str = ""
+        self.pending_called_name: Optional[str] = None
+        self.last_abs_end: Optional[float] = None
+
+    def _label_for(self, spk_id: int) -> str:
+        with state.lock:
+            if spk_id not in state.speaker_labels:
+                state.speaker_labels[spk_id] = f"화자 {spk_id}"
+            return state.speaker_labels[spk_id]
+
+    def _detect_explicit_role(self, text: str) -> Optional[str]:
+        if _RE_CHAIR_SPEECH.search(text):
+            return "위원장"
+        m = _RE_MEMBER_INTRO.search(text)
+        if m:
+            return f"{m.group(1).replace(' ', '')} 의원"
+        m = _RE_OFFICIAL_INTRO.search(text)
+        if m:
+            role = m.group(1).strip()
+            name = (m.group(2) or "").strip()
+            return f"{role} {name}".strip() if name else role
+        return None
+
+    def _find_cluster_by_label(self, label: str) -> Optional[Dict[str, Any]]:
+        with state.lock:
+            for cid, cname in state.speaker_labels.items():
+                if cname == label:
+                    for c in self.clusters:
+                        if c['id'] == cid:
+                            return c
+        return None
+
+    def assign(self, seg_audio: np.ndarray, text: str, seg_abs_start: float, seg_abs_end: float) -> Tuple[int, str]:
+        text = text.strip()
+        pause_sec = 0.4 if self.last_abs_end is None else max(0.0, seg_abs_start - self.last_abs_end)
+        self.last_abs_end = max(seg_abs_end, seg_abs_start)
+
+        vec = extract_voice_embedding(seg_audio)
+        explicit_role = self._detect_explicit_role(text)
+
+        # Check if previous utterance ended with a question/prompt or current starts with an answer marker
+        prev_was_question = bool(self.prev_text and _RE_QUESTION_END.search(self.prev_text))
+        cur_is_answer = bool(_RE_ANSWER_START.search(text))
+        strong_turn_cue = (prev_was_question and (cur_is_answer or pause_sec >= 0.35)) or (cur_is_answer and pause_sec >= 0.65)
+
+        # First ever cluster
+        if not self.clusters:
+            init_vec = vec if vec is not None else np.zeros(20, dtype=np.float32)
+            self.clusters.append({'id': 1, 'vec': init_vec, 'count': 1 if vec is not None else 0})
+            self.current_id = 1
+            if explicit_role:
+                rename_speaker_cluster(1, explicit_role)
+            self._check_next_call(text)
+            self.prev_text = text
+            return 1, self._label_for(1)
+
+        # If text explicitly identifies a known speaker role/name
+        if explicit_role:
+            existing = self._find_cluster_by_label(explicit_role)
+            if existing is not None:
+                self.current_id = existing['id']
+                if vec is not None:
+                    self._update_centroid(existing, vec)
+                self._check_next_call(text)
+                self.prev_text = text
+                return self.current_id, self._label_for(self.current_id)
+
+        cur_cluster = next((c for c in self.clusters if c['id'] == self.current_id), self.clusters[0])
+
+        # Determine if speaker changed
+        switched = False
+        if explicit_role and self._label_for(self.current_id) != explicit_role:
+            # A new self-introduction or Chair moderator cue after prior speech starts a dedicated cluster
+            switched = True
+        elif vec is not None and cur_cluster['count'] > 0:
+            sim_cur = float(np.dot(vec, cur_cluster['vec']))
+            # Dynamic threshold based on pause & conversational cues
+            if strong_turn_cue:
+                stay_thr = 0.87
+            elif pause_sec >= 1.3:
+                stay_thr = 0.80
+            elif pause_sec < 0.25:
+                stay_thr = 0.66
+            else:
+                stay_thr = 0.74
+
+            if sim_cur < stay_thr:
+                switched = True
+        elif strong_turn_cue and (pause_sec >= 0.45 or cur_is_answer):
+            switched = True
+
+        if switched:
+            target_cluster = None
+            if vec is not None:
+                other_clusters = [c for c in self.clusters if c['id'] != self.current_id and c['count'] > 0]
+                if other_clusters:
+                    sims = [(float(np.dot(vec, c['vec'])), c) for c in other_clusters]
+                    sims.sort(key=lambda x: x[0], reverse=True)
+                    best_sim, best_c = sims[0]
+                    match_thr = 0.76 if len(self.clusters) < self.max_speakers else 0.0
+                    if best_sim >= match_thr:
+                        target_cluster = best_c
+
+            if explicit_role and target_cluster is not None:
+                # Don't merge an explicitly identified new role into an already-named different role
+                t_lbl = self._label_for(target_cluster['id'])
+                if not t_lbl.startswith("화자 ") and t_lbl != explicit_role:
+                    target_cluster = None
+                elif t_lbl.startswith("화자 ") and len(self.clusters) < self.max_speakers:
+                    target_cluster = None
+
+            if target_cluster is None:
+                if len(self.clusters) < self.max_speakers:
+                    new_id = len(self.clusters) + 1
+                    init_vec = vec if vec is not None else np.zeros(20, dtype=np.float32)
+                    target_cluster = {'id': new_id, 'vec': init_vec, 'count': 1 if vec is not None else 0}
+                    self.clusters.append(target_cluster)
+                else:
+                    # Pick most recently active other cluster or alternate
+                    others = [c for c in self.clusters if c['id'] != self.current_id]
+                    target_cluster = others[0] if others else cur_cluster
+
+            self.current_id = target_cluster['id']
+            if vec is not None:
+                self._update_centroid(target_cluster, vec)
+
+            # Apply pending called speaker name from Chair if this cluster is still unnamed
+            if self.pending_called_name and not explicit_role:
+                if self._label_for(self.current_id).startswith("화자 "):
+                    rename_speaker_cluster(self.current_id, self.pending_called_name)
+                self.pending_called_name = None
+        else:
+            if vec is not None:
+                self._update_centroid(cur_cluster, vec)
+
+        if explicit_role:
+            cur_lbl = self._label_for(self.current_id)
+            if cur_lbl.startswith("화자 ") or cur_lbl == explicit_role:
+                rename_speaker_cluster(self.current_id, explicit_role)
+
+        self._check_next_call(text)
+        self.prev_text = text
+        return self.current_id, self._label_for(self.current_id)
+
+    def _update_centroid(self, cluster: Dict[str, Any], vec: np.ndarray):
+        if cluster['count'] == 0:
+            cluster['vec'] = vec.copy()
+            cluster['count'] = 1
+        else:
+            alpha = max(0.18, 1.0 / (cluster['count'] + 1))
+            merged = (1.0 - alpha) * cluster['vec'] + alpha * vec
+            norm = float(np.linalg.norm(merged))
+            if norm > 1e-6:
+                cluster['vec'] = merged / norm
+            cluster['count'] += 1
+
+    def _check_next_call(self, text: str):
+        m = _RE_NEXT_CALL.search(text)
+        if m:
+            self.pending_called_name = f"{m.group(1).replace(' ', '')} 의원"
+
+
 class ChunkTranscriber:
     """Transcribes consecutive audio chunks without losing words at the chunk boundaries.
 
@@ -343,6 +629,7 @@ class ChunkTranscriber:
         self.carry = np.zeros(0, dtype=np.float32)
         self.carry_start = start_sec  # stream position (seconds) of carry[0]
         self.context = ""
+        self.speaker_tracker = SpeakerTracker()
 
     def _segments(self, audio):
         prompt = WHISPER_PROMPT
@@ -360,8 +647,8 @@ class ChunkTranscriber:
         return [s for s in segments
                 if s.text.strip() and re.sub(r'[\s.,]', '', s.text) not in PROMPT_KEY]
 
-    def feed(self, audio: np.ndarray, final: bool = False):
-        """Returns (text, stream position in seconds where the text starts)."""
+    def feed_turns(self, audio: np.ndarray, final: bool = False) -> List[Dict[str, Any]]:
+        """Transcribe audio and split into speaker-attributed turns: [{'text', 'pos', 'speaker_id', 'speaker'}]."""
         if len(self.carry):
             audio = np.concatenate([self.carry, audio])
         start = self.carry_start
@@ -386,13 +673,42 @@ class ChunkTranscriber:
                 else:
                     keep_from = min(total, max(last.end + 0.3, total - TAIL_SEC))
 
+        turns: List[Dict[str, Any]] = []
+        for idx, s in enumerate(emit):
+            seg_text = s.text.strip()
+            if idx == 0:
+                seg_text = self._drop_overlap(seg_text)
+            if not seg_text:
+                continue
+            s0 = max(0, int(s.start * SAMPLE_RATE))
+            s1 = min(len(audio), int(s.end * SAMPLE_RATE))
+            seg_audio = audio[s0:s1]
+            spk_id, spk_label = self.speaker_tracker.assign(
+                seg_audio, seg_text, start + s.start, start + s.end
+            )
+            if turns and turns[-1]['speaker_id'] == spk_id:
+                turns[-1]['text'] += " " + seg_text
+                turns[-1]['speaker'] = spk_label
+            else:
+                turns.append({
+                    'text': seg_text,
+                    'pos': start + s.start,
+                    'speaker_id': spk_id,
+                    'speaker': spk_label,
+                })
+            self.context = seg_text
+
         cut = int(keep_from * SAMPLE_RATE)
         self.carry = audio[cut:].astype(np.float32)
         self.carry_start = start + cut / SAMPLE_RATE
-        text = self._drop_overlap(" ".join(s.text.strip() for s in emit))
-        if text:
-            self.context = text
-        return text, (start + emit[0].start if emit else start)
+        return turns
+
+    def feed(self, audio: np.ndarray, final: bool = False):
+        """Returns (text, stream position in seconds where the text starts)."""
+        turns = self.feed_turns(audio, final=final)
+        if not turns:
+            return "", self.carry_start
+        return " ".join(t['text'] for t in turns), turns[0]['pos']
 
     def _drop_overlap(self, text: str) -> str:
         """Remove words repeated at the joint, e.g. '...청와대에서 나오는' + '나오는 주된 요인이...'."""
@@ -404,6 +720,11 @@ class ChunkTranscriber:
             if len(prev) >= k and len(cur) > k and [norm(w) for w in prev[-k:]] == [norm(w) for w in cur[:k]]:
                 return " ".join(cur[k:])
         return text
+
+    def flush_turns(self) -> List[Dict[str, Any]]:
+        if not len(self.carry):
+            return []
+        return self.feed_turns(np.zeros(0, dtype=np.float32), final=True)
 
     def flush(self):
         if not len(self.carry):
@@ -432,17 +753,24 @@ def run_live(video_url: str, stream: Dict[str, Any], model, chunk_duration_sec: 
         return sum(d for _, _, d in buffer_segs)
     pending_seq_start = None  # first segment whose audio has not been emitted yet
 
-    def emit(text, seq_end):
+    def emit_turns(turns, seq_end):
         nonlocal pending_seq_start
-        if text:
-            broadcast_message({
-                'time': datetime.now().strftime("%H:%M:%S"),
-                'seq_start': min(pending_seq_start, seq_end),
-                'seq_end': seq_end,
-                'text': text
-            })
-            state.total_processed_chunks += 1
-            pending_seq_start = seq_end + 1
+        if not turns:
+            return
+        now_str = datetime.now().strftime("%H:%M:%S")
+        s_start = min(pending_seq_start, seq_end) if pending_seq_start is not None else seq_end
+        for t in turns:
+            if t.get('text'):
+                broadcast_message({
+                    'time': now_str,
+                    'seq_start': s_start,
+                    'seq_end': seq_end,
+                    'speaker_id': t.get('speaker_id', 1),
+                    'speaker': t.get('speaker', '화자 1'),
+                    'text': t['text']
+                })
+        state.total_processed_chunks += 1
+        pending_seq_start = seq_end + 1
 
     def transcribe_batch(batch):
         nonlocal pending_seq_start, batch_idx
@@ -461,13 +789,12 @@ def run_live(video_url: str, stream: Dict[str, Any], model, chunk_duration_sec: 
         if r.returncode != 0:
             safe_remove(batch_wav, retries=2, delay=0.05)
             raise RuntimeError(f"ffmpeg 변환 실패: {r.stderr.decode('utf-8', 'ignore').strip()[:200]}")
-        set_status("음성 인식 중...")
+        set_status("음성 인식 및 화자 분석 중...")
         try:
             audio_data = load_wav(batch_wav)
         finally:
             safe_remove(batch_wav)
-        text, _ = transcriber.feed(audio_data)
-        emit(text, batch[-1][0])
+        emit_turns(transcriber.feed_turns(audio_data), batch[-1][0])
 
     try:
         while not state.stop_event.is_set():
@@ -516,8 +843,7 @@ def run_live(video_url: str, stream: Dict[str, Any], model, chunk_duration_sec: 
                     pass
     finally:
         # emit the sentence still held back for the next chunk
-        text, _ = transcriber.flush()
-        emit(text, last_seq)
+        emit_turns(transcriber.flush_turns(), last_seq)
 
 def run_vod(video_url: str, stream: Dict[str, Any], model, chunk_duration_sec: int, work_dir: str):
     """Non-live video: read the audio in fixed windows and transcribe sequentially."""
@@ -529,10 +855,18 @@ def run_vod(video_url: str, stream: Dict[str, Any], model, chunk_duration_sec: i
     chunk_idx = 0
     transcriber = ChunkTranscriber(model, start_sec=0.0)
 
-    def emit(text, pos):
-        if text:
-            broadcast_message({'time': format_offset(pos), 'text': text})
-            state.total_processed_chunks += 1
+    def emit_turns(turns):
+        if not turns:
+            return
+        for t in turns:
+            if t.get('text'):
+                broadcast_message({
+                    'time': format_offset(t['pos']),
+                    'speaker_id': t.get('speaker_id', 1),
+                    'speaker': t.get('speaker', '화자 1'),
+                    'text': t['text'],
+                })
+        state.total_processed_chunks += 1
 
     try:
         while not state.stop_event.is_set():
@@ -554,15 +888,15 @@ def run_vod(video_url: str, stream: Dict[str, Any], model, chunk_duration_sec: i
                 stream_url = resolve_stream(video_url)['url']
                 continue
             failures = 0
-            set_status(f"음성 인식 중 · {format_offset(offset)}{total}")
+            set_status(f"음성 인식 및 화자 분석 중 · {format_offset(offset)}{total}")
             try:
                 audio_data = load_wav(wav)
             finally:
                 safe_remove(wav)
-            emit(*transcriber.feed(audio_data))
+            emit_turns(transcriber.feed_turns(audio_data))
             offset += chunk
     finally:
-        emit(*transcriber.flush())
+        emit_turns(transcriber.flush_turns())
 
 def worker_loop(video_url: str, chunk_duration_sec: int):
     print(f"Starting worker loop for URL: {video_url}")
@@ -595,7 +929,7 @@ def worker_loop(video_url: str, chunk_duration_sec: int):
 EXPORT_FORMATS = ("txt", "hwpx")
 
 def transcript_plain_text(items) -> str:
-    return "\n".join(f"[{i.get('time', '')}] {i.get('text', '')}" for i in items)
+    return "\n".join(format_transcript_line(i) for i in items)
 
 def build_export(fmt: str):
     """Returns (bytes, filename, media_type) for an export format."""
@@ -619,6 +953,10 @@ def build_export(fmt: str):
 class StartRequest(BaseModel):
     url: str
     chunk_sec: Optional[int] = 30
+
+class SpeakerRenameRequest(BaseModel):
+    speaker_id: int
+    speaker: str
 
 # API Routes
 @app.post("/api/start")
@@ -660,6 +998,7 @@ def clear_records():
     with state.lock:
         count = len(state.transcript_items)
         state.transcript_items = []
+        state.speaker_labels.clear()
         state.latest_seq = 0
         state.total_processed_chunks = 0
         # keep an empty JSON in place rather than no file
@@ -679,6 +1018,14 @@ def clear_records():
                 failed.append(p)
     set_status("이전 기록을 모두 삭제했습니다.")
     return {"status": "cleared", "deleted_lines": count, "failed": failed}
+
+@app.post("/api/speaker/rename")
+def api_rename_speaker(req: SpeakerRenameRequest):
+    label = req.speaker.strip()
+    if not label:
+        raise HTTPException(status_code=400, detail="화자 이름을 입력해 주세요.")
+    updated = rename_speaker_cluster(req.speaker_id, label)
+    return {"status": "ok", "speaker_id": req.speaker_id, "speaker": label, "updated": updated}
 
 @app.get("/api/status")
 def get_status():
@@ -876,7 +1223,7 @@ INDEX_HTML = r"""<!DOCTYPE html>
           <div id="statStatus" class="mt-1 text-gray-200 leading-relaxed break-all">대기 중</div>
         </div>
         <div class="text-[11px] text-gray-500 leading-relaxed bg-gray-950/60 p-2.5 rounded-lg border border-gray-800">
-          💡 HLS DVR 스트림을 5초 단위로 수집한 후 청크 크기(기본 30초)에 맞춰 노이즈를 필터링하고 고정밀 속기록을 생성합니다.
+          💡 음향 주파수·음색 특징(FFT)과 회의 문맥을 결합해 실시간으로 화자를 구분합니다. 속기록의 <b>[화자]</b> 배지를 클릭하면 이름을 직접 변경할 수 있습니다.
         </div>
       </div>
 
@@ -937,7 +1284,32 @@ INDEX_HTML = r"""<!DOCTYPE html>
     </div>
   </div>
 
-  <div id="toast"class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 bg-gray-800 border border-gray-700 text-gray-100 text-xs px-4 py-2.5 rounded-xl shadow-2xl z-50"></div>
+  <!-- Speaker Rename Modal -->
+  <div id="renameDialog" class="hidden fixed inset-0 z-[60] bg-black/60 flex items-center justify-center p-4">
+    <div class="bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl w-full max-w-sm p-5">
+      <h3 class="text-sm font-bold text-white flex items-center gap-2">
+        <i class="fa-solid fa-user-pen text-blue-400"></i> 화자 이름 변경
+      </h3>
+      <p class="mt-2 text-xs text-gray-400">
+        선택한 화자(<span id="renameTargetIdLabel" class="text-blue-300 font-semibold"></span>)의 모든 발언에 새 이름이 일괄 적용됩니다.
+      </p>
+      <input id="renameInput" type="text" placeholder="예: 양경호 의원, 미래산업국장, 위원장"
+        class="mt-3 w-full px-3.5 py-2 bg-gray-950 border border-gray-700 rounded-xl text-xs text-gray-100 focus:outline-none focus:border-blue-500">
+      <div class="mt-2.5 flex flex-wrap gap-1.5">
+        <button type="button" onclick="setRenamePreset('위원장')" class="px-2.5 py-1 bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg text-[11px] text-amber-300">위원장</button>
+        <button type="button" onclick="setRenamePreset('질의 의원')" class="px-2.5 py-1 bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg text-[11px] text-blue-300">질의 의원</button>
+        <button type="button" onclick="setRenamePreset('답변자')" class="px-2.5 py-1 bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg text-[11px] text-emerald-300">답변자</button>
+        <button type="button" onclick="setRenamePreset('부지사')" class="px-2.5 py-1 bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg text-[11px] text-purple-300">부지사</button>
+        <button type="button" onclick="setRenamePreset('국장')" class="px-2.5 py-1 bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg text-[11px] text-cyan-300">국장</button>
+      </div>
+      <div class="mt-5 flex justify-end gap-2">
+        <button onclick="closeRenameDialog()" class="px-4 py-2 bg-gray-800 hover:bg-gray-700 border border-gray-700 text-xs text-gray-200 rounded-lg">취소</button>
+        <button onclick="submitSpeakerRename()" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-xs font-semibold text-white rounded-lg">적용</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 bg-gray-800 border border-gray-700 text-gray-100 text-xs px-4 py-2.5 rounded-xl shadow-2xl z-50"></div>
 
   <script>
     let eventSource = null;
@@ -1010,6 +1382,10 @@ INDEX_HTML = r"""<!DOCTYPE html>
       eventSource.onmessage = function(e) {
         try {
           const item = JSON.parse(e.data);
+          if (item && item.type === 'speaker_rename') {
+            applySpeakerRenameDOM(item.speaker_id, item.speaker);
+            return;
+          }
           appendTranscriptItem(item);
         } catch (err) {
           console.error('SSE JSON error', err);
@@ -1022,9 +1398,80 @@ INDEX_HTML = r"""<!DOCTYPE html>
       };
     }
 
+    const SPEAKER_PALETTE = [
+      "bg-blue-500/15 text-blue-300 border-blue-500/30 hover:bg-blue-500/25",
+      "bg-emerald-500/15 text-emerald-300 border-emerald-500/30 hover:bg-emerald-500/25",
+      "bg-purple-500/15 text-purple-300 border-purple-500/30 hover:bg-purple-500/25",
+      "bg-amber-500/15 text-amber-300 border-amber-500/30 hover:bg-amber-500/25",
+      "bg-rose-500/15 text-rose-300 border-rose-500/30 hover:bg-rose-500/25",
+      "bg-cyan-500/15 text-cyan-300 border-cyan-500/30 hover:bg-cyan-500/25"
+    ];
+
+    function speakerBadgeClass(spkId, spkLabel) {
+      if (spkLabel === '위원장') {
+        return "bg-amber-500/20 text-amber-300 border-amber-500/40 hover:bg-amber-500/30";
+      }
+      const idx = Math.max(0, (parseInt(spkId || 1, 10) - 1)) % SPEAKER_PALETTE.length;
+      return SPEAKER_PALETTE[idx];
+    }
+
+    let activeRenameSpeakerId = null;
+
+    function openRenameDialog(speakerId, currentLabel) {
+      activeRenameSpeakerId = speakerId;
+      document.getElementById('renameTargetIdLabel').textContent = currentLabel || `화자 ${speakerId}`;
+      const inp = document.getElementById('renameInput');
+      inp.value = currentLabel || '';
+      document.getElementById('renameDialog').classList.remove('hidden');
+      setTimeout(() => { inp.focus(); inp.select(); }, 50);
+    }
+
+    function closeRenameDialog() {
+      document.getElementById('renameDialog').classList.add('hidden');
+      activeRenameSpeakerId = null;
+    }
+
+    function setRenamePreset(name) {
+      const inp = document.getElementById('renameInput');
+      inp.value = name;
+      inp.focus();
+    }
+
+    async function submitSpeakerRename() {
+      if (!activeRenameSpeakerId) return;
+      const newName = document.getElementById('renameInput').value.trim();
+      if (!newName) return showToast('화자 이름을 입력해 주세요.');
+      try {
+        const resp = await fetch('/api/speaker/rename', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ speaker_id: activeRenameSpeakerId, speaker: newName })
+        });
+        const data = await resp.json();
+        if (resp.ok) {
+          applySpeakerRenameDOM(activeRenameSpeakerId, newName);
+          showToast(`화자 이름이 '${newName}'(으)로 변경되었습니다.`);
+          closeRenameDialog();
+        } else {
+          showToast(data.detail || '변경에 실패했습니다.');
+        }
+      } catch (e) {
+        showToast(`오류: ${e}`);
+      }
+    }
+
+    function applySpeakerRenameDOM(speakerId, newLabel) {
+      document.querySelectorAll(`.speaker-badge[data-speaker-id="${speakerId}"]`).forEach(el => {
+        el.textContent = newLabel;
+        el.className = `speaker-badge text-[11px] font-semibold px-2 py-0.5 rounded-md border shrink-0 cursor-pointer transition ${speakerBadgeClass(speakerId, newLabel)}`;
+      });
+    }
+
     function appendTranscriptItem(item) {
       if (!item || !item.text) return;
-      const key = `${item.time}_${item.text.slice(0, 30)}`;
+      const spkId = item.speaker_id || 1;
+      const spkLabel = item.speaker || '';
+      const key = `${item.time}_${spkId}_${item.text.slice(0, 30)}`;
       if (existingItems.has(key)) return;
       existingItems.add(key);
 
@@ -1033,14 +1480,27 @@ INDEX_HTML = r"""<!DOCTYPE html>
       if (empty) empty.remove();
 
       const lineEl = document.createElement('div');
-      lineEl.className = "bg-gray-950/80 border border-gray-800/80 rounded-xl p-3.5 hover:border-blue-500/50 transition flex gap-3";
+      lineEl.className = "bg-gray-950/80 border border-gray-800/80 rounded-xl p-3.5 hover:border-blue-500/50 transition flex items-start gap-2.5";
       const timeEl = document.createElement('span');
       timeEl.className = "font-mono text-xs text-blue-400 font-semibold shrink-0 pt-0.5";
       timeEl.textContent = `[${item.time}]`;
+      lineEl.appendChild(timeEl);
+
+      if (spkLabel) {
+        const spkEl = document.createElement('button');
+        spkEl.type = "button";
+        spkEl.dataset.speakerId = String(spkId);
+        spkEl.title = "클릭하여 화자 이름 변경";
+        spkEl.className = `speaker-badge text-[11px] font-semibold px-2 py-0.5 rounded-md border shrink-0 cursor-pointer transition ${speakerBadgeClass(spkId, spkLabel)}`;
+        spkEl.textContent = spkLabel;
+        spkEl.onclick = () => openRenameDialog(spkId, spkEl.textContent);
+        lineEl.appendChild(spkEl);
+      }
+
       const textEl = document.createElement('span');
-      textEl.className = "text-gray-200 leading-relaxed";
+      textEl.className = "text-gray-200 leading-relaxed flex-1";
       textEl.textContent = item.text;
-      lineEl.append(timeEl, textEl);
+      lineEl.appendChild(textEl);
       feed.appendChild(lineEl);
 
       const countEl = document.getElementById('statLineCount');
